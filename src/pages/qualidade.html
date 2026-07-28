@@ -1,0 +1,170 @@
+<!--meta
+{
+  "slug": "qualidade.html",
+  "doc": "DOC-DS-PG-004",
+  "title": "Conformidade e qualidade — Digital Solutions",
+  "desc": "Normas internacionais adotadas pela Digital Solutions: ISO 9001, ISO/IEC 27001, ISO/IEC 25010, ISO/IEC 12207, WCAG 2.2 AA e EN 301 549, GDPR, personopplysningsloven e LGPD. Indicadores e canal de reclamações.",
+  "scripts": [],
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Conformidade e qualidade",
+    "url": "https://dsnorge.com/qualidade.html",
+    "about": ["ISO 9001:2015", "ISO/IEC 27001:2022", "ISO/IEC 25010", "WCAG 2.2 AA", "EN 301 549", "GDPR"],
+    "publisher": { "@type": "Organization", "name": "Digital Solutions" }
+  }
+}
+-->
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="qual.eyebrow">Conformidade</span>
+    <h1 data-i18n="qual.titulo">O que seguimos, e até onde.</h1>
+    <p class="lead" data-i18n="qual.lead">Esta página declara as normas internacionais que orientam o desenvolvimento, a operação e a documentação da Digital Solutions. Ela também declara o que ainda não é auditado por terceiro — porque uma declaração de conformidade só vale quando diz as duas coisas.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="card" style="border-left:3px solid var(--marca)">
+      <h3 data-i18n="qual.aviso.titulo">Declaração de escopo</h3>
+      <p data-i18n="qual.aviso.corpo">A Digital Solutions <strong>não é uma empresa certificada</strong>. Nenhuma das normas citadas nesta página foi objeto de auditoria de certificação por organismo acreditado. O que existe é aderência declarada: os processos foram desenhados segundo a estrutura das normas, as evidências são geradas e mantidas, e o repositório do site é público para que qualquer afirmação técnica aqui feita possa ser verificada.</p>
+      <p style="margin-top:var(--sp-2)" data-i18n="qual.aviso.corpo2">Onde a conformidade é verificável por ferramenta pública — acessibilidade, cabeçalhos de segurança, ausência de requisições a terceiros — o resultado pode ser reproduzido por quem quiser conferir.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="qual.gestao.eyebrow">Sistema de gestão</span>
+      <h2 data-i18n="qual.gestao.titulo">Normas de gestão e de processo</h2>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt>ISO 9001:2015</dt>
+        <dd data-i18n="qual.g1">Gestão da qualidade. A cláusula 7.5 — informação documentada — é atendida na prática: cabeçalho, rodapé, metadados e código de documento existem em um único lugar, as páginas publicadas são geradas a partir dele, e a publicação é reprovada automaticamente se a raiz divergir da fonte. Controle de versão substitui disciplina individual.</dd>
+      </div>
+      <div>
+        <dt>ISO/IEC 27001:2022</dt>
+        <dd data-i18n="qual.g2">Segurança da informação. Aplicam-se os controles de gestão de acesso, registro de alterações, segregação entre ambiente de homologação e produção, cópia de segurança com periodicidade declarada em contrato e resposta a incidente com prazo de notificação.</dd>
+      </div>
+      <div>
+        <dt>ISO/IEC 27701:2019</dt>
+        <dd data-i18n="qual.g3">Gestão da privacidade da informação, como extensão da 27001. Orienta o registro das operações de tratamento, a base legal de cada uma e os prazos de retenção declarados na Política de Privacidade.</dd>
+      </div>
+      <div>
+        <dt>ISO/IEC 12207:2017</dt>
+        <dd data-i18n="qual.g4">Processos do ciclo de vida de software. Define as fases de cada projeto sob medida: levantamento de requisitos, arquitetura, construção, verificação, transição e manutenção — cada uma com entregável e critério de aceite nomeados.</dd>
+      </div>
+      <div>
+        <dt>ISO/IEC 25010:2011</dt>
+        <dd data-i18n="qual.g5">Modelo de qualidade de produto de software. É a lista de características usada nos critérios de aceite: adequação funcional, desempenho, compatibilidade, usabilidade, confiabilidade, segurança, manutenibilidade e portabilidade.</dd>
+      </div>
+      <div>
+        <dt>ISO 31000:2018</dt>
+        <dd data-i18n="qual.g6">Gestão de riscos. Cada projeto tem registro de risco com probabilidade, impacto, tratamento e responsável nominal, revisto nos marcos contratuais.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="qual.tec.eyebrow">Produto</span>
+      <h2 data-i18n="qual.tec.titulo">Normas técnicas aplicadas ao que é publicado</h2>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt data-i18n="qual.t1.t">Acessibilidade</dt>
+        <dd data-i18n="qual.t1" data-i18n-html>WCAG 2.2 nível AA, equivalente à ISO/IEC 40500, e EN 301 549 para o mercado europeu. Contraste mínimo de 4.5:1 verificado inclusive nos rótulos coloridos do disco, navegação completa por teclado, foco sempre visível, estrutura semântica com marco de navegação, link de salto e respeito a <span class="mono">prefers-reduced-motion</span>. A ISO 9241-171 orienta os componentes interativos.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.t2.t">Idiomas</dt>
+        <dd data-i18n="qual.t2" data-i18n-html>Códigos de idioma conforme ISO 639-1 e etiquetas conforme BCP 47 (pt-BR, en, nb-NO, es), declaradas em <span class="mono">hreflang</span> e no atributo <span class="mono">lang</span> do documento. O português é o idioma mestre; chave ausente numa tradução cai para o inglês, nunca quebra a página.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.t3.t">Codificação e formatos</dt>
+        <dd data-i18n="qual.t3" data-i18n-html>UTF-8 conforme ISO/IEC 10646, datas em ISO 8601, países em ISO 3166-1 alfa-2 e moedas em ISO 4217 (EUR, NOK, BRL) em todo o site, nos contratos e nas exportações das plataformas.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.t4.t">Zero terceiros em execução</dt>
+        <dd data-i18n="qual.t4">Fontes, estilos e scripts são servidos pelo próprio domínio. Nenhuma requisição sai para fora ao carregar a página — não há CDN, não há fonte remota, não há rastreador carregado por padrão. É a única forma de o aviso de cookies ser verdadeiro.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.t5.t">Divulgação de vulnerabilidade</dt>
+        <dd data-i18n="qual.t5" data-i18n-html>Canal declarado em <span class="mono">/.well-known/security.txt</span> conforme a RFC 9116. Comunicações de boa-fé sobre falhas de segurança são respondidas e não geram represália.</dd>
+      </div>
+      <div>
+        <dt>ISO 2631-1</dt>
+        <dd data-i18n="qual.t6">Aplicada dentro do produto, não ao site: é a norma de exposição humana a vibração que sustenta o cálculo do índice de risco do SALA · Safe-Load Analytics, junto ao Arbeidsmiljøloven § 4-4.</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="qual.leg.eyebrow">Base legal</span>
+      <h2 data-i18n="qual.leg.titulo">Legislação de dados aplicável</h2>
+      <p class="lead" data-i18n="qual.leg.lead">A Digital Solutions opera a partir da Noruega e atende clientes na União Europeia e no Brasil. Os três regimes se aplicam simultaneamente, e o mais restritivo prevalece em cada situação.</p>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt data-i18n="qual.l1.t">União Europeia e EEE</dt>
+        <dd data-i18n="qual.l1">Regulamento (UE) 2016/679 — GDPR. Consentimento prévio e granular, direitos de acesso, retificação, apagamento, portabilidade e oposição, e notificação de violação no prazo regulamentar.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.l2.t">Noruega</dt>
+        <dd data-i18n="qual.l2">Personopplysningsloven, que incorpora o GDPR ao direito norueguês, com a Datatilsynet como autoridade de controle.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.l3.t">Brasil</dt>
+        <dd data-i18n="qual.l3">Lei 13.709/2018 — LGPD. Aplica-se aos contratos brasileiros e aos titulares localizados no Brasil, com a ANPD como autoridade.</dd>
+      </div>
+      <div>
+        <dt data-i18n="qual.l4.t">Transferência internacional</dt>
+        <dd data-i18n="qual.l4">Quando dados cruzam fronteira entre os projetos, a base é a decisão de adequação aplicável ou cláusulas contratuais padrão, indicadas no contrato de tratamento firmado com cada cliente.</dd>
+      </div>
+    </dl>
+    <div class="btn-row" style="margin-top:var(--sp-4)">
+      <a class="btn btn--ghost" href="/politica-de-privacidade.html" data-i18n="qual.leg.cta">Ler a Política de Privacidade</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="qual.ind.eyebrow">Indicadores</span>
+      <h2 data-i18n="qual.ind.titulo">O que medimos</h2>
+      <p class="lead" data-i18n="qual.ind.lead">Indicadores sem meta declarada são decoração. Estes são os quatro que a Digital Solutions acompanha, com o alvo assumido em cada um.</p>
+    </div>
+    <dl class="facts">
+      <div><dt data-i18n="qual.i1.t">Prazo da primeira resposta</dt><dd data-i18n="qual.i1">Até 2 dias úteis a contar do recebimento da mensagem pelo formulário ou por e-mail.</dd></div>
+      <div><dt data-i18n="qual.i2.t">Entregas dentro do marco</dt><dd data-i18n="qual.i2">Alvo de 90% dos marcos contratuais entregues na data acordada. Desvio previsto é comunicado antes da data, não depois.</dd></div>
+      <div><dt data-i18n="qual.i3.t">Correção de defeito crítico</dt><dd data-i18n="qual.i3">Defeito que impede o uso da plataforma em produção: diagnóstico em até 4 horas úteis e correção ou contorno em até 1 dia útil.</dd></div>
+      <div><dt data-i18n="qual.i4.t">Reclamações tratadas</dt><dd data-i18n="qual.i4">100% registradas, respondidas por escrito e encerradas com a causa identificada e a ação corretiva declarada.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap wrap-narrow" style="padding-inline:0">
+    <span class="eyebrow" data-i18n="qual.rec.eyebrow">Reclamações</span>
+    <h2 data-i18n="qual.rec.titulo">Como reclamar, e o que acontece depois</h2>
+    <p class="lead" data-i18n="qual.rec.lead">Reclamações sobre trabalhos em andamento ou concluídos entram pelo formulário de contato ou por e-mail, com a palavra «reclamação» no início da mensagem.</p>
+    <dl class="facts" style="margin-top:var(--sp-4)">
+      <div><dt data-i18n="qual.rec.1.t">Registro</dt><dd data-i18n="qual.rec.1">Toda reclamação recebe número de referência e data de entrada, comunicados a quem reclamou.</dd></div>
+      <div><dt data-i18n="qual.rec.2.t">Análise</dt><dd data-i18n="qual.rec.2">Identificação da causa, não apenas do sintoma. Se a causa for nossa, isso é dito por escrito.</dd></div>
+      <div><dt data-i18n="qual.rec.3.t">Ação</dt><dd data-i18n="qual.rec.3">Ação corretiva com responsável nominal e prazo, e a verificação de que a ação funcionou.</dd></div>
+      <div><dt data-i18n="qual.rec.4.t">Encerramento</dt><dd data-i18n="qual.rec.4">Resposta escrita ao reclamante. O registro é mantido pelo prazo declarado na Política de Privacidade.</dd></div>
+    </dl>
+    <div class="btn-row" style="margin-top:var(--sp-4)">
+      <a class="btn" href="/contato.html" data-i18n="qual.rec.cta">Abrir o formulário</a>
+      <a class="btn btn--quiet" href="mailto:info@dsnorge.com">info@dsnorge.com</a>
+    </div>
+  </div>
+</section>

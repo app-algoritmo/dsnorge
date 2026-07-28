@@ -1,0 +1,6 @@
+# dsnorge.com
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://dsnorge.com/sitemap.xml

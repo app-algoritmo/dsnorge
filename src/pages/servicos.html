@@ -1,0 +1,95 @@
+<!--meta
+{
+  "slug": "servicos.html",
+  "doc": "DOC-DS-PG-002",
+  "title": "Plataformas e serviços — Digital Solutions",
+  "desc": "Catálogo completo da Digital Solutions: IA MIMBAI, rede B2B Oslo Meet, SALA Safe-Load Analytics, CRM e extranet, desenvolvimento web, automação e engenharia de dados.",
+  "scripts": ["/assets/js/disco.js"],
+  "jsonld": {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Plataformas e serviços Digital Solutions",
+    "itemListElement": [
+      { "@type": "Service", "position": 1, "name": "IA MIMBAI com Claude", "provider": { "@type": "Organization", "name": "Digital Solutions" } },
+      { "@type": "Service", "position": 2, "name": "B2B MIMBAI · Oslo Meet", "provider": { "@type": "Organization", "name": "Digital Solutions" } },
+      { "@type": "Service", "position": 3, "name": "SALA · Safe-Load Analytics", "provider": { "@type": "Organization", "name": "Digital Solutions" } },
+      { "@type": "Service", "position": 4, "name": "CRM e Extranet", "provider": { "@type": "Organization", "name": "Digital Solutions" } },
+      { "@type": "Service", "position": 5, "name": "Desenvolvimento e engenharia de dados", "provider": { "@type": "Organization", "name": "Digital Solutions" } }
+    ]
+  }
+}
+-->
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="serv.eyebrow">Catálogo · 5 frentes · 26 itens</span>
+    <h1 data-i18n="serv.titulo">Plataformas e serviços</h1>
+    <p class="lead" data-i18n="serv.lead">O disco organiza tudo o que a Digital Solutions entrega. Cada fatia é uma frente de trabalho; o aro externo indica se o item é produto licenciado ou construído por projeto. Clique para abrir a lista e, em cada item, ver o que está incluído e em que formato é contratado.</p>
+  </div>
+</section>
+
+<section class="section" id="catalogo">
+  <div class="wrap">
+    <div class="disco-wrap">
+      <div>
+        <div class="disco-stage">
+          <svg id="wheel" viewBox="0 0 400 400" role="group" aria-label="Disco de plataformas e serviços"></svg>
+          <div class="disco-hub" id="disco-hub" aria-live="polite">
+            <span class="hub-kicker" data-i18n="disco.hub.kicker">Escolha uma fatia</span>
+            <p class="hub-title" data-i18n="disco.hub.titulo">Plataformas &amp; Serviços</p>
+            <p class="hub-body" data-i18n="disco.hub.corpo">Digital Solutions · Norge</p>
+          </div>
+        </div>
+        <div class="legenda" id="legenda"></div>
+
+        <div class="doc-control" style="margin-top:var(--sp-4)">
+          <dl><dt data-i18n="doc.catalogo">Catálogo</dt><dd>DOC-DS-CAT-001</dd></dl>
+          <dl><dt data-i18n="doc.idioma">Idioma mestre</dt><dd>pt-BR</dd></dl>
+        </div>
+      </div>
+
+      <div>
+        <div class="vitrine" id="vitrine" hidden aria-live="polite"></div>
+        <div class="vitrine-empty" id="vitrine-vazia" data-i18n="disco.vazio">Selecione uma fatia do disco para ver as plataformas e serviços daquela frente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--surface">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="serv.contrat.eyebrow">Contratação</span>
+      <h2 data-i18n="serv.contrat.titulo">Formatos disponíveis</h2>
+    </div>
+    <dl class="facts">
+      <div>
+        <dt data-i18n="serv.f1.t">Projeto fechado</dt>
+        <dd data-i18n="serv.f1.d">Escopo, entregáveis e preço definidos antes do início. Pagamento por marcos de entrega.</dd>
+      </div>
+      <div>
+        <dt data-i18n="serv.f2.t">Assinatura mensal</dt>
+        <dd data-i18n="serv.f2.d">Plataformas e painéis com hospedagem, manutenção evolutiva e suporte incluídos.</dd>
+      </div>
+      <div>
+        <dt data-i18n="serv.f3.t">Assinatura por usuário</dt>
+        <dd data-i18n="serv.f3.d">MIMBAI e CRM. O número de licenças ativas é revisto mensalmente, para cima ou para baixo.</dd>
+      </div>
+      <div>
+        <dt data-i18n="serv.f4.t">Assinatura anual</dt>
+        <dd data-i18n="serv.f4.d">Oslo Meet. Planos Starter, Business e Partner, com preço já incluindo MVA.</dd>
+      </div>
+      <div>
+        <dt data-i18n="serv.f5.t">Implantação + assinatura</dt>
+        <dd data-i18n="serv.f5.d">Um projeto de entrada para configurar e migrar dados, seguido da recorrência de operação.</dd>
+      </div>
+      <div>
+        <dt data-i18n="serv.f6.t">Moeda</dt>
+        <dd data-i18n="serv.f6.d">EUR ou NOK para contratos europeus, BRL para contratos brasileiros. Taxa de referência fixada na assinatura (ISO 4217).</dd>
+      </div>
+    </dl>
+    <div class="btn-row" style="margin-top:var(--sp-4)">
+      <a class="btn" href="/contato.html" data-i18n="serv.cta">Pedir proposta</a>
+    </div>
+  </div>
+</section>

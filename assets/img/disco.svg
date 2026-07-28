@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Disco de plataformas e serviços — 5 frentes de trabalho">
+<title>Plataformas e serviços Digital Solutions</title>
+<style>.rot{font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:8.4px;font-weight:600;letter-spacing:.05em;fill:#fff;text-transform:uppercase}.hub{font-family:Georgia,serif;font-size:15px;fill:#16232C}.sub{font-family:'IBM Plex Mono',monospace;font-size:7.4px;letter-spacing:.14em;fill:#5F6E77}</style>
+<path d="M202.50 -4.98 A205 205 0 1 1 81.54 367.31 L85.01 362.41 A199 199 0 1 0 202.43 1.01 Z" fill="#22536E"/>
+<path d="M77.49 364.36 A205 205 0 0 1 197.50 -4.98 L197.57 1.01 A199 199 0 0 0 81.07 359.55 Z" fill="#4E8098"/>
+<path d="M201.34 8.00 A192 192 0 0 1 382.18 139.40 L306.27 164.65 A112 112 0 0 0 200.78 88.00 Z" fill="#1E4A68"/>
+<text class="rot" x="289.34" y="77.03" text-anchor="middle" dominant-baseline="middle" transform="rotate(-54.00 289.34 77.03)">IA MIMBAI</text>
+<path d="M383.01 141.94 A192 192 0 0 1 313.94 354.54 L266.46 290.15 A112 112 0 0 0 306.76 166.13 Z" fill="#265676"/>
+<text class="rot" x="344.56" y="246.97" text-anchor="middle" dominant-baseline="middle" transform="rotate(18.00 344.56 246.97)">B2B MIMBAI</text>
+<path d="M311.77 356.12 A192 192 0 0 1 88.23 356.12 L134.80 291.07 A112 112 0 0 0 265.20 291.07 Z" fill="#2F6283"/>
+<text class="rot" x="200.00" y="352.00" text-anchor="middle" dominant-baseline="middle" transform="rotate(90.00 200.00 352.00)">SALA</text>
+<path d="M86.06 354.54 A192 192 0 0 1 16.99 141.94 L93.24 166.13 A112 112 0 0 0 133.54 290.15 Z" fill="#376E91"/>
+<text class="rot" x="55.44" y="246.97" text-anchor="middle" dominant-baseline="middle" transform="rotate(342.00 55.44 246.97)">CRM</text>
+<path d="M17.82 139.40 A192 192 0 0 1 198.66 8.00 L199.22 88.00 A112 112 0 0 0 93.73 164.65 Z" fill="#3F7A9E"/>
+<text class="rot" x="110.66" y="77.03" text-anchor="middle" dominant-baseline="middle" transform="rotate(414.00 110.66 77.03)">Dev</text>
+<circle cx="200" cy="200" r="94" fill="#FFFFFF" stroke="#DCE5EA"/>
+<text class="hub" x="200" y="196" text-anchor="middle">Plataformas</text>
+<text class="hub" x="200" y="214" text-anchor="middle">&amp; Serviços</text>
+<text class="sub" x="200" y="236" text-anchor="middle">5 FRENTES</text>
+</svg>

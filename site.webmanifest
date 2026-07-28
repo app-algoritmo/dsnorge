@@ -1,0 +1,26 @@
+{
+  "name": "Digital Solutions",
+  "short_name": "DS",
+  "description": "Plataformas próprias e sistemas sob medida. Noruega, org.nr 996 041 468.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    {
+      "src": "/assets/img/favicon/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/img/favicon/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+/* EQUIPE */
+  Empresa: Digital Solutions
+  Registro: org.nr 996 041 468 — Norge
+  Contato: info@dsnorge.com
+
+/* SITE */
+  Padrões: HTML5, CSS3, JavaScript (ES modules)
+  Acessibilidade: WCAG 2.2 AA · EN 301 549
+  Idiomas: pt-BR (mestre) · en · nb-NO · es
+  Tipografia: IBM Plex — SIL Open Font License 1.1
+  Terceiros em execução: nenhum
+  Repositório: https://github.com/app-algoritmo/dsnorge
+  Documento: DOC-DS-WEB-HUMANS · v1.0.0
