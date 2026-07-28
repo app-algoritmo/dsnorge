@@ -1,0 +1,92 @@
+# ============================================================
+# DIGITAL SOLUTIONS — publicação com verificação
+#
+# O deploy só acontece depois de o workflow provar três coisas:
+#   1. a raiz do repositório está em dia com src/  (ISO 9001, 7.5.3)
+#   2. o dicionário mestre pt.json corresponde ao HTML
+#   3. en/no/es não têm chave faltando nem chave órfã
+#
+# Editar um .html da raiz à mão reprova o deploy — é o controle que
+# garante que a fonte única de verdade continue sendo src/.
+#
+# Documento controlado: DOC-DS-CI-001 · v1.0.0
+# ============================================================
+name: Publicar
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    name: Verificar informação documentada
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Raiz em dia com src/
+        run: |
+          python3 tools/build.py
+          if ! git diff --quiet -- '*.html' sitemap.xml; then
+            echo "::error::A raiz divergiu de src/. Rode 'python3 tools/build.py' e faça commit do resultado."
+            git --no-pager diff --stat -- '*.html' sitemap.xml
+            exit 1
+          fi
+
+      - name: Disco estático em dia com o catálogo
+        run: |
+          python3 tools/gerar-disco-svg.py
+          if ! git diff --quiet -- assets/img/disco.svg; then
+            echo "::error::assets/img/disco.svg divergiu de catalogo.js. Rode 'python3 tools/gerar-disco-svg.py'."
+            exit 1
+          fi
+
+      - name: Dicionário mestre em dia com o HTML
+        run: |
+          python3 tools/extrair-i18n.py
+          if ! git diff --quiet -- i18n/pt.json; then
+            echo "::error::i18n/pt.json divergiu das páginas. Rode 'python3 tools/extrair-i18n.py'."
+            exit 1
+          fi
+
+      - name: Traduções completas
+        run: |
+          python3 tools/traduzir.py
+          if ! git diff --quiet -- i18n/en.json i18n/no.json i18n/es.json; then
+            echo "::error::Traduções desatualizadas. Rode 'python3 tools/traduzir.py'."
+            exit 1
+          fi
+
+      - name: CNAME aponta para o domínio de produção
+        run: |
+          test "$(cat CNAME)" = "dsnorge.com" || { echo "::error::CNAME diferente de dsnorge.com"; exit 1; }
+
+  publicar:
+    name: Publicar no GitHub Pages
+    needs: verificar
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
