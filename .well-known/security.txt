@@ -1,0 +1,12 @@
+# Política de divulgação responsável — RFC 9116
+# Digital Solutions · org.nr 996 041 468 · dsnorge.com
+
+Contact: mailto:info@dsnorge.com
+Expires: 2027-07-28T00:00:00.000Z
+Preferred-Languages: pt, en, no, es
+Canonical: https://dsnorge.com/.well-known/security.txt
+Policy: https://dsnorge.com/qualidade.html
+
+# Comunicações de boa-fé sobre falhas de segurança são respondidas em até
+# 2 dias úteis e não geram represália. Pedimos que a falha não seja
+# divulgada publicamente antes da correção ou de 90 dias, o que vier antes.
