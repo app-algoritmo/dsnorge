@@ -34,9 +34,9 @@ T = {
   "Creamos tu landing page gratis"),
 "lp.oferta.mes": ("/month incl. VAT", "/mnd inkl. mva.", "/mes con IVA"),
 "lp.oferta.cond": (
-  "No setup cost. 12-month commitment.",
-  "Ingen oppstartskostnad. 12 måneders bindingstid.",
-  "Sin coste inicial. Permanencia de 12 meses."),
+  "Launch price for the first 10 businesses, for the first 12 months. After that, 690 kr/month. No setup cost.",
+  "Introduksjonspris for de 10 første bedriftene, de første 12 månedene. Deretter 690 kr/mnd. Ingen oppstartskostnad.",
+  "Precio de lanzamiento para las 10 primeras empresas, durante los primeros 12 meses. Después, 690 kr/mes. Sin coste inicial."),
 "lp.oferta.cta": ("Send SMS to 90 66 71 30", "Send SMS til 90 66 71 30", "Enviar SMS al 90 66 71 30"),
 
 # Serviços
@@ -56,7 +56,7 @@ T = {
   "One page that says who you are, what you offer and how customers reach you. Perfect for getting started quickly.",
   "Én side som forteller hvem du er, hva du tilbyr og hvordan kunden når deg. Perfekt for å komme raskt i gang.",
   "Una página que dice quién eres, qué ofreces y cómo te encuentra el cliente. Ideal para empezar rápido."),
-"lp.serv.s2.p": ("Free setup · 399 kr/month", "Gratis oppstart · 399 kr/mnd", "Inicio gratis · 399 kr/mes"),
+"lp.serv.s2.p": ("Free setup · from 499 kr/month", "Gratis oppstart · fra 499 kr/mnd", "Inicio gratis · desde 499 kr/mes"),
 "lp.serv.s3.t": ("Online shop", "Nettbutikk", "Tienda online"),
 "lp.serv.s3.d": (
   "Sell your products online, with simple payment and an overview of orders.",
@@ -81,12 +81,16 @@ T = {
 "lp.inc.i7": ("Your own .no domain", "Eget .no-domene", "Dominio .no propio"),
 
 # Plano
+"lp.preco.r0": (
+  "<strong>Launch price:</strong> 499 kr/month for the first 12 months, for the first 10 businesses",
+  "<strong>Introduksjonspris:</strong> 499 kr/mnd de første 12 månedene, for de 10 første bedriftene",
+  "<strong>Precio de lanzamiento:</strong> 499 kr/mes los primeros 12 meses, para las 10 primeras empresas"),
 "lp.preco.r1": ("<strong>Setup:</strong> 0 kr", "<strong>Oppstart:</strong> 0 kr", "<strong>Inicio:</strong> 0 kr"),
 "lp.preco.r2": ("<strong>Commitment:</strong> 12 months", "<strong>Bindingstid:</strong> 12 måneder", "<strong>Permanencia:</strong> 12 meses"),
 "lp.preco.r3": (
-  "<strong>After that:</strong> month to month, one month’s notice",
-  "<strong>Deretter:</strong> løpende, med én måneds oppsigelse",
-  "<strong>Después:</strong> mes a mes, con un mes de preaviso"),
+  "<strong>After that:</strong> 690 kr/month, month to month, one month’s notice",
+  "<strong>Deretter:</strong> 690 kr/mnd, løpende, med én måneds oppsigelse",
+  "<strong>Después:</strong> 690 kr/mes, mes a mes, con un mes de preaviso"),
 "lp.preco.r4": ("<strong>Own .no domain:</strong> included", "<strong>Eget .no-domene:</strong> inkludert", "<strong>Dominio .no propio:</strong> incluido"),
 "lp.preco.r5": (
   "<strong>Delivery:</strong> 5 business days after the draft is approved",
@@ -116,9 +120,9 @@ T = {
 "lp.faq.titulo": ("Frequently asked questions", "Vanlige spørsmål", "Preguntas frecuentes"),
 "lp.faq.q1": ("What happens after 12 months?", "Hva skjer etter 12 måneder?", "¿Qué pasa después de 12 meses?"),
 "lp.faq.a1": (
-  "The subscription continues month to month. You can cancel with one month's notice.",
-  "Abonnementet fortsetter måned for måned. Du kan si opp med én måneds varsel.",
-  "La suscripción continúa mes a mes. Puedes cancelar con un mes de preaviso."),
+  "The subscription continues month to month at 690 kr/month. You can cancel with one month's notice.",
+  "Abonnementet fortsetter måned for måned til 690 kr/mnd. Du kan si opp med én måneds varsel.",
+  "La suscripción continúa mes a mes por 690 kr/mes. Puedes cancelar con un mes de preaviso."),
 "lp.faq.q2": ("How long does it take?", "Hvor lang tid tar det?", "¿Cuánto tarda?"),
 "lp.faq.a2": (
   "The page is ready within 5 business days after you approve the draft.",
