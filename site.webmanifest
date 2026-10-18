@@ -2,7 +2,7 @@
   "name": "Digital Solutions",
   "short_name": "DS",
   "description": "Plataformas próprias e sistemas sob medida. Noruega, org.nr 996 041 468.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "lang": "pt-BR",

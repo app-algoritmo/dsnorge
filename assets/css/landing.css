@@ -1,0 +1,137 @@
+/* ============================================================
+   DIGITAL SOLUTIONS — landing.css
+   Página de entrada em dsnorge.com/ (src/pages/index.html).
+   Usa os tokens de base.css; carregada só pela landing.
+
+   Documento controlado: DOC-DS-CSS-010 · v1.0.0
+   ============================================================ */
+
+:root{
+  --lp-sol: #F2B33D;          /* selo e botão de destaque — só aqui */
+  --lp-noite: var(--ink);
+  --lp-texto-noite: #C9D6DE;  /* texto secundário sobre fundo escuro (≥ 4.5:1) */
+}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-size:1.0625rem;line-height:1.55}
+
+.lp-wrap{max-width:var(--wrap);margin:0 auto;padding-inline:24px}
+.lp-wrap--estreito{max-width:820px}
+.lp-secao{padding-block:88px}
+
+/* ─── Cabeçalho ───────────────────────────────────────────── */
+.lp-header{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.lp-header-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-block:14px}
+.lp-brand img{height:36px;width:auto;display:block}
+.lp-nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;font-weight:500;font-size:1rem}
+.lp-nav-link{color:var(--ink);text-decoration:none}
+.lp-nav-link:hover{color:var(--marca);text-decoration:underline;text-underline-offset:.25em}
+@media (max-width:860px){ .lp-nav-link{display:none} }
+
+/* ─── Botões ──────────────────────────────────────────────── */
+.lp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 24px;border-radius:6px;
+  font-weight:600;font-size:1.0625rem;text-decoration:none;text-align:center;border:1px solid transparent;
+  transition:transform .15s var(--ease),background .15s var(--ease)}
+.lp-btn:hover{transform:translateY(-1px)}
+.lp-btn--compacto{min-height:44px;padding:10px 18px;font-size:1rem}
+.lp-btn--primario{background:var(--marca);color:#fff}
+.lp-btn--primario:hover{background:var(--casa-plataformas);color:#fff}
+.lp-btn--claro{background:var(--surface);color:var(--ink);border-color:var(--line)}
+.lp-btn--claro:hover{border-color:var(--ink);color:var(--ink)}
+.lp-btn--papel{background:var(--paper);color:var(--ink)}
+.lp-btn--papel:hover{background:#fff;color:var(--ink)}
+.lp-btn--sol{background:var(--lp-sol);color:var(--ink)}
+.lp-btn--sol:hover{background:#f6c25f;color:var(--ink)}
+.lp-btn--contorno{background:transparent;color:var(--paper);border-color:var(--ink-2)}
+.lp-btn--contorno:hover{border-color:var(--paper);color:#fff}
+.lp-btn-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+
+/* ─── Tipografia ──────────────────────────────────────────── */
+.lp-eyebrow{font-size:.875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--marca)}
+.lp-eyebrow--neutro{color:var(--ink-3)}
+.lp-h1{font-family:var(--f-display);font-weight:600;font-size:clamp(2.25rem,5vw,3.5rem);line-height:1.08;letter-spacing:-.01em}
+.lp-h2{font-family:var(--f-display);font-weight:600;font-size:clamp(1.75rem,3.4vw,2.4rem);line-height:1.15}
+.lp-lead{font-size:1.25rem;color:var(--ink-2);max-width:560px}
+.lp-sub{margin-top:14px;font-size:1.125rem;color:var(--ink-2);max-width:640px}
+
+/* ─── Abertura ────────────────────────────────────────────── */
+.lp-hero-inner{display:flex;flex-wrap:wrap;align-items:center;gap:56px;padding-block:88px 96px}
+.lp-hero-texto{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.lp-oferta{flex:1 1 340px;min-width:0;background:var(--lp-noite);color:var(--paper);border-radius:12px;padding:36px 34px;
+  display:flex;flex-direction:column;gap:14px;box-shadow:0 16px 40px rgba(var(--ink-rgb),.18)}
+.lp-oferta-titulo{font-family:var(--f-display);font-weight:600;font-size:1.75rem;line-height:1.2;color:inherit}
+.lp-contato .lp-h2,.lp-card--destaque .lp-card-titulo{color:#fff}
+.lp-oferta .lp-preco-unid,.lp-plano .lp-preco-unid{font-size:1rem}
+.lp-oferta-cond{color:var(--lp-texto-noite);font-size:1rem}
+.lp-oferta .lp-preco-unid{color:var(--lp-texto-noite)}
+.lp-oferta .lp-btn{margin-top:6px}
+
+.lp-selo{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;background:var(--lp-sol);color:var(--ink);
+  font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px 6px 9px;border-radius:999px}
+.lp-selo--flutua{position:absolute;top:-15px;left:28px}
+
+.lp-preco{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.lp-preco-valor{font-size:3rem;font-weight:600;line-height:1}
+.lp-preco-unid{font-size:1.125rem;color:var(--ink-2)}
+
+/* ─── Faixas brancas ──────────────────────────────────────── */
+.lp-faixa{background:var(--surface);border-block:1px solid var(--line)}
+
+/* ─── Serviços ────────────────────────────────────────────── */
+.lp-cards{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 20px}
+.lp-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:32px 28px;
+  display:flex;flex-direction:column;gap:10px;color:var(--ink-2)}
+.lp-card-titulo{font-family:var(--f-sans);font-weight:600;font-size:1.375rem;color:var(--ink)}
+.lp-card-preco{margin-top:auto;padding-top:16px;font-weight:600;color:var(--marca)}
+.lp-card--destaque{background:var(--marca);border-color:var(--marca);color:#E3ECF2;box-shadow:0 10px 28px rgba(var(--ink-rgb),.18)}
+.lp-card--destaque .lp-card-titulo,.lp-card--destaque .lp-card-preco{color:#fff}
+
+/* ─── Preço e incluso ─────────────────────────────────────── */
+.lp-preco-secao{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start}
+.lp-incluso{flex:999 1 480px;min-width:0}
+.lp-lista{margin:32px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px 28px}
+.lp-lista li{display:flex;gap:12px;align-items:flex-start}
+.lp-check{flex:none;margin-top:2px}
+.lp-check circle{fill:var(--surface-2)}
+.lp-check path{fill:none;stroke:var(--marca);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+.lp-plano{flex:1 1 320px;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px 30px;
+  display:flex;flex-direction:column;gap:12px}
+.lp-plano .lp-preco-valor{font-size:2.75rem}
+.lp-condicoes{margin:8px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;
+  font-size:1rem;color:var(--ink-2)}
+.lp-condicoes strong{color:var(--ink);font-weight:600}
+.lp-plano .lp-btn{margin-top:10px}
+
+/* ─── Passos ──────────────────────────────────────────────── */
+.lp-passos{margin:44px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px}
+.lp-passos li{display:flex;flex-direction:column;gap:10px;color:var(--ink-2)}
+.lp-passo-num{font-family:var(--f-display);font-weight:600;font-size:2.5rem;line-height:1;color:var(--marca)}
+.lp-passo-titulo{font-family:var(--f-sans);font-weight:600;font-size:1.25rem;color:var(--ink)}
+
+/* ─── Perguntas ───────────────────────────────────────────── */
+.lp-faq{margin-top:32px;display:flex;flex-direction:column;gap:12px}
+.lp-faq details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 24px}
+.lp-faq summary{font-weight:600;font-size:1.125rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.lp-faq summary::-webkit-details-marker{display:none}
+.lp-faq summary::after{content:"+";font-weight:400;color:var(--marca);font-size:1.5rem;line-height:1}
+.lp-faq details[open] summary::after{content:"–"}
+.lp-faq p{margin-top:12px;color:var(--ink-2)}
+
+/* ─── Contato ─────────────────────────────────────────────── */
+.lp-contato{background:var(--lp-noite);color:var(--paper)}
+.lp-contato-inner{display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:space-between;padding-block:88px}
+.lp-contato-texto{flex:999 1 460px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.lp-contato-texto p{font-size:1.1875rem;color:var(--lp-texto-noite)}
+.lp-contato-botoes{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px}
+
+/* ─── Rodapé ──────────────────────────────────────────────── */
+.lp-footer{background:var(--surface);border-top:1px solid var(--line);font-size:.9375rem;color:var(--ink-2)}
+.lp-footer-inner{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center;justify-content:space-between;padding-block:32px 16px}
+.lp-footer-links{display:flex;flex-wrap:wrap;gap:8px 24px}
+.lp-footer a{color:var(--marca)}
+.lp-footer-doc{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;padding-block:0 28px;font-size:.8125rem;color:var(--ink-3)}
+
+/* Âncoras não ficam escondidas sob o cabeçalho fixo */
+[id]{scroll-margin-top:84px}
+
+@media (prefers-reduced-motion:reduce){ .lp-btn{transition:none} .lp-btn:hover{transform:none} }

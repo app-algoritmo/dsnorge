@@ -26,6 +26,18 @@ depender de disciplina.
 
 ---
 
+## Páginas de entrada
+
+| Endereço | Fonte | O que é |
+|---|---|---|
+| `dsnorge.com/` | `src/pages/index.html` | Landing page comercial (sites, landing pages, lojas). `"layout": "landing"` — usa `landing-header.html` / `landing-footer.html` e `assets/css/landing.css`. |
+| `dsnorge.com/start.html` | `src/pages/start.html` | Página inicial institucional (antiga `index`). Item "Início" do menu. |
+
+Os links internos apontam para `/`, nunca para `/index.html`.
+Traduções da landing: `tools/_trad_c.py` (chaves `lp.*`).
+
+---
+
 ## Estrutura
 
 ```

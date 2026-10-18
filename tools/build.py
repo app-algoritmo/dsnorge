@@ -8,7 +8,11 @@ Monta as páginas estáticas a partir de src/partials + src/pages.
 Regra ISO 9001 (7.5.2/7.5.3): cabeçalho, rodapé e metadados existem em
 UM único lugar. Nunca edite os .html da raiz — edite src/ e rode o build.
 
-Documento controlado: DOC-DS-BUILD-001 · v1.0.0
+Bloco <!--meta--> aceita, além de slug/title/desc/doc/scripts/jsonld:
+  "styles": ["/assets/css/x.css"]   folhas extras para a página
+  "layout": "landing"               usa landing-header.html / landing-footer.html
+
+Documento controlado: DOC-DS-BUILD-001 · v1.1.0
 """
 import json
 import re
@@ -48,8 +52,21 @@ def montar(pagina: Path) -> tuple[str, str]:
             + "</script>"
         )
 
-    html = ler(PARTIALS / "head.html") + ler(PARTIALS / "header.html") + corpo + ler(PARTIALS / "footer.html")
+    estilos = "".join(
+        f'\n<link rel="stylesheet" href="{s}">' for s in meta.get("styles", [])
+    )
+
+    # "layout": "landing" usa cabeçalho e rodapé próprios (página de entrada em /).
+    # Qualquer outro valor, ou ausência, usa os partials institucionais.
+    prefixo = "landing-" if meta.get("layout") == "landing" else ""
+    html = (
+        ler(PARTIALS / "head.html")
+        + ler(PARTIALS / f"{prefixo}header.html")
+        + corpo
+        + ler(PARTIALS / f"{prefixo}footer.html")
+    )
     subs = {
+        "{{STYLES}}": estilos,
         "{{TITLE}}": meta["title"],
         "{{DESC}}": meta["desc"],
         "{{SLUG}}": meta["slug"] if meta["slug"] != "index.html" else "",
