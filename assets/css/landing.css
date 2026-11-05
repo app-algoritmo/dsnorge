@@ -135,3 +135,39 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-siz
 [id]{scroll-margin-top:84px}
 
 @media (prefers-reduced-motion:reduce){ .lp-btn{transition:none} .lp-btn:hover{transform:none} }
+
+/* ─── Pedido, agradecimento e termos ──────────────────────── */
+.lp-passos--lista{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:24px}
+.lp-best-acao{margin-top:36px}
+.lp-best-resumo{margin-top:40px}
+.lp-best-nota{font-size:.9375rem;color:var(--ink-2)}
+.lp-best-nota a{color:var(--marca)}
+.lp-vilkar .lp-h2{font-size:1.375rem;margin-top:32px}
+.lp-vilkar p{margin-top:10px;color:var(--ink-2)}
+.lp-vilkar .lp-lead{margin-top:16px}
+.lp-vilkar a{color:var(--marca)}
+
+/* ─── Formulário de pedido ────────────────────────────────── */
+.lp-form{margin-top:40px;display:flex;flex-direction:column;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:32px 30px}
+.lp-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.lp-campo{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:.9375rem;border:0;padding:0;margin:0;min-width:0}
+.lp-campo legend{font-weight:600;margin-bottom:8px;padding:0}
+.lp-campo input:not([type=radio]):not([type=checkbox]),.lp-campo textarea{font:inherit;font-weight:400;font-size:1rem;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:11px 12px;min-height:46px;width:100%}
+.lp-campo textarea{resize:vertical}
+.lp-campo input:focus,.lp-campo textarea:focus{outline:2px solid var(--focus);outline-offset:1px;border-color:var(--focus)}
+.lp-campo [aria-invalid=true],.lp-sufixo [aria-invalid=true]{border-color:var(--erro);outline-color:var(--erro)}
+.lp-opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.lp-opcao{display:flex;align-items:center;gap:10px;font-weight:500;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-height:48px;cursor:pointer}
+.lp-opcao:has(input:checked){border-color:var(--marca);background:#EAF1F6}
+.lp-sufixo{display:flex;align-items:stretch}
+.lp-sufixo input{border-top-right-radius:0!important;border-bottom-right-radius:0!important}
+.lp-sufixo span{display:flex;align-items:center;padding:0 12px;background:var(--surface-2);border:1px solid var(--line);border-left:0;border-radius:0 6px 6px 0;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.lp-aceite{display:flex;gap:10px;align-items:flex-start;font-size:.9375rem;color:var(--ink-2)}
+.lp-aceite input{margin-top:4px;width:18px;height:18px;flex:none}
+.lp-aceite a{color:var(--marca)}
+.lp-form .lp-btn{align-self:flex-start}
+.lp-form button.lp-btn{cursor:pointer;font-family:inherit}
+.lp-form button.lp-btn:disabled{opacity:.6;cursor:wait;transform:none}
+.lp-form-estado{font-weight:500;min-height:1.5em}
+.lp-form-estado[data-erro=true]{color:var(--erro)}
+.lp-oculto{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
