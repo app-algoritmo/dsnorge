@@ -122,9 +122,9 @@ T = {
   "<strong>Gratisperiode:</strong> 30 dager",
   "<strong>Periodo gratuito:</strong> 30 días"),
 "lp.preco.r6": (
-  "<strong>Help from our team:</strong> 450 kr per task",
-  "<strong>Hjelp fra oss:</strong> 450 kr per oppgave",
-  "<strong>Ayuda de nuestro equipo:</strong> 450 kr por tarea"),
+  '<strong>Support:</strong> chat assistant on the website and in Min side, at no extra cost',
+  '<strong>Support:</strong> chatassistent på nettsiden og på Min side, uten ekstra kostnad',
+  '<strong>Soporte:</strong> asistente de chat en la web y en Min side, sin coste adicional'),
 
 # Como trabalhamos
 "lp.como.titulo": (
@@ -172,9 +172,9 @@ T = {
   "Tu logo, si tienes, algunas fotos y una breve descripción de la empresa. Puedes enviarlo todo con el pedido o directamente en el editor."),
 "lp.faq.q4": ("How do I update the page?", "Hvordan oppdaterer jeg siden?", "¿Cómo actualizo la página?"),
 "lp.faq.a4": (
-  "Log in at minside.dsnorge.com with your email. There you change text, prices, opening hours, photos and colours and publish instantly. If you'd rather we do it for you, it costs 450 kr per task.",
-  "Logg inn på minside.dsnorge.com med e-postadressen din. Der endrer du tekst, priser, åpningstider, bilder og farger og publiserer med en gang. Vil du heller at vi gjør det for deg, koster det 450 kr per oppgave.",
-  "Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. Si prefieres que lo hagamos nosotros, cuesta 450 kr por tarea."),
+  'Log in at minside.dsnorge.com with your email. There you change text, prices, opening hours, photos and colours and publish instantly. Any questions? Ask our assistant in the corner of the screen.',
+  'Logg inn på minside.dsnorge.com med e-postadressen din. Der endrer du tekst, priser, åpningstider, bilder og farger og publiserer med en gang. Lurer du på noe? Spør assistenten vår nede i hjørnet.',
+  'Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. ¿Tienes dudas? Pregunta a nuestro asistente en la esquina de la pantalla.'),
 "lp.faq.q5": ("What about the domain?", "Hva med domene?", "¿Y el dominio?"),
 "lp.faq.a5": (
   "The page gets a free address, like side.dsnorge.com/yourbusiness. If you want your own domain, like yourbusiness.no, you register it in your name and we connect it. Your own domain is not included in the price.",

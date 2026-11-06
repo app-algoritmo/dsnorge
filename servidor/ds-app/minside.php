@@ -4,7 +4,7 @@
  * Login por link no e-mail, editor da página, prévia, publicação e o painel /admin.
  * A interface do cliente segue o idioma dele (lib/sprak.php: no, pt, en, es);
  * o painel /admin fica em norueguês. Comentários em português.
- * DOC-WEB-MS-009 · v1.2.0
+ * DOC-WEB-MS-009 · v1.3.0 (assistente de chat)
  */
 declare(strict_types=1);
 
@@ -14,7 +14,7 @@ const MAKS_LENKER_IP    = 20;   // por IP per time
 
 function minside_kjor(): void
 {
-    header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
+    header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://api.dsnorge.com; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
     header('X-Frame-Options: DENY');
     header('Cache-Control: no-store');
     start_okt();
@@ -783,5 +783,6 @@ function ramme(string $tittel, string $innhold, bool $bred = false): void
         . '<meta name="robots" content="noindex, nofollow"><title>' . e($tittel) . ' · Digital Solutions</title>'
         . '<link rel="stylesheet" href="/assets/minside.css?v=2"></head><body>'
         . '<header class="ms-topp"><div class="ms-ramme"><a class="ms-merke" href="/">Min side</a><span class="ms-av">Digital Løsninger · dsnorge.com</span></div></header>'
-        . '<main class="ms-ramme' . ($bred ? '' : ' ms-smal') . '">' . $innhold . '</main></body></html>';
+        . '<main class="ms-ramme' . ($bred ? '' : ' ms-smal') . '">' . $innhold . '</main>'
+        . '<script src="/assets/chat.js?v=1" defer data-sted="minside"></script></body></html>';
 }

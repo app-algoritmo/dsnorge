@@ -91,10 +91,24 @@ T = {
   "Når et prosjekt krever samarbeid med Barros Consultoria eller Inteligência Sanitária, står det i tilbudet før noe deles. Vi selger, leier ut eller gir ikke bort opplysninger til reklameformål.",
   "Cuando un proyecto requiere trabajo conjunto con Barros Consultoria o Inteligência Sanitária, se indica en la propuesta antes de compartir nada. No vendemos, alquilamos ni cedemos datos con fines publicitarios."),
 "priv.c44": ("7. International transfers", "7. Overføring til utlandet", "7. Transferencias internacionales"),
+"priv.chat1": (
+  "The chat assistant on the website and in Min side sends the messages you type, together with the page language, to Anthropic, which generates the answer with AI. Digital Solutions does not store the content of conversations, only anonymous counters to limit use. The conversation is saved only in your browser while the tab is open. Legal basis: legitimate interest in answering your questions (6.1.f). Do not type personal or sensitive information in the chat.",
+  "Chatassistenten på nettsiden og på Min side sender meldingene du skriver, sammen med sidens språk, til Anthropic, som lager svaret med KI. Digital Solutions lagrer ikke innholdet i samtalene, bare anonyme tellere for å begrense bruken. Samtalen lagres bare i nettleseren din så lenge fanen er åpen. Behandlingsgrunnlag: berettiget interesse i å svare på spørsmålene dine (6.1.f). Ikke skriv personopplysninger eller sensitive opplysninger i chatten.",
+  "El asistente de chat de la web y de Min side envía los mensajes que escribes, junto con el idioma de la página, a Anthropic, que genera la respuesta con IA. Digital Solutions no guarda el contenido de las conversaciones, solo contadores anónimos para limitar el uso. La conversación se guarda solo en tu navegador mientras la pestaña esté abierta. Base jurídica: interés legítimo en responder a tus preguntas (6.1.f). No escribas datos personales ni sensibles en el chat."),
+"priv.chat2": (
+  "<strong>Anthropic</strong> (USA): generates the chat assistant's answers, as processor. Under Anthropic's commercial terms, the messages are not used to train AI models.",
+  "<strong>Anthropic</strong> (USA): lager svarene fra chatassistenten, som databehandler. Etter Anthropics kommersielle vilkår brukes meldingene ikke til å trene KI-modeller.",
+  "<strong>Anthropic</strong> (EE. UU.): genera las respuestas del asistente de chat, como encargado del tratamiento. Según los términos comerciales de Anthropic, los mensajes no se usan para entrenar modelos de IA."),
+"cook.chat1": (
+  '<span class="mono">ds-chat-site</span> / <span class="mono">ds-chat-minside</span> (<span class="mono">sessionStorage</span>)',
+  '<span class="mono">ds-chat-site</span> / <span class="mono">ds-chat-minside</span> (<span class="mono">sessionStorage</span>)',
+  '<span class="mono">ds-chat-site</span> / <span class="mono">ds-chat-minside</span> (<span class="mono">sessionStorage</span>)'),
+"cook.chat2": ("Keep your conversation with the chat assistant while the tab is open", "Ta vare på samtalen med chatassistenten så lenge fanen er åpen", "Guardar la conversación con el asistente de chat mientras la pestaña esté abierta"),
+"cook.chat3": ("Until you close the tab", "Til du lukker fanen", "Hasta cerrar la pestaña"),
 "priv.c45": (
-  "Data is kept in the European Economic Area. Stripe may process data outside the EEA, including in the United States; such transfers are covered by the EU–US Data Privacy Framework or the European Commission's standard contractual clauses.",
-  "Opplysningene lagres i EØS. Stripe kan behandle opplysninger utenfor EØS, også i USA; slike overføringer er dekket av EU–US Data Privacy Framework eller EU-kommisjonens standard personvernbestemmelser.",
-  "Los datos se guardan en el Espacio Económico Europeo. Stripe puede tratar datos fuera del EEE, incluso en Estados Unidos; esas transferencias están amparadas por el EU–US Data Privacy Framework o por las cláusulas contractuales tipo de la Comisión Europea."),
+  "Data is kept in the European Economic Area. Stripe and Anthropic may process data outside the EEA, including in the United States; such transfers are covered by the EU–US Data Privacy Framework or the European Commission's standard contractual clauses.",
+  "Opplysningene lagres i EØS. Stripe og Anthropic kan behandle opplysninger utenfor EØS, også i USA; slike overføringer er dekket av EU–US Data Privacy Framework eller EU-kommisjonens standard personvernbestemmelser.",
+  "Los datos se guardan en el Espacio Económico Europeo. Stripe y Anthropic pueden tratar datos fuera del EEE, incluso en Estados Unidos; esas transferencias están amparadas por el EU–US Data Privacy Framework o por las cláusulas contractuales tipo de la Comisión Europea."),
 "priv.c46": ("8. How long we keep data", "8. Hvor lenge vi lagrer", "8. Cuánto tiempo guardamos los datos"),
 "priv.c47": ("Order that does not become a subscription: up to 12 months after the order.", "Bestilling som ikke blir abonnement: inntil 12 måneder etter bestillingen.", "Pedido que no se convierte en suscripción: hasta 12 meses después del pedido."),
 "priv.c48": (
@@ -231,9 +245,9 @@ T = {
   "B2. Pris",
   "B2. Precio"),
 "vilk.b2": (
-  "The price is 399 kr per month (total price). There is no setup fee. If the customer wants Digital Solutions to work on the page, for example writing texts or entering content, it costs 450 kr per task, agreed and paid before the work is done.",
-  "Prisen er 399 kr per måned (totalpris). Det er ingen etableringskostnad. Ønsker kunden at vi gjør arbeid på siden, for eksempel skriver tekster eller legger inn innhold, koster det 450 kr per oppgave. Slike oppgaver avtales og betales før vi utfører dem.",
-  "El precio es de 399 kr al mes (precio final). No hay coste de alta. Si el cliente quiere que Digital Solutions trabaje en la página, por ejemplo redactando textos o introduciendo contenido, cuesta 450 kr por tarea, acordada y pagada antes de realizarla."),
+  'The price is 399 kr per month (total price). There is no setup fee. The customer builds and updates the page themselves. Support is provided by an AI chat assistant on the website and in Min side, at no extra cost, and by email for technical, account and payment matters.',
+  'Prisen er 399 kr per måned (totalpris). Det er ingen etableringskostnad. Kunden lager og oppdaterer siden selv. Støtte gis av en chatassistent med KI på nettsiden og på Min side, uten ekstra kostnad, og på e-post for tekniske spørsmål, konto og betaling.',
+  'El precio es de 399 kr al mes (precio final). No hay coste de alta. El cliente crea y actualiza la página él mismo. El soporte lo ofrece un asistente de chat con IA en la web y en Min side, sin coste adicional, y por correo electrónico para cuestiones técnicas, de cuenta y de pago.'),
 "vilk.b3t": (
   "B3. Payment",
   "B3. Betaling",
