@@ -23,8 +23,9 @@ sys.path.insert(0, str(RAIZ / "tools"))
 import _trad_a
 import _trad_b
 import _trad_c   # landing page (src/pages/index.html)
+import _trad_d   # documentos legais (privacidade, termos, cookies)
 
-TRAD = {**_trad_a.T, **_trad_b.T, **_trad_c.T}
+TRAD = {**_trad_a.T, **_trad_b.T, **_trad_c.T, **_trad_d.T}
 IDIOMAS = {"en": 0, "no": 1, "es": 2}
 
 
