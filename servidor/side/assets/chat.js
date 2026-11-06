@@ -237,6 +237,8 @@
       else feil = d.feil === "grense" || d.feil === "dag" ? "grense" : d.feil === "av" ? "av" : "feil";
     } catch (e) { feil = "feil"; }
     venter = false; sendKnapp.disabled = false;
+    // Segurança extra: tira marcas de Markdown (**negrito**, # títulos) se a IA usar.
+    if (svar) svar = svar.replace(/\*\*(.+?)\*\*/g, "$1").replace(/__(.+?)__/g, "$1").replace(/^#{1,6}\s+/gm, "");
     logg.push(feil ? { rolle: "assistent", tekst: t(feil), feil: true } : { rolle: "assistent", tekst: svar });
     lagre(); tegn();
     felt.focus();

@@ -13,9 +13,7 @@ T = {
   "Slik fungerer det",
   "Cómo funciona"),
 "lp.nav.faq": ("Questions", "Spørsmål", "Preguntas"),
-"lp.nav.bestill": ("Order now", "Bestill nå", "Pedir ahora"),
-
-# Abertura e oferta
+"lp.nav.bestill": ('Get started', 'Kom i gang', 'Empieza ahora'),
 "lp.hero.eyebrow": (
   "Websites for businesses in Hvarnes and the surrounding area",
   "Nettsider for bedrifter i Hvarnes og omegn",
@@ -29,7 +27,7 @@ T = {
   "De fleste kunder sjekker nettet før de tar kontakt. Med vår editor lager du en enkel og pen side med noen få klikk, uten å kunne koding.",
   "La mayoría de los clientes busca en internet antes de contactar. Con nuestro editor montas una página sencilla y bonita en pocos clics, sin saber programar."),
 "lp.hero.cta2": ("See the models", "Se modellene", "Ver los modelos"),
-"lp.cta.pedir": ("Order your landing page", "Bestill landingsside", "Pide tu landing page"),
+"lp.cta.pedir": ('Start for free', 'Kom i gang gratis', 'Empieza gratis'),
 "lp.selo": (
   "30 days free",
   "30 dager gratis",
@@ -131,7 +129,7 @@ T = {
   "How it works",
   "Slik fungerer det",
   "Cómo funciona"),
-"lp.como.p1.t": ("Order online", "Bestill på nett", "Haz el pedido online"),
+"lp.como.p1.t": ('Sign up online', 'Registrer deg på nett', 'Regístrate online'),
 "lp.como.p1.d": (
   "Choose the model, tell us about your business and send your logo and photos. It takes a few minutes.",
   "Velg modell, fortell om bedriften og send logo og bilder. Det tar bare noen minutter.",
@@ -193,10 +191,7 @@ T = {
 
 # Chamada final
 "lp.cta.titulo": ("Ready to get online?", "Klar for å komme på nett?", "¿Listo para estar en internet?"),
-"lp.cta.lead": (
-  "Order online in a few minutes. You get the confirmation by email right away.",
-  "Bestill på nett på noen minutter. Du får bekreftelse på e-post med en gang.",
-  "Haz el pedido online en pocos minutos. Recibes la confirmación por correo al instante."),
+"lp.cta.lead": ('Get started in a few minutes. You get a confirmation by email right away.', 'Kom i gang på noen minutter. Du får bekreftelse på e-post med en gang.', 'Empieza en pocos minutos. Recibes la confirmación por correo al instante.'),
 "lp.cta.duvidas": ("Questions?", "Spørsmål?", "¿Dudas?"),
 
 # Rodapé
@@ -226,8 +221,8 @@ T = {
 "lp.rodape.vilkar": ("Terms and conditions", "Vilkår", "Términos y condiciones"),
 
 # Página de pedido
-"lp.best.eyebrow": ("Online order", "Bestilling på nett", "Pedido online"),
-"lp.best.titulo": ("Order your landing page", "Bestill landingssiden din", "Pide tu landing page"),
+"lp.best.eyebrow": ('30 days free', '30 dager gratis', '30 días gratis'),
+"lp.best.titulo": ('Create your landing page', 'Lag landingssiden din', 'Crea tu landing page'),
 "lp.best.lead": (
   "It takes about 5 minutes. At the end of the form you register your card. The first 30 days are free.",
   "Det tar ca. 5 minutter. Til slutt registrerer du kortet. De første 30 dagene er gratis.",
