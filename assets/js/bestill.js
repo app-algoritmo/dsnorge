@@ -24,13 +24,12 @@ const MAX_TOTAL = 40 * 1024 * 1024;   // soma dos arquivos
     estado.dataset.erro = erro ? "true" : "false";
   };
 
-  /* País da empresa: muda o rótulo e a regra do número (org.nr, CNPJ ou outro). */
+  /* País da empresa: muda o rótulo e a regra do número (org.nr ou número de outro país). */
   const land = document.getElementById("lp-land");
   const orgnr = document.getElementById("lp-orgnr");
   const REGRAS = {
     NO: { pattern: "[0-9 ]{9,11}", max: 11, modo: "numeric", exemplo: "123 456 789" },
-    BR: { pattern: "[0-9A-Za-z./ -]{14,20}", max: 20, modo: "text", exemplo: "00.000.000/0001-00" },
-    XX: { pattern: "[A-Za-z0-9][A-Za-z0-9 ./-]{2,29}", max: 30, modo: "text", exemplo: "" }
+    XX: { pattern: "[A-Za-z0-9][A-Za-z0-9 ./-]{2,29}", max: 30, modo: "text", exemplo: "CNPJ, NIF, VAT…" }
   };
   const aplicarLand = () => {
     const r = REGRAS[land.value] || REGRAS.NO;
