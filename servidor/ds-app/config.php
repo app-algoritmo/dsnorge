@@ -13,8 +13,13 @@ const DB_NOME  = 'dsnorgecom01';
 const DB_USER  = 'dsnorgecom01';
 const DB_SENHA = 'TROCAR_ESTA_SENHA';      // senha do banco MySQL (a do phpMyAdmin)
 
-const BASE_DOMENE  = 'dsnorge.com';         // páginas: <slug>.dsnorge.com
+const BASE_DOMENE  = 'dsnorge.com';
+const SIDE_HOST    = 'side.dsnorge.com';    // páginas: side.dsnorge.com/<slug>
 const MINSIDE_HOST = 'minside.dsnorge.com'; // área do cliente
+
+// true: o primeiro «Publiser» do cliente já põe a página no ar (você recebe aviso).
+// false: a página espera você clicar em «Aktiver» no /admin.
+const AUTO_AKTIVER = true;
 const HTTPS        = true;
 
 const REMETENTE = 'no-reply@dsnorge.com';

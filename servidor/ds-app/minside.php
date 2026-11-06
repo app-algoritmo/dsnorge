@@ -224,7 +224,7 @@ function status_tekst(array $k): array
 {
     return match ($k['status']) {
         'aktiv'  => ['Publisert', 'ok', 'Siden din er på nett. Endringer blir synlige når du trykker «Publiser endringer».'],
-        'venter' => ['Venter på aktivering', 'vent', 'Takk! Vi aktiverer adressen din, normalt innen én virkedag. Du får e-post når siden er på nett. Du kan fortsatt gjøre endringer.'],
+        'venter' => ['Venter på aktivering', 'vent', 'Takk! Siden blir aktivert av oss, normalt innen én virkedag. Du får e-post når den er på nett. Du kan fortsatt gjøre endringer.'],
         'av'     => ['Stengt', 'feil', 'Siden er ikke på nett. Ta kontakt med oss på ' . DESTINO . '.'],
         default  => ['Ikke publisert', 'info', 'Fyll inn, se forhåndsvisning og trykk «Publiser» når du er fornøyd.'],
     };
@@ -236,7 +236,7 @@ function side_editor(array $k): void
     $inn = array_merge(tomt_innhold($k['modell']), json_les($k['utkast']));
     [$stNavn, $stType, $stTekst] = status_tekst($k);
     $f = flash();
-    $adresse = $k['slug'] . '.' . BASE_DOMENE;
+    $adresse = side_adresse($k['slug']);
     $erAdmin = er_admin(innlogget());
 
     $h  = '';
@@ -467,30 +467,54 @@ function publiser(array $k, array $inn, string $varsel): never
     rydd_bilder((int)$k['id']);
 
     if ($k['status'] === 'aktiv') {
-        flash('Publisert! Endringene er nå på ' . $k['slug'] . '.' . BASE_DOMENE . '.' . $varsel);
+        flash('Publisert! Endringene er nå på ' . side_adresse($k['slug']) . '.' . $varsel);
         videre('/');
     }
 
     $forste = $k['status'] === 'utkast';
-    q("UPDATE kunder SET status = 'venter' WHERE id = ?", [$k['id']]);
+    $ny_status = AUTO_AKTIVER ? 'aktiv' : 'venter';
+    q('UPDATE kunder SET status = ? WHERE id = ?', [$ny_status, $k['id']]);
     if ($forste) {
-        send_epost(DESTINO, '[Min side] Klar til publisering: ' . $inn['firmanavn'], implode("\n", [
-            'Kunden har trykket «Publiser».',
+        send_epost(DESTINO, '[Min side] ' . (AUTO_AKTIVER ? 'Ny side på nett: ' : 'Klar til publisering: ') . $inn['firmanavn'], implode("\n", [
+            AUTO_AKTIVER ? 'Kunden har publisert siden, og den er nå på nett.' : 'Kunden har trykket «Publiser».',
             '',
             'Bedrift:  ' . $inn['firmanavn'],
             'E-post:   ' . $k['epost'],
             'Bestilling: ' . ($k['bestilling_ref'] ?: '—'),
-            'Adresse:  ' . $k['slug'] . '.' . BASE_DOMENE,
+            'Adresse:  ' . side_url($k['slug']),
             '',
             'Gjør dette:',
             '1. Sjekk i Stripe at abonnementet finnes (kunden har lagt inn kort).',
-            '2. Domeneshop → Webhotell → Webadresser: legg til ' . $k['slug'] . '.' . BASE_DOMENE . ' med mappen «side».',
-            '3. ' . minside_url('/admin') . ' → «Aktiver».',
-            '4. Stripe → Abonnementet → avslutt prøveperioden nå (første trekk).',
+            '   Finnes det ikke: ' . minside_url('/admin') . ' → «Slå av».',
+            AUTO_AKTIVER ? '2. Stripe → Abonnementet → avslutt prøveperioden nå (første trekk).' : '2. ' . minside_url('/admin') . ' → «Aktiver».',
+            AUTO_AKTIVER ? '' : '3. Stripe → Abonnementet → avslutt prøveperioden nå (første trekk).',
         ]), $k['epost']);
+        if (AUTO_AKTIVER) {
+            send_epost($k['epost'], 'Landingssiden din er på nett', velkommen_tekst($k, $inn));
+        }
     }
-    flash('Takk! Siden er sendt til aktivering. Du får e-post når den er på nett, normalt innen én virkedag.' . $varsel);
+    if (AUTO_AKTIVER) {
+        flash('Gratulerer! Siden din er nå på nett: ' . side_adresse($k['slug']) . '.' . $varsel);
+    } else {
+        flash('Takk! Siden er sendt til aktivering. Du får e-post når den er på nett, normalt innen én virkedag.' . $varsel);
+    }
     videre('/');
+}
+
+function velkommen_tekst(array $k, array $inn): string
+{
+    return implode("\n", [
+        'Hei!',
+        '',
+        'Landingssiden til ' . ($inn['firmanavn'] ?? '') . ' er nå på nett:',
+        side_url($k['slug']),
+        '',
+        'Du kan endre tekst, bilder og farger når du vil på ' . minside_url('/') . '.',
+        'Del gjerne lenken på Facebook, Instagram og Google-profilen din.',
+        '',
+        'Vennlig hilsen',
+        'Digital Solutions · dsnorge.com',
+    ]);
 }
 
 function side_forhand(): void
@@ -517,7 +541,7 @@ function side_admin(): void
     $venter = array_filter($kunder, static fn($k) => $k['status'] === 'venter');
     if ($venter) {
         $h .= '<div class="melding vent"><strong>' . count($venter) . ' side(r) venter på aktivering.</strong> Før du trykker «Aktiver»: '
-            . 'sjekk abonnementet i Stripe, og legg til adressen i Domeneshop (Webhotell → Webadresser → mappe «side»). Etterpå: avslutt prøveperioden i Stripe.</div>';
+            . 'sjekk abonnementet i Stripe. Etterpå: avslutt prøveperioden i Stripe.</div>';
     }
 
     $h .= '<div class="tabell-ramme"><table class="tabell"><thead><tr><th>Bedrift</th><th>Adresse</th><th>Status</th><th>Sist</th><th>Handlinger</th></tr></thead><tbody>';
@@ -528,14 +552,13 @@ function side_admin(): void
         $h .= '<tr><td><strong>' . e($inn['firmanavn'] ?? '—') . '</strong><br><small>' . e($k['epost']) . '<br>'
             . e(MODELLER[$k['modell']]['navn']) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
             . ($k['nota'] ? '<br><small class="nota">' . e($k['nota']) . '</small>' : '') . '</td>'
-            . '<td>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug']))
-            . '<small>.' . e(BASE_DOMENE) . '</small></td>'
+            . '<td><small>' . e(SIDE_HOST) . '/</small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug'])) . '</td>'
             . '<td><span class="merkelapp ' . e($stType) . '">' . e($stNavn) . '</span></td>'
             . '<td><small>Lagret: ' . e(kort_dato($k['sist_lagret'])) . '<br>Publisert: ' . e(kort_dato($k['sist_publisert'])) . '<br>Innlogget: ' . e(kort_dato($k['sist_innlogget'])) . '</small></td>'
             . '<td class="admin-handlinger">'
             . admin_knapp($k['id'], 'rediger', 'Åpne editor', 'strek');
         if ($k['status'] !== 'aktiv') {
-            $h .= admin_knapp($k['id'], 'aktiver', 'Aktiver', 'hoved', 'Er adressen ' . $k['slug'] . '.' . BASE_DOMENE . ' lagt til i Domeneshop?');
+            $h .= admin_knapp($k['id'], 'aktiver', 'Aktiver', 'hoved', 'Har kunden abonnement i Stripe?');
         }
         if ($k['status'] !== 'av') {
             $h .= admin_knapp($k['id'], 'stenge', 'Slå av', 'strek', 'Slå av siden til ' . ($inn['firmanavn'] ?? $k['slug']) . '?');
@@ -608,25 +631,14 @@ function handling_admin(): void
             }
             q("UPDATE kunder SET status = 'aktiv' WHERE id = ?", [$id]);
             $inn = json_les($k['utkast']);
-            send_epost($k['epost'], 'Landingssiden din er på nett', implode("\n", [
-                'Hei!',
-                '',
-                'Landingssiden til ' . ($inn['firmanavn'] ?? '') . ' er nå på nett:',
-                side_url($k['slug']),
-                '',
-                'Du kan endre tekst, bilder og farger når du vil på ' . minside_url('/') . '.',
-                'Abonnementet (399 kr/mnd, totalpris) starter nå. Kvittering kommer fra Stripe.',
-                '',
-                'Vennlig hilsen',
-                'Digital Solutions · dsnorge.com',
-            ]));
-            flash('Aktivert: ' . $k['slug'] . '.' . BASE_DOMENE . '. Husk å avslutte prøveperioden i Stripe.');
+            send_epost($k['epost'], 'Landingssiden din er på nett', velkommen_tekst($k, $inn));
+            flash('Aktivert: ' . side_adresse($k['slug']) . '. Husk å avslutte prøveperioden i Stripe.');
             break;
 
         case 'stenge':
             if (!$k) { break; }
             q("UPDATE kunder SET status = 'av' WHERE id = ?", [$id]);
-            flash('Slått av: ' . $k['slug'] . '.' . BASE_DOMENE . '. Husk å fjerne webadressen i Domeneshop hvis kunden har sluttet.');
+            flash('Slått av: ' . side_adresse($k['slug']) . '. Husk å avslutte abonnementet i Stripe hvis kunden har sluttet.');
             break;
 
         case 'slug':
@@ -635,7 +647,7 @@ function handling_admin(): void
             if (!slug_gyldig($ny)) { flash('Ugyldig adresse: bruk a–z, 0–9 og bindestrek.', 'feil'); break; }
             if (q('SELECT id FROM kunder WHERE slug = ? AND id <> ?', [$ny, $id])->fetch()) { flash('Adressen er i bruk.', 'feil'); break; }
             q('UPDATE kunder SET slug = ? WHERE id = ?', [$ny, $id]);
-            flash('Ny adresse: ' . $ny . '.' . BASE_DOMENE . ($k['status'] === 'aktiv' ? '. Legg den til i Domeneshop!' : '.'));
+            flash('Ny adresse: ' . side_adresse($ny) . '. Den gamle adressen virker ikke lenger.');
             break;
 
         case 'nota':
@@ -656,7 +668,7 @@ function handling_admin(): void
             $inn['firmanavn'] = $navn;
             $inn['epost'] = $epost;
             q('INSERT INTO kunder (opprettet, epost, slug, modell, utkast) VALUES (NOW(), ?, ?, ?, ?)', [$epost, $slug, $modell, json_skriv($inn)]);
-            flash('Opprettet: ' . $navn . ' (' . $slug . '.' . BASE_DOMENE . '). Kunden logger inn på ' . MINSIDE_HOST . ' med ' . $epost . '.');
+            flash('Opprettet: ' . $navn . ' (' . side_adresse($slug) . '). Kunden logger inn på ' . MINSIDE_HOST . ' med ' . $epost . '.');
             break;
     }
     videre('/admin');

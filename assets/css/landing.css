@@ -162,6 +162,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-siz
 .lp-sufixo{display:flex;align-items:stretch}
 .lp-sufixo input{border-top-right-radius:0!important;border-bottom-right-radius:0!important}
 .lp-sufixo span{display:flex;align-items:center;padding:0 12px;background:var(--surface-2);border:1px solid var(--line);border-left:0;border-radius:0 6px 6px 0;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.lp-prefixo input{border-radius:0 6px 6px 0!important;min-width:0}
+.lp-prefixo span{border-left:1px solid var(--line);border-right:0;border-radius:6px 0 0 6px}
 .lp-aceite{display:flex;gap:10px;align-items:flex-start;font-size:.9375rem;color:var(--ink-2)}
 .lp-aceite input{margin-top:4px;width:18px;height:18px;flex:none}
 .lp-aceite a{color:var(--marca)}

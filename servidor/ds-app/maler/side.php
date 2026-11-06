@@ -34,7 +34,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
         'telephone' => $inn['telefon'] ?: null,
         'email'     => $inn['epost'] ?: null,
         'address'   => $inn['adresse'] ?: null,
-        'image'     => $inn['toppbilde'] ? rtrim($url, '/') . bilde_url($inn['toppbilde']) : null,
+        'image'     => $inn['toppbilde'] ? side_rot() . bilde_url($inn['toppbilde']) : null,
         'sameAs'    => array_values(array_filter([$inn['facebook'], $inn['instagram']])) ?: null,
     ]);
 
@@ -55,7 +55,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 <meta property="og:url" content="<?= e($url) ?>">
 <?php if ($beskrivelse !== ''): ?><meta property="og:description" content="<?= e($beskrivelse) ?>">
 <?php endif; ?>
-<?php if ($inn['toppbilde']): ?><meta property="og:image" content="<?= e(rtrim($url, '/') . bilde_url($inn['toppbilde'])) ?>">
+<?php if ($inn['toppbilde']): ?><meta property="og:image" content="<?= e(side_rot() . bilde_url($inn['toppbilde'])) ?>">
 <?php endif; ?>
 <?php if ($inn['logo']): ?><link rel="icon" href="<?= e(bilde_url($inn['logo'])) ?>">
 <?php endif; ?>

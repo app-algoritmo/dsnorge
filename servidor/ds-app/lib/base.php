@@ -7,6 +7,10 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/config.php';
 
+// Valores novos com padrão, para um config.php antigo continuar valendo.
+if (!defined('SIDE_HOST'))    { define('SIDE_HOST', 'side.dsnorge.com'); }
+if (!defined('AUTO_AKTIVER')) { define('AUTO_AKTIVER', true); }
+
 mb_internal_encoding('UTF-8');
 date_default_timezone_set('Europe/Oslo');
 
@@ -67,9 +71,21 @@ function minside_url(string $sti = '/'): string
     return (HTTPS ? 'https://' : 'http://') . MINSIDE_HOST . port_suffiks() . $sti;
 }
 
+/** Endereço público da página: https://side.dsnorge.com/<slug> */
 function side_url(string $slug): string
 {
-    return (HTTPS ? 'https://' : 'http://') . $slug . '.' . BASE_DOMENE . port_suffiks() . '/';
+    return side_rot() . '/' . $slug;
+}
+
+function side_rot(): string
+{
+    return (HTTPS ? 'https://' : 'http://') . SIDE_HOST . port_suffiks();
+}
+
+/** Como o endereço aparece em textos: side.dsnorge.com/<slug> */
+function side_adresse(string $slug): string
+{
+    return SIDE_HOST . '/' . $slug;
 }
 
 function port_suffiks(): string
@@ -175,7 +191,7 @@ function slugify(string $s): string
     return rtrim($s, '-');
 }
 
-const RESERVERTE_SLUGS = ['www', 'api', 'minside', 'admin', 'mail', 'epost', 'ftp', 'smtp', 'imap', 'pop',
+const RESERVERTE_SLUGS = ['assets', 'robots', 'favicon', 'www', 'api', 'minside', 'admin', 'mail', 'epost', 'ftp', 'smtp', 'imap', 'pop',
     'webmail', 'dsnorge', 'ds', 'test', 'demo', 'static', 'cdn', 'm', 'side', 'blogg', 'shop', 'butikk', 'support', 'hjelp'];
 
 function slug_gyldig(string $s): bool

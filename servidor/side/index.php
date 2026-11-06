@@ -2,7 +2,8 @@
 /**
  * DIGITAL SOLUTIONS — porta de entrada de ~/side
  *   minside.dsnorge.com  → área do cliente (Min side) e /admin
- *   <slug>.dsnorge.com   → landingsside publicada do cliente
+ *   side.dsnorge.com/<slug> → landingsside publicada do cliente
+ *   <slug>.dsnorge.com   → idem (se um dia o endereço for criado na Domeneshop)
  * Tudo o que não é arquivo (assets, m/) chega aqui pelo .htaccess.
  * DOC-WEB-MS-008 · v1.0.0
  */
@@ -25,6 +26,21 @@ if ($host === MINSIDE_HOST) {
     exit;
 }
 
+if ($host === SIDE_HOST) {
+    $sti = parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/';
+    $slug = strtolower(trim($sti, '/'));
+    if ($slug === '') {
+        header('Location: https://' . BASE_DOMENE . '/', true, 302);
+        exit;
+    }
+    if ($sti !== '/' . $slug) {                 // /Firma/ → /firma
+        header('Location: ' . side_url($slug), true, 301);
+        exit;
+    }
+    vis_kundeside($slug, true);
+    exit;
+}
+
 $suffiks = '.' . BASE_DOMENE;
 if (str_ends_with($host, $suffiks)) {
     $slug = substr($host, 0, -strlen($suffiks));
@@ -35,12 +51,12 @@ if (str_ends_with($host, $suffiks)) {
 http_response_code(404);
 echo render_ikke_funnet();
 
-function vis_kundeside(string $slug): void
+function vis_kundeside(string $slug, bool $sti_ok = false): void
 {
     header("Content-Security-Policy: default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'self'");
     $sti = parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/';
     $kunde = null;
-    if (slug_gyldig($slug) && in_array($sti, ['/', '/index.html', '/index.php'], true)) {
+    if (slug_gyldig($slug) && ($sti_ok || in_array($sti, ['/', '/index.html', '/index.php'], true))) {
         try {
             $kunde = q("SELECT * FROM kunder WHERE slug = ? AND status = 'aktiv' AND publisert IS NOT NULL", [$slug])->fetch() ?: null;
         } catch (Throwable $e) {

@@ -92,9 +92,9 @@ T = {
   "Endre tekst, priser, åpningstider og bilder når du vil, og publiser med en gang",
   "Cambia textos, precios, horarios y fotos cuando quieras y publica al instante"),
 "lp.inc.i7": (
-  "Free address: yourbusiness.dsnorge.com",
-  "Gratis adresse: dinbedrift.dsnorge.com",
-  "Dirección gratis: tuempresa.dsnorge.com"),
+  "Free address: side.dsnorge.com/yourbusiness",
+  "Gratis adresse: side.dsnorge.com/dinbedrift",
+  "Dirección gratis: side.dsnorge.com/tuempresa"),
 
 # Plano
 "lp.plano.rot": ("Landing page", "Landingsside", "Landing page"),
@@ -140,9 +140,9 @@ T = {
   "Publiser",
   "Publica"),
 "lp.como.p3.d": (
-  "Click publish and we activate your address, usually within 1 working day. After that, changes go live instantly.",
-  "Trykk på publiser, så aktiverer vi adressen din, normalt innen én virkedag. Deretter blir endringer synlige med en gang.",
-  "Haz clic en publicar y activamos tu dirección, normalmente en 1 día hábil. Después, los cambios se publican al instante."),
+  "Click publish and the page goes live instantly at side.dsnorge.com/yourbusiness. Every later change also goes live instantly.",
+  "Trykk på publiser, så er siden på nett med en gang, på side.dsnorge.com/dinbedrift. Alle senere endringer vises også med en gang.",
+  "Haz clic en publicar y la página se publica al instante en side.dsnorge.com/tuempresa. Cada cambio posterior también se publica al instante."),
 
 # Perguntas
 "lp.faq.titulo": ("Frequently asked questions", "Vanlige spørsmål", "Preguntas frecuentes"),
@@ -153,9 +153,9 @@ T = {
   "La suscripción continúa mes a mes. Puedes cancelar con un mes de preaviso."),
 "lp.faq.q2": ("How long does it take?", "Hvor lang tid tar det?", "¿Cuánto tarda?"),
 "lp.faq.a2": (
-  "You just fill in the fields and choose the colours, and the page is ready in no time. After you click publish, we usually activate the address within 1 working day.",
-  "Du fyller bare inn feltene og velger farger, så er siden klar på kort tid. Når du har trykket på publiser, aktiverer vi adressen normalt innen én virkedag.",
-  "Solo rellenas los campos y eliges los colores, y la página queda lista enseguida. Cuando haces clic en publicar, activamos la dirección normalmente en 1 día hábil."),
+  "You just fill in the fields and choose the colours, and the page is ready in no time. When you click publish, it goes live instantly.",
+  "Du fyller bare inn feltene og velger farger, så er siden klar på kort tid. Når du trykker på publiser, er den på nett med en gang.",
+  "Solo rellenas los campos y eliges los colores, y la página queda lista enseguida. Cuando haces clic en publicar, se publica al instante."),
 "lp.faq.q3": ("What do you need from me?", "Hva trenger dere fra meg?", "¿Qué necesitáis de mí?"),
 "lp.faq.a3": (
   "Your logo, if you have one, a few photos and a short description of the business. You can send it all with the order or add it directly in the editor.",
@@ -168,9 +168,9 @@ T = {
   "Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. Si prefieres que lo hagamos nosotros, cuesta 450 kr por tarea."),
 "lp.faq.q5": ("What about the domain?", "Hva med domene?", "¿Y el dominio?"),
 "lp.faq.a5": (
-  "The page gets a free address, like yourbusiness.dsnorge.com. If you want your own domain, like yourbusiness.no, you register it in your name and we connect it. Your own domain is not included in the price.",
-  "Siden får en gratis adresse, som dinbedrift.dsnorge.com. Vil du ha eget domene, som dinbedrift.no, registrerer du det i ditt navn, og vi kobler det til. Eget domene er ikke inkludert i prisen.",
-  "La página recibe una dirección gratis, como tuempresa.dsnorge.com. Si quieres un dominio propio, como tuempresa.no, lo registras a tu nombre y lo conectamos. El dominio propio no está incluido en el precio."),
+  "The page gets a free address, like side.dsnorge.com/yourbusiness. If you want your own domain, like yourbusiness.no, you register it in your name and we connect it. Your own domain is not included in the price.",
+  "Siden får en gratis adresse, som side.dsnorge.com/dinbedrift. Vil du ha eget domene, som dinbedrift.no, registrerer du det i ditt navn, og vi kobler det til. Eget domene er ikke inkludert i prisen.",
+  "La página recibe una dirección gratis, como side.dsnorge.com/tuempresa. Si quieres un dominio propio, como tuempresa.no, lo registras a tu nombre y lo conectamos. El dominio propio no está incluido en el precio."),
 "lp.faq.q6": ("How do I pay?", "Hvordan betaler jeg?", "¿Cómo pago?"),
 "lp.faq.a6": (
   "By card, automatically every month. The first 30 days are free: billing starts when the page is published or after 30 days at the latest. You get the receipt by email.",
