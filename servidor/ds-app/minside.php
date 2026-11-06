@@ -4,7 +4,7 @@
  * Login por link no e-mail, editor da página, prévia, publicação e o painel /admin.
  * A interface do cliente segue o idioma dele (lib/sprak.php: no, pt, en, es);
  * o painel /admin fica em norueguês. Comentários em português.
- * DOC-WEB-MS-009 · v1.1.0
+ * DOC-WEB-MS-009 · v1.2.0
  */
 declare(strict_types=1);
 
@@ -326,7 +326,11 @@ function side_editor(array $k): void
         . '</fieldset>';
 
     /* Lista (serviços / cardápio / tratamentos) */
-    $h .= '<fieldset class="del"><legend>' . e($m['liste_tittel']) . '</legend><p class="hjelp">' . e($m['liste_hint']) . '</p>';
+    $listeT = trim($inn['liste_tittel']) !== '' ? $inn['liste_tittel'] : $m['liste_tittel'];
+    $infoT  = trim($inn['info_tittel']) !== '' ? $inn['info_tittel'] : $m['info_tittel'];
+    $h .= '<fieldset class="del"><legend>' . e($listeT) . '</legend>'
+        . felt('liste_tittel', t('f.liste_tittel'), $inn['liste_tittel'], 40, false, t('f.tittel.h', $m['liste_tittel']))
+        . '<p class="hjelp">' . e($m['liste_hint']) . '</p>';
     $rader = $inn['liste'];
     $tomme = max(0, min(3, MAKS_LISTE - count($rader)));
     $alle = array_merge($rader, array_fill(0, $tomme, ['navn' => '', 'tekst' => '', 'pris' => '']));
@@ -343,8 +347,9 @@ function side_editor(array $k): void
     }
     $h .= '</div><p class="hjelp">' . th('l.flere', th('k.lagre'), MAKS_LISTE) . '</p></fieldset>';
 
-    $h .= '<fieldset class="del"><legend>' . e($m['info_tittel']) . '</legend>'
-        . tekstfelt('info', $m['info_tittel'], $inn['info'], 600, 3, $m['info_hint'])
+    $h .= '<fieldset class="del"><legend>' . e($infoT) . '</legend>'
+        . felt('info_tittel', t('f.info_tittel'), $inn['info_tittel'], 40, false, t('f.tittel.tom', $m['info_tittel']))
+        . tekstfelt('info', $infoT, $inn['info'], 600, 3, $m['info_hint'])
         . '</fieldset>';
 
     /* Contato */

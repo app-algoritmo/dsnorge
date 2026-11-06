@@ -3,7 +3,7 @@
  * DIGITAL SOLUTIONS — idiomas do Min side, dos e-mails ao cliente e da página publicada.
  * Cada cliente tem um idioma (kunder.sprak): no, pt, en ou es. O painel /admin fica em norueguês.
  * Para mudar um texto, mude-o aqui nos quatro idiomas: [no, pt, en, es].
- * DOC-WEB-MS-010 · v1.0.0
+ * DOC-WEB-MS-010 · v1.1.0
  */
 declare(strict_types=1);
 
@@ -58,46 +58,46 @@ function modell(string $id): array
 
 const MODELL_TEKST = [
     'no' => [
-        'handverk' => ['navn' => 'Håndverk og service', 'liste_tittel' => 'Tjenester', 'liste_hint' => 'Hva tilbyr dere? F.eks. «Baderomsrenovering» – kort forklaring – «fra 650 kr/t».',
+        'handverk' => ['navn' => 'Tjenester og håndverk', 'liste_tittel' => 'Tjenester', 'liste_hint' => 'Hva tilbyr dere? F.eks. «Baderomsrenovering» – kort forklaring – «fra 650 kr/t».',
             'info_tittel' => 'Område', 'info_hint' => 'Hvilke steder dekker dere? F.eks. «Larvik, Sandefjord og Kvelde».', 'knapp' => 'Be om tilbud',
             'eksempel' => ['Tømrerarbeid', 'Nye vinduer, terrasser og tilbygg.', 'fra 650 kr/t']],
-        'mat' => ['navn' => 'Mat og butikk', 'liste_tittel' => 'Meny', 'liste_hint' => 'Retter eller varer. F.eks. «Pizza Margherita» – tomat, mozzarella, basilikum – «159 kr».',
+        'mat' => ['navn' => 'Mat, butikk og varer', 'liste_tittel' => 'Meny', 'liste_hint' => 'Retter eller varer. F.eks. «Pizza Margherita» – tomat, mozzarella, basilikum – «159 kr».',
             'info_tittel' => 'Bestilling og levering', 'info_hint' => 'Take away, levering, bordbestilling, betaling med Vipps osv.', 'knapp' => 'Ring og bestill',
             'eksempel' => ['Pizza Margherita', 'Tomat, mozzarella og fersk basilikum.', '159 kr']],
-        'velvaere' => ['navn' => 'Velvære og timer', 'liste_tittel' => 'Behandlinger', 'liste_hint' => 'Behandlinger med varighet og pris. F.eks. «Dameklipp» – 45 min – «590 kr».',
+        'velvaere' => ['navn' => 'Timebestilling og velvære', 'liste_tittel' => 'Behandlinger', 'liste_hint' => 'Behandlinger med varighet og pris. F.eks. «Dameklipp» – 45 min – «590 kr».',
             'info_tittel' => 'Om timebestilling', 'info_hint' => 'Hvordan bestiller man time? Avbestillingsregler?', 'knapp' => 'Bestill time',
             'eksempel' => ['Dameklipp', 'Vask, klipp og føn. 45 min.', '590 kr']],
     ],
     'pt' => [
-        'handverk' => ['navn' => 'Artesanato e serviços', 'liste_tittel' => 'Serviços', 'liste_hint' => 'O que vocês oferecem? Ex.: «Reforma de banheiro» – breve explicação – «a partir de R$ 80/h».',
+        'handverk' => ['navn' => 'Serviços e profissionais', 'liste_tittel' => 'Serviços', 'liste_hint' => 'O que vocês oferecem? Ex.: «Reforma de banheiro» – breve explicação – «a partir de R$ 80/h».',
             'info_tittel' => 'Região atendida', 'info_hint' => 'Quais lugares vocês atendem? Ex.: «Centro, Zona Sul e Niterói».', 'knapp' => 'Peça um orçamento',
             'eksempel' => ['Marcenaria', 'Janelas, decks e ampliações.', 'a partir de R$ 80/h']],
-        'mat' => ['navn' => 'Comida e loja', 'liste_tittel' => 'Cardápio', 'liste_hint' => 'Pratos ou produtos. Ex.: «Pizza Margherita» – tomate, muçarela, manjericão – «R$ 45».',
+        'mat' => ['navn' => 'Comida, loja e produtos', 'liste_tittel' => 'Cardápio', 'liste_hint' => 'Pratos ou produtos. Ex.: «Pizza Margherita» – tomate, muçarela, manjericão – «R$ 45».',
             'info_tittel' => 'Pedidos e entrega', 'info_hint' => 'Retirada, entrega, reservas, pagamento com Pix etc.', 'knapp' => 'Ligue e peça',
             'eksempel' => ['Pizza Margherita', 'Tomate, muçarela e manjericão fresco.', 'R$ 45']],
-        'velvaere' => ['navn' => 'Bem-estar e agendamento', 'liste_tittel' => 'Tratamentos', 'liste_hint' => 'Tratamentos com duração e preço. Ex.: «Corte feminino» – 45 min – «R$ 90».',
+        'velvaere' => ['navn' => 'Agendamento e bem-estar', 'liste_tittel' => 'Tratamentos', 'liste_hint' => 'Tratamentos com duração e preço. Ex.: «Corte feminino» – 45 min – «R$ 90».',
             'info_tittel' => 'Sobre o agendamento', 'info_hint' => 'Como marcar horário? Regras de cancelamento?', 'knapp' => 'Agende seu horário',
             'eksempel' => ['Corte feminino', 'Lavagem, corte e escova. 45 min.', 'R$ 90']],
     ],
     'en' => [
-        'handverk' => ['navn' => 'Trades and services', 'liste_tittel' => 'Services', 'liste_hint' => 'What do you offer? E.g. «Bathroom renovation» – short description – «from 650 kr/h».',
+        'handverk' => ['navn' => 'Services and trades', 'liste_tittel' => 'Services', 'liste_hint' => 'What do you offer? E.g. «Bathroom renovation» – short description – «from 650 kr/h».',
             'info_tittel' => 'Service area', 'info_hint' => 'Which places do you cover? E.g. «Larvik, Sandefjord and Kvelde».', 'knapp' => 'Request a quote',
             'eksempel' => ['Carpentry', 'New windows, decks and extensions.', 'from 650 kr/h']],
-        'mat' => ['navn' => 'Food and shop', 'liste_tittel' => 'Menu', 'liste_hint' => 'Dishes or products. E.g. «Pizza Margherita» – tomato, mozzarella, basil – «159 kr».',
+        'mat' => ['navn' => 'Food, shop and products', 'liste_tittel' => 'Menu', 'liste_hint' => 'Dishes or products. E.g. «Pizza Margherita» – tomato, mozzarella, basil – «159 kr».',
             'info_tittel' => 'Ordering and delivery', 'info_hint' => 'Takeaway, delivery, table booking, payment options etc.', 'knapp' => 'Call to order',
             'eksempel' => ['Pizza Margherita', 'Tomato, mozzarella and fresh basil.', '159 kr']],
-        'velvaere' => ['navn' => 'Wellness and booking', 'liste_tittel' => 'Treatments', 'liste_hint' => 'Treatments with duration and price. E.g. «Women\'s haircut» – 45 min – «590 kr».',
+        'velvaere' => ['navn' => 'Appointments and wellness', 'liste_tittel' => 'Treatments', 'liste_hint' => 'Treatments with duration and price. E.g. «Women\'s haircut» – 45 min – «590 kr».',
             'info_tittel' => 'About booking', 'info_hint' => 'How do people book? Cancellation rules?', 'knapp' => 'Book an appointment',
             'eksempel' => ['Women\'s haircut', 'Wash, cut and blow-dry. 45 min.', '590 kr']],
     ],
     'es' => [
-        'handverk' => ['navn' => 'Oficios y servicios', 'liste_tittel' => 'Servicios', 'liste_hint' => '¿Qué ofrecéis? P. ej. «Reforma de baño» – breve explicación – «desde 40 €/h».',
+        'handverk' => ['navn' => 'Servicios y profesionales', 'liste_tittel' => 'Servicios', 'liste_hint' => '¿Qué ofrecéis? P. ej. «Reforma de baño» – breve explicación – «desde 40 €/h».',
             'info_tittel' => 'Zona de servicio', 'info_hint' => '¿Qué lugares cubrís? P. ej. «Centro, Norte y alrededores».', 'knapp' => 'Pide presupuesto',
             'eksempel' => ['Carpintería', 'Ventanas, terrazas y ampliaciones.', 'desde 40 €/h']],
-        'mat' => ['navn' => 'Comida y tienda', 'liste_tittel' => 'Carta', 'liste_hint' => 'Platos o productos. P. ej. «Pizza Margherita» – tomate, mozzarella, albahaca – «12 €».',
+        'mat' => ['navn' => 'Comida, tienda y productos', 'liste_tittel' => 'Carta', 'liste_hint' => 'Platos o productos. P. ej. «Pizza Margherita» – tomate, mozzarella, albahaca – «12 €».',
             'info_tittel' => 'Pedidos y entrega', 'info_hint' => 'Para llevar, a domicilio, reservas, formas de pago, etc.', 'knapp' => 'Llama y pide',
             'eksempel' => ['Pizza Margherita', 'Tomate, mozzarella y albahaca fresca.', '12 €']],
-        'velvaere' => ['navn' => 'Bienestar y citas', 'liste_tittel' => 'Tratamientos', 'liste_hint' => 'Tratamientos con duración y precio. P. ej. «Corte de mujer» – 45 min – «35 €».',
+        'velvaere' => ['navn' => 'Citas y bienestar', 'liste_tittel' => 'Tratamientos', 'liste_hint' => 'Tratamientos con duración y precio. P. ej. «Corte de mujer» – 45 min – «35 €».',
             'info_tittel' => 'Sobre las citas', 'info_hint' => '¿Cómo se pide cita? ¿Normas de cancelación?', 'knapp' => 'Pide cita',
             'eksempel' => ['Corte de mujer', 'Lavado, corte y secado. 45 min.', '35 €']],
     ],
@@ -171,6 +171,10 @@ const TEKST = [
     'f.intro.h'     => ['Vises øverst. 2–3 setninger om hva dere gjør og for hvem.', 'Aparece no topo. 2–3 frases sobre o que vocês fazem e para quem.', 'Shown at the top. 2–3 sentences about what you do and for whom.', 'Aparece arriba. 2–3 frases sobre lo que hacéis y para quién.'],
     'f.om'          => ['Om oss', 'Sobre nós', 'About us', 'Sobre nosotros'],
     'f.om.h'        => ['Historie, erfaring, hvem som jobber der. Kan stå tomt.', 'História, experiência, quem trabalha aí. Pode ficar em branco.', 'History, experience, who works there. Can be left empty.', 'Historia, experiencia, quién trabaja ahí. Puede quedar vacío.'],
+    'f.liste_tittel'=> ['Overskrift for listen', 'Título da lista', 'List heading', 'Título de la lista'],
+    'f.info_tittel' => ['Overskrift for denne delen', 'Título desta seção', 'Heading for this section', 'Título de esta sección'],
+    'f.tittel.h'    => ['Tomt = «%s». F.eks. «Fagområder» for en advokat eller «Våre varer» for vedsalg.', 'Em branco = «%s». Ex.: «Áreas de atuação» para um advogado ou «Nossos produtos» para venda de lenha.', 'Empty = «%s». E.g. «Practice areas» for a lawyer or «Our products» for firewood sales.', 'Vacío = «%s». P. ej. «Áreas de práctica» para un abogado o «Nuestros productos» para venta de leña.'],
+    'f.tittel.tom'  => ['Tomt = «%s».', 'Em branco = «%s».', 'Empty = «%s».', 'Vacío = «%s».'],
     'l.navn'        => ['Navn', 'Nome', 'Name', 'Nombre'],
     'l.tekst'       => ['Beskrivelse', 'Descrição', 'Description', 'Descripción'],
     'l.pris'        => ['Pris', 'Preço', 'Price', 'Precio'],

@@ -2,7 +2,7 @@
 /**
  * DIGITAL SOLUTIONS — monta a landingsside de um cliente.
  * Usado no ar (<slug>.dsnorge.com) e na prévia do Min side.
- * DOC-WEB-MS-006 · v1.1.0 (textos no idioma da página)
+ * DOC-WEB-MS-006 · v1.2.0 (textos no idioma da página)
  */
 declare(strict_types=1);
 
@@ -15,6 +15,9 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
     $layout = isset(LAYOUTER[$layout]) ? $layout : 'a';
     $tema   = isset(TEMAER[$tema]) ? $tema : STANDARD_TEMA;
     $inn    = array_merge(tomt_innhold($modell), $inn);
+    // Títulos que o cliente escreveu (ex.: «Áreas de atuação») valem mais que os do modelo.
+    if (trim($inn['liste_tittel']) !== '') { $m['liste_tittel'] = $inn['liste_tittel']; }
+    if (trim($inn['info_tittel']) !== '')  { $m['info_tittel']  = $inn['info_tittel']; }
 
     $navn    = $inn['firmanavn'] !== '' ? $inn['firmanavn'] : t('s.bedriften');
     $tlfLenke = $inn['telefon'] !== '' ? 'tel:' . preg_replace('/[^\d+]/', '', $inn['telefon']) : '';

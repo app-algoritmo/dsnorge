@@ -2,16 +2,16 @@
 /**
  * DIGITAL SOLUTIONS — modelos, temas, layouts e o conteúdo de cada página.
  * O cliente só escolhe entre opções desta lista: é isso que protege a qualidade.
- * DOC-WEB-MS-004 · v1.1.0
+ * DOC-WEB-MS-004 · v1.2.0
  * Os textos de modelos, layouts e temas em cada idioma ficam em lib/sprak.php.
  */
 declare(strict_types=1);
 
 // Nomes em norueguês (painel /admin). Os textos para o cliente vêm de modell() em lib/sprak.php.
 const MODELLER = [
-    'handverk' => ['navn' => 'Håndverk og service'],
-    'mat'      => ['navn' => 'Mat og butikk'],
-    'velvaere' => ['navn' => 'Velvære og timer'],
+    'handverk' => ['navn' => 'Tjenester og håndverk'],
+    'mat'      => ['navn' => 'Mat, butikk og varer'],
+    'velvaere' => ['navn' => 'Timebestilling og velvære'],
 ];
 
 const LAYOUTER = [
@@ -47,6 +47,8 @@ const TEKSTFELT = [
     'epost'        => 180,
     'adresse'      => 200,
     'knapp_tekst'  => 40,
+    'liste_tittel' => 40,                    // vazio = título padrão do modelo
+    'info_tittel'  => 40,
 ];
 
 function tomt_innhold(string $modell): array
@@ -54,6 +56,7 @@ function tomt_innhold(string $modell): array
     return [
         'firmanavn' => '', 'slagord' => '', 'intro' => '', 'om' => '',
         'liste' => [], 'info' => '', 'apningstider' => '',
+        'liste_tittel' => '', 'info_tittel' => '',
         'telefon' => '', 'epost' => '', 'adresse' => '',
         'knapp_tekst' => modell($modell)['knapp'], 'knapp_lenke' => '',
         'facebook' => '', 'instagram' => '',

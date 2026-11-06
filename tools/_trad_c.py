@@ -50,21 +50,30 @@ T = {
   "Three ready-made models, all at the same price. You choose the layout and colours and add your own text and photos.",
   "Tre ferdige modeller, alle til samme pris. Du velger oppsett og farger og legger inn egne tekster og bilder.",
   "Tres modelos listos, todos al mismo precio. Tú eliges el diseño y los colores y pones tus textos y fotos."),
-"lp.mod.m1.t": ("Trades and services", "Håndverk og service", "Oficios y servicios"),
+"lp.mod.m1.t": (
+  'Services and trades',
+  'Tjenester og håndverk',
+  'Servicios y profesionales'),
 "lp.mod.m1.d": (
-  "For carpenters, plumbers, electricians and other services: what you do, where you work and how to ask for a quote.",
-  "For snekker, rørlegger, elektriker og andre tjenester: hva du gjør, hvor du jobber og hvordan kunden ber om tilbud.",
-  "Para carpinteros, fontaneros, electricistas y otros servicios: qué haces, dónde trabajas y cómo pedir presupuesto."),
-"lp.mod.m2.t": ("Food and shop", "Mat og butikk", "Comida y tienda"),
+  'For anyone selling a service: carpenter, electrician, lawyer, accountant, gardener, firewood cutter. What you do, where you work and how to ask for a quote.',
+  'For alle som selger tjenester: snekker, elektriker, advokat, regnskapsfører, gartner, vedhogger. Hva du gjør, hvor du jobber og hvordan kunden ber om tilbud.',
+  'Para quien ofrece servicios: carpintero, electricista, abogado, gestor, jardinero, leñador. Qué haces, dónde trabajas y cómo pedir presupuesto.'),
+"lp.mod.m2.t": (
+  'Food, shop and products',
+  'Mat, butikk og varer',
+  'Comida, tienda y productos'),
 "lp.mod.m2.d": (
-  "For cafés, pizzerias and farm shops: menu or products, opening hours and map.",
-  "For kafé, pizzeria og gårdsbutikk: meny eller varer, åpningstider og kart.",
-  "Para cafeterías, pizzerías y tiendas de granja: carta o productos, horario y mapa."),
-"lp.mod.m3.t": ("Wellness and booking", "Velvære og timer", "Bienestar y citas"),
+  'For cafés, pizzerias, bakeries, farm shops and firewood sales: menu or products with prices, opening hours and map.',
+  'For kafé, pizzeria, bakeri, gårdsbutikk og vedsalg: meny eller varer med pris, åpningstider og kart.',
+  'Para cafeterías, pizzerías, panaderías, tiendas de granja y venta de leña: carta o productos con precio, horario y mapa.'),
+"lp.mod.m3.t": (
+  'Appointments and wellness',
+  'Timebestilling og velvære',
+  'Citas y bienestar'),
 "lp.mod.m3.d": (
-  "For hairdressers, nail studios and foot care: treatments, prices and a booking link.",
-  "For frisør, negler og fotterapi: behandlinger, priser og lenke til timebestilling.",
-  "Para peluquerías, manicura y podología: tratamientos, precios y enlace para reservar cita."),
+  'For hairdressers, nail studios, physiotherapists, personal trainers and dog groomers: treatments, prices and a booking link.',
+  'For frisør, negler, fysioterapeut, PT og hundefrisør: behandlinger, priser og lenke til timebestilling.',
+  'Para peluquerías, uñas, fisioterapeutas, entrenadores personales y peluquerías caninas: tratamientos, precios y enlace para pedir cita.'),
 "lp.mod.preco": ("399 kr/month", "399 kr/mnd", "399 kr/mes"),
 
 # Incluído
@@ -227,6 +236,10 @@ T = {
 "lp.best.c1": ("<strong>Price:</strong> 399 kr/month, total price", "<strong>Pris:</strong> 399 kr/mnd, totalpris", "<strong>Precio:</strong> 399 kr/mes, precio final"),
 # Formulário de pedido
 "lp.form.modelo": ("Choose the model *", "Velg modell *", "Elige el modelo *"),
+"lp.form.mod.m1.ex": ("E.g. carpenter, electrician, lawyer, accountant, gardener, firewood cutter", "F.eks. snekker, elektriker, advokat, regnskapsfører, gartner, vedhogger", "P. ej. carpintero, electricista, abogado, gestor, jardinero, leñador"),
+"lp.form.mod.m2.ex": ("E.g. café, pizzeria, bakery, farm shop, firewood sales", "F.eks. kafé, pizzeria, bakeri, gårdsbutikk, vedsalg", "P. ej. cafetería, pizzería, panadería, tienda de granja, venta de leña"),
+"lp.form.mod.m3.ex": ("E.g. hairdresser, nails, physiotherapist, personal trainer, dog groomer", "F.eks. frisør, negler, fysioterapeut, PT, hundefrisør", "P. ej. peluquería, uñas, fisioterapeuta, entrenador personal, peluquería canina"),
+"lp.form.mod.dica": ("Can't find your sector? Pick the closest one. You can change the headings yourself later in Min side.", "Finner du ikke bransjen din? Velg den som ligner mest. Overskriftene kan du endre selv etterpå på Min side.", "¿No encuentras tu sector? Elige el más parecido. Los títulos los cambias tú después en Min side."),
 "lp.form.empresa": ("Business name *", "Bedriftsnavn *", "Nombre de la empresa *"),
 "lp.form.orgnr": ("Organisation number (9 digits) *", "Org.nr. (9 siffer) *", "Número de organización (9 dígitos) *"),
 "lp.form.land": ("Country of the business *", "Bedriftens land *", "País de la empresa *"),

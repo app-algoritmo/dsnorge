@@ -39,10 +39,16 @@ const MAX_ARQUIVOS   = 6;
 const MAX_BYTES      = 8 * 1024 * 1024;        // por arquivo
 const TIPOS_ACEITOS  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 
-const MODELOS = [
-    'handverk' => 'Håndverk og service',
-    'mat'      => 'Mat og butikk',
-    'velvaere' => 'Velvære og timer',
+const MODELOS = [                              // e-mail interno (norueguês)
+    'handverk' => 'Tjenester og håndverk',
+    'mat'      => 'Mat, butikk og varer',
+    'velvaere' => 'Timebestilling og velvære',
+];
+const MODELOS_IDIOMA = [                       // confirmação ao cliente
+    'no' => MODELOS,
+    'pt' => ['handverk' => 'Serviços e profissionais', 'mat' => 'Comida, loja e produtos', 'velvaere' => 'Agendamento e bem-estar'],
+    'en' => ['handverk' => 'Services and trades', 'mat' => 'Food, shop and products', 'velvaere' => 'Appointments and wellness'],
+    'es' => ['handverk' => 'Servicios y profesionales', 'mat' => 'Comida, tienda y productos', 'velvaere' => 'Citas y bienestar'],
 ];
 
 /* ─── CORS e método ─────────────────────────────────────── */
@@ -292,7 +298,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
 {
     $v = TERMOS_VERSAO;
     $m = MINSIDE;
-    $mod = MODELOS[$modelo];
+    $mod = MODELOS_IDIOMA[$idioma][$modelo] ?? MODELOS[$modelo];
     $t = [
         'no' => [
             "Bestilling mottatt – $ref",

@@ -161,6 +161,9 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-siz
 .lp-opcoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .lp-opcao{display:flex;align-items:center;gap:10px;font-weight:500;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;min-height:48px;cursor:pointer}
 .lp-opcao:has(input:checked){border-color:var(--marca);background:#EAF1F6}
+.lp-opcao-txt{display:flex;flex-direction:column;gap:3px}
+.lp-opcao-txt small{font-weight:400;font-size:.84rem;line-height:1.35;color:var(--ink-2)}
+.lp-opcoes-dica{margin:10px 0 0;font-weight:400;font-size:.9rem;color:var(--ink-2)}
 .lp-sufixo{display:flex;align-items:stretch}
 .lp-sufixo input{border-top-right-radius:0!important;border-bottom-right-radius:0!important}
 .lp-sufixo span{display:flex;align-items:center;padding:0 12px;background:var(--surface-2);border:1px solid var(--line);border-left:0;border-radius:0 6px 6px 0;font-weight:500;color:var(--ink-2);white-space:nowrap}
