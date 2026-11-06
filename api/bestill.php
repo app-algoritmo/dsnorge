@@ -21,7 +21,7 @@ declare(strict_types=1);
 const ORIGENS      = ['https://dsnorge.com', 'https://www.dsnorge.com'];
 const LIMITE_HORA  = 5;                        // pedidos por IP por hora
 const STRIPE_LINK  = 'https://buy.stripe.com/8x200ka6v07Y28SaYm73G00';
-const TERMOS_VERSAO = '2026-11-05';            // data no topo de /vilkar.html
+const TERMOS_VERSAO = '2026-11-06';            // data no topo de /vilkar.html
 const MINSIDE      = 'https://minside.dsnorge.com/';
 
 // Senha e dados do banco ficam SÓ no servidor, em ~/ds-app/config.php
@@ -226,7 +226,19 @@ $confirmacao = implode("\n", [
     '',
     'Pris: 399 kr/mnd, totalpris. De første 30 dagene er gratis. Første trekk skjer',
     'når siden publiseres, eller senest etter 30 dager.',
-    'Vilkår: https://dsnorge.com/vilkar.html',
+    '',
+    'Viktige vilkår (du har godtatt versjon ' . TERMOS_VERSAO . '):',
+    '- 399 kr/mnd, totalpris. 12 måneders bindingstid fra første trekk,',
+    '  deretter løpende med én måneds oppsigelse.',
+    '- Du er selv ansvarlig for alt innhold på siden din: tekst, bilder,',
+    '  priser og lenker. Innholdet må være lovlig og ikke krenke andres',
+    '  rettigheter (opphavsrett, varemerker, personvern).',
+    '- Siden kan ikke brukes til ulovlige varer eller tjenester, svindel,',
+    '  villedende reklame, hets, seksuelt innhold eller andres',
+    '  personopplysninger uten samtykke.',
+    '- Vi kontrollerer ikke innholdet før publisering, men kan ta ned siden',
+    '  straks hvis den bryter med loven eller vilkårene.',
+    'Fullstendige vilkår: https://dsnorge.com/vilkar.html',
     '',
     'Spørsmål? Svar på denne e-posten og oppgi referansen.',
     '',
