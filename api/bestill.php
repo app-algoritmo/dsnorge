@@ -5,36 +5,36 @@
  * guarda logo e fotos fora do public_html, avisa info@dsnorge.com, confirma ao
  * cliente e devolve o endereço do pagamento no Stripe.
  *
- * Onde instalar (Domeneshop): no site do subdomínio api.dsnorge.com, como
- * bestill.php (mesma pasta de contato.php).
+ * Onde instalar (Domeneshop): pasta ~/api do webhotell, que responde por
+ * api.dsnorge.com → https://api.dsnorge.com/bestill.php
  * Requisitos: PHP 8.1+, pdo_mysql, fileinfo, função mail() habilitada.
  *
  * Os dados do cliente ficam só no seu Domeneshop. O Stripe recebe apenas o
  * e-mail e a referência do pedido (DS-000123), para ligar o pagamento ao pedido.
  *
- * Documento controlado: DOC-WEB-API-003 · v1.0.0
+ * Documento controlado: DOC-WEB-API-003 · v1.1.0
  */
 
 declare(strict_types=1);
 
-/* ─── Configuração ──────────────────────────────────────────
-   O repositório é público: edite a senha SÓ na cópia do servidor. */
-const DESTINO      = 'info@dsnorge.com';
-const REMETENTE    = 'no-reply@dsnorge.com';   // precisa existir no domínio
+/* ─── Configuração ────────────────────────────────────────── */
 const ORIGENS      = ['https://dsnorge.com', 'https://www.dsnorge.com'];
 const LIMITE_HORA  = 5;                        // pedidos por IP por hora
 const STRIPE_LINK  = 'https://buy.stripe.com/8x200ka6v07Y28SaYm73G00';
-const TERMOS_VERSAO = '2026-11-04';            // data no topo de /vilkar.html
+const TERMOS_VERSAO = '2026-11-05';            // data no topo de /vilkar.html
+const MINSIDE      = 'https://minside.dsnorge.com/';
 
-const DB_HOST  = 'mysql.domeneshop.no';
-const DB_NOME  = 'ds_site';
-const DB_USER  = 'ds_site';
-const DB_SENHA = 'TROCAR_ESTA_SENHA';          // NÃO commitar a senha real
-const DB_ATIVO = false;                        // true depois de rodar sql/bestillinger.sql
+// Senha e dados do banco ficam SÓ no servidor, em ~/ds-app/config.php
+// (o mesmo arquivo do Min side). Sem esse arquivo, o pedido segue só por e-mail.
+$cfg = dirname(__DIR__) . '/ds-app/config.php';
+if (is_file($cfg)) { require $cfg; }
+if (!defined('DESTINO'))   { define('DESTINO', 'info@dsnorge.com'); }
+if (!defined('REMETENTE')) { define('REMETENTE', 'no-reply@dsnorge.com'); }
+define('DB_ATIVO', defined('DB_SENHA') && DB_SENHA !== 'TROCAR_ESTA_SENHA');
 
-// Pasta FORA do public_html para logo e fotos (crie-a no Domeneshop).
-// Padrão: duas pastas acima deste arquivo, em "bestillinger-filer".
-define('PASTA_ARQUIVOS', dirname(__DIR__, 2) . '/bestillinger-filer');
+// Pasta FORA da pasta pública para logo e fotos. No Domeneshop, api.dsnorge.com
+// aponta para ~/api, então os arquivos ficam em ~/bestillinger-filer (criada sozinha).
+define('PASTA_ARQUIVOS', dirname(__DIR__) . '/bestillinger-filer');
 const MAX_ARQUIVOS   = 6;
 const MAX_BYTES      = 8 * 1024 * 1024;        // por arquivo
 const TIPOS_ACEITOS  = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
@@ -220,13 +220,15 @@ $confirmacao = implode("\n", [
     '',
     'Hva skjer nå:',
     '1. Fullfør registreringen av kortet i betalingsvinduet (hvis du ikke allerede har gjort det).',
-    '2. Vi lager et utkast og sender deg lenken på e-post.',
-    '3. Når du har godkjent utkastet, er siden klar innen 5 virkedager.',
+    '2. Logg inn på Min side med denne e-postadressen: ' . MINSIDE,
+    '   Siden din er allerede fylt ut med det du sendte oss. Juster tekst, bilder og farger.',
+    '3. Trykk «Publiser». Vi aktiverer adressen din, normalt innen én virkedag.',
     '',
-    'Pris: 399 kr/mnd, totalpris. Første trekk skjer først når siden publiseres.',
+    'Pris: 399 kr/mnd, totalpris. De første 30 dagene er gratis. Første trekk skjer',
+    'når siden publiseres, eller senest etter 30 dager.',
     'Vilkår: https://dsnorge.com/vilkar.html',
     '',
-    'Har du flere bilder eller spørsmål? Svar på denne e-posten og oppgi referansen.',
+    'Spørsmål? Svar på denne e-posten og oppgi referansen.',
     '',
     'Vennlig hilsen',
     'Digital Solutions · dsnorge.com',

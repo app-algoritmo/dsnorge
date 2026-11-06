@@ -10,7 +10,7 @@
    Documento controlado: DOC-DS-JS-004 · v1.0.0
    ============================================================ */
 
-const ENDPOINT = "";   // ex.: "https://api.dsnorge.com/bestill.php"
+const ENDPOINT = "https://api.dsnorge.com/bestill.php";
 const MAX_TOTAL = 40 * 1024 * 1024;   // soma dos arquivos
 
 (function bestill(){

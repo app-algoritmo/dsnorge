@@ -8,7 +8,10 @@ T = {
 # Cabeçalho
 "lp.nav.modelos": ("Models", "Modeller", "Modelos"),
 "lp.nav.preco": ("Price", "Pris", "Precio"),
-"lp.nav.como": ("How we work", "Slik jobber vi", "Cómo trabajamos"),
+"lp.nav.como": (
+  "How it works",
+  "Slik fungerer det",
+  "Cómo funciona"),
 "lp.nav.faq": ("Questions", "Spørsmål", "Preguntas"),
 "lp.nav.bestill": ("Order now", "Bestill nå", "Pedir ahora"),
 
@@ -22,28 +25,31 @@ T = {
   "Er bedriften din ikke på nett ennå?",
   "¿Tu empresa todavía no está en internet?"),
 "lp.hero.lead": (
-  "Most customers look online before they get in touch. We build a simple, tidy page that makes it easy to find you, and easy to contact you.",
-  "De fleste kunder sjekker nettet før de tar kontakt. Vi lager en enkel og ryddig side som gjør det lett å finne deg, og lett å ta kontakt.",
-  "La mayoría de los clientes busca en internet antes de contactar. Creamos una página sencilla y ordenada que facilita encontrarte y ponerse en contacto."),
+  "Most customers search online before they get in touch. With our editor you build a simple, good-looking page in just a few clicks, no coding needed.",
+  "De fleste kunder sjekker nettet før de tar kontakt. Med vår editor lager du en enkel og pen side med noen få klikk, uten å kunne koding.",
+  "La mayoría de los clientes busca en internet antes de contactar. Con nuestro editor montas una página sencilla y bonita en pocos clics, sin saber programar."),
 "lp.hero.cta2": ("See the models", "Se modellene", "Ver los modelos"),
 "lp.cta.pedir": ("Order your landing page", "Bestill landingsside", "Pide tu landing page"),
-"lp.selo": ("Free to get started", "Gratis å komme i gang", "Gratis para empezar"),
+"lp.selo": (
+  "30 days free",
+  "30 dager gratis",
+  "30 días gratis"),
 "lp.oferta.titulo": (
-  "We build your landing page for free",
-  "Vi lager landingssiden din gratis",
-  "Creamos tu landing page gratis"),
+  "Build your landing page in a few clicks",
+  "Lag landingssiden din med noen få klikk",
+  "Monta tu landing page en pocos clics"),
 "lp.oferta.mes": ("/month, total price", "/mnd, totalpris", "/mes, precio final"),
 "lp.oferta.cond": (
-  "No setup cost. 12-month commitment. Own domain not included.",
-  "Ingen oppstartskostnad. 12 måneders bindingstid. Eget domene er ikke inkludert.",
-  "Sin coste inicial. Permanencia de 12 meses. Dominio propio no incluido."),
+  "No setup fee. 30 days free. 12-month commitment. Own domain not included.",
+  "Ingen oppstartskostnad. 30 dager gratis. 12 måneders bindingstid. Eget domene er ikke inkludert.",
+  "Sin coste inicial. 30 días gratis. Permanencia de 12 meses. Dominio propio no incluido."),
 
 # Modelos
 "lp.mod.titulo": ("Choose the model for your business", "Velg modellen som passer bedriften din", "Elige el modelo para tu empresa"),
 "lp.mod.lead": (
-  "Three ready-made models, all at the same price. We adapt texts, photos and colours to your business.",
-  "Tre ferdige modeller, alle til samme pris. Vi tilpasser tekst, bilder og farger til bedriften din.",
-  "Tres modelos listos, todos al mismo precio. Adaptamos textos, fotos y colores a tu empresa."),
+  "Three ready-made models, all at the same price. You choose the layout and colours and add your own text and photos.",
+  "Tre ferdige modeller, alle til samme pris. Du velger oppsett og farger og legger inn egne tekster og bilder.",
+  "Tres modelos listos, todos al mismo precio. Tú eliges el diseño y los colores y pones tus textos y fotos."),
 "lp.mod.m1.t": ("Trades and services", "Håndverk og service", "Oficios y servicios"),
 "lp.mod.m1.d": (
   "For carpenters, plumbers, electricians and other services: what you do, where you work and how to ask for a quote.",
@@ -70,7 +76,10 @@ T = {
   "All of this is included in the monthly price. No hidden costs.",
   "Alt dette er inkludert i månedsprisen. Ingen skjulte kostnader.",
   "Todo esto está incluido en la cuota mensual. Sin costes ocultos."),
-"lp.inc.i1": ("Design and setup of the page", "Design og oppsett av siden", "Diseño y configuración de la página"),
+"lp.inc.i1": (
+  "Easy editor with 2 layouts and 6 colour themes",
+  "Enkel editor med 2 oppsett og 6 fargetemaer",
+  "Editor fácil, con 2 diseños y 6 temas de colores"),
 "lp.inc.i2": ("Works on mobile and tablet", "Tilpasset mobil og nettbrett", "Adaptada a móvil y tableta"),
 "lp.inc.i3": ("Hosting and SSL certificate", "Webhotell og SSL-sertifikat", "Alojamiento y certificado SSL"),
 "lp.inc.i4": (
@@ -79,9 +88,9 @@ T = {
   "Botones de teléfono, SMS y correo para tus clientes"),
 "lp.inc.i5": ("Links to Facebook and Instagram", "Lenker til Facebook og Instagram", "Enlaces a Facebook e Instagram"),
 "lp.inc.i6": (
-  "You update texts, opening hours and photos yourself, whenever you like",
-  "Du oppdaterer tekst, åpningstider og bilder selv, når du vil",
-  "Tú actualizas textos, horarios y fotos cuando quieras"),
+  "Change text, prices, opening hours and photos whenever you like and publish instantly",
+  "Endre tekst, priser, åpningstider og bilder når du vil, og publiser med en gang",
+  "Cambia textos, precios, horarios y fotos cuando quieras y publica al instante"),
 "lp.inc.i7": (
   "Free address: yourbusiness.dsnorge.com",
   "Gratis adresse: dinbedrift.dsnorge.com",
@@ -100,31 +109,40 @@ T = {
   "<strong>Eget domene:</strong> ikke inkludert (gratis adresse på dsnorge.com)",
   "<strong>Dominio propio:</strong> no incluido (dirección gratis en dsnorge.com)"),
 "lp.preco.r5": (
-  "<strong>Delivery:</strong> 5 business days after the draft is approved",
-  "<strong>Levering:</strong> 5 virkedager etter godkjent utkast",
-  "<strong>Entrega:</strong> 5 días hábiles tras aprobar el borrador"),
+  "<strong>Free period:</strong> 30 days",
+  "<strong>Gratisperiode:</strong> 30 dager",
+  "<strong>Periodo gratuito:</strong> 30 días"),
 "lp.preco.r6": (
-  "<strong>Larger changes:</strong> 450 kr each",
-  "<strong>Større endringer:</strong> 450 kr per endring",
-  "<strong>Cambios mayores:</strong> 450 kr cada uno"),
+  "<strong>Help from our team:</strong> 450 kr per task",
+  "<strong>Hjelp fra oss:</strong> 450 kr per oppgave",
+  "<strong>Ayuda de nuestro equipo:</strong> 450 kr por tarea"),
 
 # Como trabalhamos
-"lp.como.titulo": ("How we work", "Slik jobber vi", "Cómo trabajamos"),
+"lp.como.titulo": (
+  "How it works",
+  "Slik fungerer det",
+  "Cómo funciona"),
 "lp.como.p1.t": ("Order online", "Bestill på nett", "Haz el pedido online"),
 "lp.como.p1.d": (
   "Choose the model, tell us about your business and send your logo and photos. It takes a few minutes.",
   "Velg modell, fortell om bedriften og send logo og bilder. Det tar bare noen minutter.",
   "Elige el modelo, cuéntanos sobre tu empresa y envía logo y fotos. Lleva pocos minutos."),
-"lp.como.p2.t": ("We make a draft", "Vi lager et utkast", "Hacemos un borrador"),
+"lp.como.p2.t": (
+  "Build the page in Min side",
+  "Lag siden i Min side",
+  "Monta la página en Min side"),
 "lp.como.p2.d": (
-  "You review the draft and approve it. The page is ready within 5 business days of approval.",
-  "Du får se utkastet og godkjenner det. Siden er klar innen 5 virkedager etter godkjenning.",
-  "Revisas el borrador y lo apruebas. La página está lista en 5 días hábiles tras la aprobación."),
-"lp.como.p3.t": ("The page goes live", "Siden går live", "La página se publica"),
+  "Log in with your email and find the page already filled in with what you sent. Adjust text, photos, colours and layout, and see a preview.",
+  "Logg inn med e-postadressen din, og siden er allerede fylt ut med det du sendte. Juster tekst, bilder, farger og oppsett, og se forhåndsvisning.",
+  "Entra con tu e-mail y encontrarás la página ya rellenada con lo que enviaste. Ajusta textos, fotos, colores y diseño, y mira la vista previa."),
+"lp.como.p3.t": (
+  "Publish",
+  "Publiser",
+  "Publica"),
 "lp.como.p3.d": (
-  "The monthly price only starts once the page is published. After that, you update whatever you like yourself.",
-  "Månedsprisen starter først når siden er publisert. Deretter oppdaterer du selv det du vil.",
-  "La cuota mensual empieza solo cuando la página está publicada. Después, tú actualizas lo que quieras."),
+  "Click publish and we activate your address, usually within 1 working day. After that, changes go live instantly.",
+  "Trykk på publiser, så aktiverer vi adressen din, normalt innen én virkedag. Deretter blir endringer synlige med en gang.",
+  "Haz clic en publicar y activamos tu dirección, normalmente en 1 día hábil. Después, los cambios se publican al instante."),
 
 # Perguntas
 "lp.faq.titulo": ("Frequently asked questions", "Vanlige spørsmål", "Preguntas frecuentes"),
@@ -135,19 +153,19 @@ T = {
   "La suscripción continúa mes a mes. Puedes cancelar con un mes de preaviso."),
 "lp.faq.q2": ("How long does it take?", "Hvor lang tid tar det?", "¿Cuánto tarda?"),
 "lp.faq.a2": (
-  "The page is ready within 5 business days after you approve the draft.",
-  "Siden er klar innen 5 virkedager etter at du har godkjent utkastet.",
-  "La página está lista en 5 días hábiles después de que apruebes el borrador."),
+  "You just fill in the fields and choose the colours, and the page is ready in no time. After you click publish, we usually activate the address within 1 working day.",
+  "Du fyller bare inn feltene og velger farger, så er siden klar på kort tid. Når du har trykket på publiser, aktiverer vi adressen normalt innen én virkedag.",
+  "Solo rellenas los campos y eliges los colores, y la página queda lista enseguida. Cuando haces clic en publicar, activamos la dirección normalmente en 1 día hábil."),
 "lp.faq.q3": ("What do you need from me?", "Hva trenger dere fra meg?", "¿Qué necesitáis de mí?"),
 "lp.faq.a3": (
-  "Your logo if you have one, a few photos and a short description of the business. You send everything through the order form, and we help you with the texts.",
-  "Logo hvis du har en, noen bilder og en kort beskrivelse av bedriften. Du sender alt i bestillingsskjemaet, og vi hjelper deg med tekstene.",
-  "Tu logo si tienes uno, algunas fotos y una breve descripción de la empresa. Lo envías todo con el formulario de pedido y te ayudamos con los textos."),
+  "Your logo, if you have one, a few photos and a short description of the business. You can send it all with the order or add it directly in the editor.",
+  "Logoen din hvis du har en, noen bilder og en kort beskrivelse av bedriften. Du kan sende alt med bestillingen eller legge det inn rett i editoren.",
+  "Tu logo, si tienes, algunas fotos y una breve descripción de la empresa. Puedes enviarlo todo con el pedido o directamente en el editor."),
 "lp.faq.q4": ("How do I update the page?", "Hvordan oppdaterer jeg siden?", "¿Cómo actualizo la página?"),
 "lp.faq.a4": (
-  "You get a link to a simple form. There you change texts, opening hours, prices and photos, and the page updates by itself. Larger changes, like a new section, cost 450 kr each.",
-  "Du får en lenke til et enkelt skjema. Der endrer du tekst, åpningstider, priser og bilder, og siden oppdateres av seg selv. Større endringer, som en ny seksjon, koster 450 kr per endring.",
-  "Recibes un enlace a un formulario sencillo. Ahí cambias textos, horarios, precios y fotos, y la página se actualiza sola. Los cambios mayores, como una sección nueva, cuestan 450 kr cada uno."),
+  "Log in at minside.dsnorge.com with your email. There you change text, prices, opening hours, photos and colours and publish instantly. If you'd rather we do it for you, it costs 450 kr per task.",
+  "Logg inn på minside.dsnorge.com med e-postadressen din. Der endrer du tekst, priser, åpningstider, bilder og farger og publiserer med en gang. Vil du heller at vi gjør det for deg, koster det 450 kr per oppgave.",
+  "Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. Si prefieres que lo hagamos nosotros, cuesta 450 kr por tarea."),
 "lp.faq.q5": ("What about the domain?", "Hva med domene?", "¿Y el dominio?"),
 "lp.faq.a5": (
   "The page gets a free address, like yourbusiness.dsnorge.com. If you want your own domain, like yourbusiness.no, you register it in your name and we connect it. Your own domain is not included in the price.",
@@ -155,9 +173,9 @@ T = {
   "La página recibe una dirección gratis, como tuempresa.dsnorge.com. Si quieres un dominio propio, como tuempresa.no, lo registras a tu nombre y lo conectamos. El dominio propio no está incluido en el precio."),
 "lp.faq.q6": ("How do I pay?", "Hvordan betaler jeg?", "¿Cómo pago?"),
 "lp.faq.a6": (
-  "By card, automatically every month. You get the receipt by email. The first charge only happens when the page is published.",
-  "Med kort, automatisk hver måned. Du får kvittering på e-post. Første trekk skjer først når siden publiseres.",
-  "Con tarjeta, de forma automática cada mes. Recibes el recibo por correo. El primer cobro solo se hace cuando la página se publica."),
+  "By card, automatically every month. The first 30 days are free: billing starts when the page is published or after 30 days at the latest. You get the receipt by email.",
+  "Med kort, automatisk hver måned. De første 30 dagene er gratis: trekket starter når siden publiseres, eller senest etter 30 dager. Du får kvittering på e-post.",
+  "Con tarjeta, de forma automática cada mes. Los primeros 30 días son gratis: el cobro empieza cuando se publica la página o, como máximo, a los 30 días. Recibes el recibo por e-mail."),
 "lp.faq.q7": ("Can I get a bigger website later?", "Kan jeg få en større nettside senere?", "¿Puedo tener un sitio más grande después?"),
 "lp.faq.a7": (
   "Yes. The landing page can grow into a full website or an online shop. You get a separate quote before we start.",
@@ -175,15 +193,36 @@ T = {
 # Rodapé
 "lp.rodape.marca": ("Digital Løsninger · since 2010", "Digital Løsninger · siden 2010", "Digital Løsninger · desde 2010"),
 "lp.rodape.empresa": ("About Digital Solutions", "Om Digital Solutions", "Sobre Digital Solutions"),
+"lp.rodape.conta": ("Manage subscription", "Administrer abonnement", "Gestionar suscripción"),
+"lp.nav.minside": (
+  "Min side",
+  "Min side",
+  "Min side"),
+"lp.faq.q8": (
+  "Do I need to be good with technology?",
+  "Må jeg kunne noe om teknologi?",
+  "¿Necesito saber de tecnología?"),
+"lp.faq.a8": (
+  "No. You just fill in fields and pick from ready-made options, like a form. We take care of hosting, security and the address.",
+  "Nei. Du fyller bare inn felt og velger blant ferdige alternativer, som i et skjema. Vi tar oss av webhotell, sikkerhet og adresse.",
+  "No. Solo rellenas campos y eliges entre opciones listas, como en un formulario. Nosotros nos encargamos del alojamiento, la seguridad y la dirección."),
+"lp.takk.minside": (
+  "Go to Min side",
+  "Gå til Min side",
+  "Ir a Min side"),
+"lp.rodape.minside": (
+  "Min side (edit page)",
+  "Min side (rediger siden)",
+  "Min side (editar página)"),
 "lp.rodape.vilkar": ("Subscription terms", "Abonnementsvilkår", "Condiciones de la suscripción"),
 
 # Página de pedido
 "lp.best.eyebrow": ("Online order", "Bestilling på nett", "Pedido online"),
 "lp.best.titulo": ("Order your landing page", "Bestill landingssiden din", "Pide tu landing page"),
 "lp.best.lead": (
-  "It takes about 5 minutes. At the end of the form you add your card. The first charge only happens when the page is published.",
-  "Det tar rundt 5 minutter. Til slutt i skjemaet legger du inn kortet. Første trekk skjer først når siden er publisert.",
-  "Lleva unos 5 minutos. Al final del formulario registras tu tarjeta. El primer cobro solo se hace cuando la página está publicada."),
+  "It takes about 5 minutes. At the end of the form you register your card. The first 30 days are free.",
+  "Det tar ca. 5 minutter. Til slutt registrerer du kortet. De første 30 dagene er gratis.",
+  "Tarda unos 5 minutos. Al final del formulario registras la tarjeta. Los primeros 30 días son gratis."),
 "lp.best.resumo": ("Summary of terms", "Kort om vilkårene", "Resumen de condiciones"),
 "lp.best.c1": ("<strong>Price:</strong> 399 kr/month, total price", "<strong>Pris:</strong> 399 kr/mnd, totalpris", "<strong>Precio:</strong> 399 kr/mes, precio final"),
 # Formulário de pedido
@@ -224,12 +263,12 @@ T = {
 "lp.takk.eyebrow": ("Order received", "Bestilling mottatt", "Pedido recibido"),
 "lp.takk.titulo": ("Thank you for your order!", "Takk for bestillingen!", "¡Gracias por tu pedido!"),
 "lp.takk.lead": (
-  "You will receive a confirmation by email. As soon as the draft is ready, we send you the link to review and approve it.",
-  "Du får en bekreftelse på e-post. Så snart utkastet er klart, sender vi deg lenken slik at du kan se og godkjenne det.",
-  "Recibirás una confirmación por correo. En cuanto el borrador esté listo, te enviamos el enlace para verlo y aprobarlo."),
+  "You'll receive a confirmation by email. Now just log in to Min side with the same email and build your page.",
+  "Du får en bekreftelse på e-post. Nå er det bare å logge inn på Min side med samme e-postadresse og lage siden din.",
+  "Recibirás una confirmación por e-mail. Ahora solo tienes que entrar en Min side con el mismo e-mail y montar tu página."),
 "lp.takk.cobranca": (
-  "The first charge of 399 kr only happens when the page is published.",
-  "Første trekk på 399 kr skjer først når siden publiseres.",
-  "El primer cobro de 399 kr solo se hace cuando la página se publica."),
+  "The first 30 days are free. Billing of 399 kr starts when the page is published or after 30 days at the latest.",
+  "De første 30 dagene er gratis. Trekket på 399 kr starter når siden publiseres, eller senest etter 30 dager.",
+  "Los primeros 30 días son gratis. El cobro de 399 kr empieza cuando se publica la página o, como máximo, a los 30 días."),
 "lp.takk.voltar": ("Back to the home page", "Tilbake til forsiden", "Volver a la página de inicio"),
 }
