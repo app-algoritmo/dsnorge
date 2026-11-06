@@ -2,7 +2,7 @@
 """Tabela de tradução — parte C: landing page e páginas de pedido
 (src/pages/index.html, bestill.html, takk.html e os partials landing-*).
 Ordem de cada tupla: (en, no, es). Ver tools/traduzir.py.
-A página vilkar.html é só em norueguês e não usa chaves."""
+A página vilkar.html usa as chaves vilk.* (tools/_trad_d.py)."""
 
 T = {
 # Cabeçalho
@@ -214,7 +214,7 @@ T = {
   "Min side (edit page)",
   "Min side (rediger siden)",
   "Min side (editar página)"),
-"lp.rodape.vilkar": ("Subscription terms", "Abonnementsvilkår", "Condiciones de la suscripción"),
+"lp.rodape.vilkar": ("Terms and conditions", "Vilkår", "Términos y condiciones"),
 
 # Página de pedido
 "lp.best.eyebrow": ("Online order", "Bestilling på nett", "Pedido online"),

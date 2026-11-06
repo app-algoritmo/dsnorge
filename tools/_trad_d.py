@@ -10,11 +10,6 @@ T = {
   "This policy describes which personal data we collect on dsnorge.com, in Min side and on customer pages, for what purpose, for how long and what you can demand.",
   "Denne erklæringen beskriver hvilke personopplysninger vi samler inn på dsnorge.com, i Min side og på kundenes sider, hvorfor, hvor lenge og hva du kan kreve.",
   "Esta política describe qué datos personales recogemos en dsnorge.com, en Min side y en las páginas de los clientes, para qué, durante cuánto tiempo y qué puedes exigir."),
-"term.lead": (
-  "These terms apply to everyone who visits dsnorge.com and its subdomains. They do not replace the contract for each project or subscription, which takes precedence over this page in case of conflict.",
-  "Disse vilkårene gjelder for alle som besøker dsnorge.com og underdomenene. De erstatter ikke kontrakten for det enkelte prosjekt eller abonnement, som går foran denne siden ved motstrid.",
-  "Estas condiciones se aplican a quien visita dsnorge.com y sus subdominios. No sustituyen el contrato de cada proyecto o suscripción, que prevalece sobre esta página en caso de discrepancia."),
-
 # ─── Política de privacidade ────────────────────────────────
 "priv.c01": ("1. Who is responsible", "1. Hvem er ansvarlig", "1. Quién es el responsable"),
 "priv.c02": (
@@ -138,80 +133,230 @@ T = {
 "priv.c63": ("Master language", "Hovedspråk", "Idioma maestro"),
 "priv.c64": ("Next review", "Neste revisjon", "Próxima revisión"),
 
-# ─── Termos de uso ──────────────────────────────────────────
-"term.c01": ("1. Who publishes this site", "1. Hvem publiserer nettstedet", "1. Quién publica este sitio"),
-"term.c02": (
-  "dsnorge.com is published by <strong>Digital Solutions</strong>, a company registered in Norway with org. no. 996 041 468. Contact: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "dsnorge.com publiseres av <strong>Digital Solutions</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "dsnorge.com lo publica <strong>Digital Solutions</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
-"term.c03": ("2. Nature of the catalogue information", "2. Informasjonen i katalogen", "2. Naturaleza de la información del catálogo"),
-"term.c04": (
-  "The catalogue of platforms and services describes the typical scope of each item and the usual way it is contracted. It is informative material, not a binding commercial offer. Prices shown in subscription plans are subject to the conditions in force on the date of contract. Scope, deadline, price, service level and acceptance criteria for any work only exist once they are set out in a signed proposal or contract.",
-  "Katalogen over plattformer og tjenester beskriver typisk omfang og vanlig avtaleform for hver tjeneste. Den er informasjon, ikke et bindende tilbud. Priser i abonnementsplaner gjelder etter vilkårene som gjelder på avtaletidspunktet. Omfang, frist, pris, servicenivå og akseptkriterier for et oppdrag gjelder først når de står i et signert tilbud eller en signert avtale.",
-  "El catálogo de plataformas y servicios describe el alcance típico de cada elemento y la forma habitual de contratación. Es material informativo, no una oferta comercial vinculante. Los precios de los planes de suscripción están sujetos a las condiciones vigentes en la fecha de contratación. Alcance, plazo, precio, nivel de servicio y criterios de aceptación de cualquier trabajo solo existen cuando constan en una propuesta o contrato firmado."),
-"term.c05": ("3. Ownership of site content", "3. Rettigheter til innholdet", "3. Titularidad del contenido del sitio"),
-"term.c06": (
-  "Texts, catalogue structure, visual identity, the service disc and other editorial elements belong to Digital Solutions. Reproduction, adaptation or commercial use requires written permission. Quoting with credit and a link to the original page is allowed.",
-  "Tekster, katalogens oppbygging, visuell profil, tjenestehjulet og annet redaksjonelt innhold tilhører Digital Solutions. Gjengivelse, bearbeiding eller kommersiell bruk krever skriftlig tillatelse. Sitat med kildehenvisning og lenke til originalsiden er tillatt.",
-  "Los textos, la estructura del catálogo, la identidad visual, el disco de servicios y demás elementos editoriales pertenecen a Digital Solutions. La reproducción, adaptación o uso comercial requieren autorización por escrito. Se permite citar indicando la fuente y enlazando la página original."),
-"term.c07": ("4. Source code and third-party licences", "4. Kildekode og tredjepartslisenser", "4. Código fuente y licencias de terceros"),
-"term.c08": (
-  "The source code of this site is published in a public repository under the MIT licence, as stated in the <span class=\"mono\">LICENSE</span> file. The licence covers the code; it does not cover the editorial content, the commercial catalogue or the visual identity, dealt with in the previous clause. The IBM Plex typefaces are used under the SIL Open Font License 1.1.",
-  "Kildekoden til nettstedet er publisert i et offentlig kodelager under MIT-lisens, se filen <span class=\"mono\">LICENSE</span>. Lisensen gjelder koden, ikke det redaksjonelle innholdet, katalogen eller den visuelle profilen, som omtales i punktet over. Skrifttypene IBM Plex brukes under SIL Open Font License 1.1.",
-  "El código fuente de este sitio está publicado en un repositorio público con licencia MIT, según el archivo <span class=\"mono\">LICENSE</span>. La licencia cubre el código; no cubre el contenido editorial, el catálogo comercial ni la identidad visual, tratados en la cláusula anterior. Las tipografías IBM Plex se usan bajo la SIL Open Font License 1.1."),
-"term.c09": ("5. Software developed or licensed", "5. Programvare som utvikles eller lisensieres", "5. Software desarrollado o licenciado"),
-"term.c10": (
-  "Our own platforms — MIMBAI, Oslo Meet and SALA · Safe-Load Analytics — are licensed by subscription. Digital Solutions keeps ownership of the code; data entered by the customer remains the customer's and can be exported in an open format at any time during the contract and within the exit periods set out in it.",
-  "Våre egne plattformer — MIMBAI, Oslo Meet og SALA · Safe-Load Analytics — lisensieres som abonnement. Digital Solutions eier koden; opplysningene kunden legger inn tilhører kunden og kan eksporteres i åpent format når som helst i avtaleperioden og innenfor avviklingsfristene i avtalen.",
-  "Nuestras plataformas propias — MIMBAI, Oslo Meet y SALA · Safe-Load Analytics — se licencian por suscripción. Digital Solutions conserva la titularidad del código; los datos introducidos por el cliente siguen siendo del cliente y pueden exportarse en formato abierto en cualquier momento durante la vigencia y en los plazos de salida previstos en el contrato."),
-"term.c11": (
-  "For custom-built systems, ownership of what is developed specifically for the contract is defined in the contract itself, together with the scope of documentation and knowledge transfer. Open-source components used in the solution remain under their original licences, listed in the delivery documentation.",
-  "For skreddersydde systemer avtales rettighetene til det som utvikles for oppdraget i selve avtalen, sammen med omfanget av dokumentasjon og kunnskapsoverføring. Åpen kildekode som brukes i løsningen beholder sine opprinnelige lisenser, som står i leveransedokumentasjonen.",
-  "En los sistemas a medida, la titularidad de lo desarrollado específicamente para el contrato se define en el propio contrato, junto con el alcance de la documentación y de la transferencia de conocimiento. Los componentes de código abierto usados en la solución mantienen sus licencias originales, indicadas en la documentación de entrega."),
-"term.c12": ("6. Landing page subscription", "6. Abonnement på landingsside", "6. Suscripción de landing page"),
-"term.c13": (
-  "Anyone who orders a landing page is also bound by the <a href=\"/vilkar.html\">Abonnementsvilkår</a> (subscription terms), which take precedence over this page on that point. The content of customer pages on side.dsnorge.com is the responsibility of each customer. To report illegal content on one of these pages, write to <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "Den som bestiller landingsside, er også bundet av <a href=\"/vilkar.html\">Abonnementsvilkår</a>, som går foran denne siden på det punktet. Innholdet på kundenes sider på side.dsnorge.com er hver kundes ansvar. Melding om ulovlig innhold på en av disse sidene sendes til <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "Quien contrata una landing page también está sujeto a los <a href=\"/vilkar.html\">Abonnementsvilkår</a> (condiciones de la suscripción), que prevalecen sobre esta página en ese punto. El contenido de las páginas de los clientes en side.dsnorge.com es responsabilidad de cada cliente. Para comunicar contenido ilegal en una de esas páginas, escribe a <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
-"term.c14": ("7. Acceptable use", "7. Akseptabel bruk", "7. Uso aceptable"),
-"term.c15": (
-  "It is not permitted to: attempt unauthorised access to this site or any related system; extract content automatically in volumes that degrade the service; use the contact form to send unsolicited bulk messages; or reproduce the site, in whole or in part, in a way that suggests an origin, authorship or affiliation that does not exist.",
-  "Det er ikke tillatt å: forsøke å skaffe seg uautorisert tilgang til nettstedet eller tilknyttede systemer; hente ut innhold automatisk i et omfang som svekker tjenesten; bruke kontaktskjemaet til uønsket massekommunikasjon; eller kopiere nettstedet, helt eller delvis, på en måte som gir inntrykk av en opprinnelse, et opphav eller en tilknytning som ikke finnes.",
-  "Queda prohibido: intentar acceder sin autorización a este sitio o a cualquier sistema asociado; extraer contenido de forma automatizada en un volumen que degrade el servicio; usar el formulario de contacto para enviar mensajes masivos no solicitados; y reproducir el sitio, total o parcialmente, de forma que sugiera un origen, autoría o vínculo que no existen."),
-"term.c16": ("8. Availability", "8. Tilgjengelighet", "8. Disponibilidad"),
-"term.c17": (
-  "The site is provided as is. There is no guarantee of uninterrupted availability, and maintenance may take place without notice. Availability and service-level commitments only exist for contracted platforms, under the relevant subscription contract.",
-  "Nettstedet leveres som det er. Det gis ingen garanti for at det alltid er tilgjengelig, og vedlikehold kan skje uten varsel. Forpliktelser om tilgjengelighet og servicenivå gjelder bare for plattformer det er inngått avtale om, etter den aktuelle abonnementsavtalen.",
-  "El sitio se ofrece tal cual. No hay garantía de disponibilidad ininterrumpida, y puede haber mantenimiento sin aviso previo. Los compromisos de disponibilidad y nivel de servicio solo existen para las plataformas contratadas, según el contrato de suscripción correspondiente."),
-"term.c18": ("9. External links", "9. Eksterne lenker", "9. Enlaces externos"),
-"term.c19": (
-  "This site links to third-party domains and to platforms with their own life cycle, including mimbai.com, oslomeet.org, barros.no and public repositories. Digital Solutions is not responsible for the content, availability or privacy practices of those destinations.",
-  "Nettstedet lenker til tredjeparts domener og plattformer med egen livssyklus, blant annet mimbai.com, oslomeet.org, barros.no og offentlige kodelagre. Digital Solutions er ikke ansvarlig for innhold, tilgjengelighet eller personvernpraksis på disse stedene.",
-  "Este sitio enlaza a dominios de terceros y a plataformas con ciclo propio, entre ellos mimbai.com, oslomeet.org, barros.no y repositorios públicos. Digital Solutions no responde del contenido, la disponibilidad ni las prácticas de privacidad de esos destinos."),
-"term.c20": ("10. Limitation of liability", "10. Ansvarsbegrensning", "10. Limitación de responsabilidad"),
-"term.c21": (
-  "The information on this page is general and does not constitute technical, legal, accounting or regulatory advice for a specific case. Decisions based solely on the site's content are the responsibility of whoever makes them. Digital Solutions' liability for contracted work follows the limits set out in the relevant contract.",
-  "Informasjonen på nettstedet er generell og er ikke teknisk, juridisk, regnskapsmessig eller regulatorisk rådgivning i en konkret sak. Beslutninger tatt bare på grunnlag av innholdet her er den enkeltes eget ansvar. Digital Solutions' ansvar for avtalt arbeid følger grensene i den aktuelle avtalen.",
-  "La información de esta página es de carácter general y no constituye asesoramiento técnico, jurídico, contable ni regulatorio para un caso concreto. Las decisiones tomadas solo con base en el contenido del sitio son responsabilidad de quien las toma. La responsabilidad de Digital Solutions en trabajos contratados sigue los límites fijados en el contrato correspondiente."),
-"term.c22": ("11. Data protection", "11. Personvern", "11. Protección de datos"),
-"term.c23": (
-  "The processing of personal data is described in the <a href=\"/politica-de-privacidade.html\">Privacy Policy</a>, and the use of browser storage in the <a href=\"/aviso-de-cookies.html\">Cookie Notice</a>.",
-  "Behandlingen av personopplysninger er beskrevet i <a href=\"/politica-de-privacidade.html\">personvernerklæringen</a>, og bruken av lagring i nettleseren i <a href=\"/aviso-de-cookies.html\">erklæringen om informasjonskapsler</a>.",
-  "El tratamiento de datos personales se describe en la <a href=\"/politica-de-privacidade.html\">Política de Privacidad</a>, y el uso del almacenamiento del navegador, en el <a href=\"/aviso-de-cookies.html\">Aviso de Cookies</a>."),
-"term.c24": ("12. Governing law and jurisdiction", "12. Lovvalg og verneting", "12. Ley aplicable y jurisdicción"),
-"term.c25": (
-  "These terms are governed by Norwegian law. The competent court is that of Digital Solutions' domicile in Norway, without prejudice to any jurisdiction that consumer or data protection law grants the data subject in their country of residence.",
-  "Vilkårene reguleres av norsk rett. Verneting er Digital Solutions' hjemting i Norge, med forbehold om verneting som forbruker- eller personvernlovgivning gir den registrerte i bostedslandet.",
-  "Estas condiciones se rigen por la ley noruega. Son competentes los tribunales del domicilio de Digital Solutions en Noruega, sin perjuicio de las garantías de jurisdicción que la legislación de protección del consumidor o de datos conceda al interesado en su país de residencia."),
-"term.c26": ("13. Changes", "13. Endringer", "13. Cambios"),
-"term.c27": (
-  "These terms may change. The version in force is always the one published on this page, with the revision date shown below, and the history is kept in the site's public repository.",
-  "Vilkårene kan endres. Gjeldende versjon er alltid den som er publisert på denne siden, med revisjonsdato nedenfor, og historikken ligger i nettstedets offentlige kodelager.",
-  "Estas condiciones pueden cambiar. La versión vigente es siempre la publicada en esta página, con la fecha de revisión indicada abajo, y el historial queda en el repositorio público del sitio."),
-"term.c28": ("Document", "Dokument", "Documento"),
-"term.c29": ("Version", "Versjon", "Versión"),
-"term.c30": ("Master language", "Hovedspråk", "Idioma maestro"),
-"term.c31": ("Next review", "Neste revisjon", "Próxima revisión"),
+# ─── Termos e condições (vilkar.html, página única) ─────────
+"vilk.eyebrow": (
+  "Legal document · effective from 6 November 2026",
+  "Vilkår · gjelder fra 6. november 2026",
+  "Documento legal · vigente desde el 6 de noviembre de 2026"),
+"vilk.titulo": (
+  "Terms and conditions",
+  "Vilkår",
+  "Términos y condiciones"),
+"vilk.lead": (
+  "These terms apply to everyone who visits dsnorge.com and its subdomains (part A) and to businesses that order a landing page from Digital Solutions, org. no. 996 041 468 (part B). The subscription is offered to businesses only. In case of discrepancy between languages, the Norwegian version prevails.",
+  "Disse vilkårene gjelder for alle som besøker dsnorge.com og underdomenene (del A), og for bedrifter som bestiller landingsside fra Digital Solutions, org.nr. 996 041 468 (del B). Abonnementet tilbys bare til næringsdrivende. Ved uoverensstemmelse mellom språkversjonene gjelder den norske.",
+  "Estas condiciones se aplican a quien visita dsnorge.com y sus subdominios (parte A) y a las empresas que contratan una landing page de Digital Solutions, org. n.º 996 041 468 (parte B). La suscripción se ofrece solo a empresas. En caso de discrepancia entre idiomas, prevalece la versión noruega."),
+"vilk.pa": (
+  "Part A · Use of the site",
+  "Del A · Bruk av nettstedet",
+  "Parte A · Uso del sitio"),
+"vilk.a1t": (
+  "A1. Who publishes this site",
+  "A1. Hvem publiserer nettstedet",
+  "A1. Quién publica este sitio"),
+"vilk.a1": (
+  "dsnorge.com and its subdomains are published by <strong>Digital Solutions</strong>, a company registered in Norway with org. no. 996 041 468. Contact: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "dsnorge.com og underdomenene publiseres av <strong>Digital Solutions</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "dsnorge.com y sus subdominios los publica <strong>Digital Solutions</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+"vilk.a2t": (
+  "A2. Nature of the catalogue information",
+  "A2. Informasjonen i katalogen",
+  "A2. Naturaleza de la información del catálogo"),
+"vilk.a2": (
+  "The catalogue of platforms and services describes the typical scope of each item and the usual way it is contracted. It is informative material, not a binding commercial offer. Scope, deadline, price, service level and acceptance criteria for custom work only exist once they are set out in a signed proposal or contract. For the landing page, the conditions in part B apply.",
+  "Katalogen over plattformer og tjenester beskriver typisk omfang og vanlig avtaleform for hver tjeneste. Den er informasjon, ikke et bindende tilbud. Omfang, frist, pris, servicenivå og akseptkriterier for skreddersydde oppdrag gjelder først når de står i et signert tilbud eller en signert avtale. For landingsside gjelder vilkårene i del B.",
+  "El catálogo de plataformas y servicios describe el alcance típico de cada elemento y la forma habitual de contratación. Es material informativo, no una oferta comercial vinculante. Alcance, plazo, precio, nivel de servicio y criterios de aceptación de un trabajo a medida solo existen cuando constan en una propuesta o contrato firmado. Para la landing page rigen las condiciones de la parte B."),
+"vilk.a3t": (
+  "A3. Ownership of site content",
+  "A3. Rettigheter til innholdet",
+  "A3. Titularidad del contenido del sitio"),
+"vilk.a3": (
+  "Texts, catalogue structure, visual identity, page templates and other editorial elements belong to Digital Solutions. Reproduction, adaptation or commercial use requires written permission. Quoting with credit and a link to the original page is allowed.",
+  "Tekster, katalogens oppbygging, visuell profil, sidemaler og annet redaksjonelt innhold tilhører Digital Solutions. Gjengivelse, bearbeiding eller kommersiell bruk krever skriftlig tillatelse. Sitat med kildehenvisning og lenke til originalsiden er tillatt.",
+  "Los textos, la estructura del catálogo, la identidad visual, las plantillas de página y demás elementos editoriales pertenecen a Digital Solutions. La reproducción, adaptación o uso comercial requieren autorización por escrito. Se permite citar indicando la fuente y enlazando la página original."),
+"vilk.a4t": (
+  "A4. Source code and third-party licences",
+  "A4. Kildekode og tredjepartslisenser",
+  "A4. Código fuente y licencias de terceros"),
+"vilk.a4": (
+  "The source code of this site is published in a public repository under the MIT licence, as stated in the <span class=\"mono\">LICENSE</span> file. The licence covers the code; it does not cover the editorial content, the commercial catalogue or the visual identity. The typefaces used are under the SIL Open Font License 1.1.",
+  "Kildekoden til nettstedet er publisert i et offentlig kodelager under MIT-lisens, se filen <span class=\"mono\">LICENSE</span>. Lisensen gjelder koden, ikke det redaksjonelle innholdet, katalogen eller den visuelle profilen. Skrifttypene som brukes, er under SIL Open Font License 1.1.",
+  "El código fuente de este sitio está publicado en un repositorio público con licencia MIT, según el archivo <span class=\"mono\">LICENSE</span>. La licencia cubre el código; no cubre el contenido editorial, el catálogo comercial ni la identidad visual. Las tipografías usadas están bajo la SIL Open Font License 1.1."),
+"vilk.a5t": (
+  "A5. Software developed or licensed",
+  "A5. Programvare som utvikles eller lisensieres",
+  "A5. Software desarrollado o licenciado"),
+"vilk.a5": (
+  "Digital Solutions' own platforms are licensed by subscription. Digital Solutions keeps ownership of the code; data entered by the customer remains the customer's. For custom-built systems, ownership of what is developed for the contract is defined in the contract itself. Open-source components remain under their original licences.",
+  "Digital Solutions' egne plattformer lisensieres som abonnement. Digital Solutions eier koden; opplysninger kunden legger inn, tilhører kunden. For skreddersydde systemer avtales rettighetene til det som utvikles for oppdraget i selve avtalen. Åpen kildekode beholder sine opprinnelige lisenser.",
+  "Las plataformas propias de Digital Solutions se licencian por suscripción. Digital Solutions conserva la titularidad del código; los datos introducidos por el cliente siguen siendo del cliente. En los sistemas a medida, la titularidad de lo desarrollado para el contrato se define en el propio contrato. Los componentes de código abierto mantienen sus licencias originales."),
+"vilk.a6t": (
+  "A6. Acceptable use",
+  "A6. Akseptabel bruk",
+  "A6. Uso aceptable"),
+"vilk.a6": (
+  "It is not permitted to: attempt unauthorised access to this site or any related system; extract content automatically in volumes that degrade the service; use the forms to send unsolicited bulk messages; or reproduce the site, in whole or in part, in a way that suggests an origin, authorship or affiliation that does not exist.",
+  "Det er ikke tillatt å: forsøke å skaffe seg uautorisert tilgang til nettstedet eller tilknyttede systemer; hente ut innhold automatisk i et omfang som svekker tjenesten; bruke skjemaene til uønsket massekommunikasjon; eller kopiere nettstedet, helt eller delvis, på en måte som gir inntrykk av en opprinnelse, et opphav eller en tilknytning som ikke finnes.",
+  "Queda prohibido: intentar acceder sin autorización a este sitio o a cualquier sistema asociado; extraer contenido de forma automatizada en un volumen que degrade el servicio; usar los formularios para enviar mensajes masivos no solicitados; y reproducir el sitio, total o parcialmente, de forma que sugiera un origen, autoría o vínculo que no existen."),
+"vilk.a7t": (
+  "A7. External links",
+  "A7. Eksterne lenker",
+  "A7. Enlaces externos"),
+"vilk.a7": (
+  "This site links to third-party domains and to platforms with their own life cycle. Digital Solutions is not responsible for the content, availability or privacy practices of those destinations.",
+  "Nettstedet lenker til tredjeparts domener og plattformer med egen livssyklus. Digital Solutions er ikke ansvarlig for innhold, tilgjengelighet eller personvernpraksis på disse stedene.",
+  "Este sitio enlaza a dominios de terceros y a plataformas con ciclo propio. Digital Solutions no responde del contenido, la disponibilidad ni las prácticas de privacidad de esos destinos."),
+"vilk.a8t": (
+  "A8. General information",
+  "A8. Generell informasjon",
+  "A8. Información general"),
+"vilk.a8": (
+  "The information on the site is general and does not constitute technical, legal, accounting or regulatory advice for a specific case. The site is provided as is, with no guarantee of uninterrupted availability.",
+  "Informasjonen på nettstedet er generell og er ikke teknisk, juridisk, regnskapsmessig eller regulatorisk rådgivning i en konkret sak. Nettstedet leveres som det er, uten garanti for at det alltid er tilgjengelig.",
+  "La información del sitio es de carácter general y no constituye asesoramiento técnico, jurídico, contable ni regulatorio para un caso concreto. El sitio se ofrece tal cual, sin garantía de disponibilidad ininterrumpida."),
+"vilk.pb": (
+  "Part B · Landing page subscription",
+  "Del B · Abonnement på landingsside",
+  "Parte B · Suscripción de landing page"),
+"vilk.b1t": (
+  "B1. The service",
+  "B1. Tjenesten",
+  "B1. El servicio"),
+"vilk.b1": (
+  "The customer gets access to Min side (<em>minside.dsnorge.com</em>), where the customer builds and updates one landing page based on the chosen model, with a choice of layout and colour theme. The subscription includes the editor, hosting, SSL certificate and a free address in the form <em>side.dsnorge.com/businessname</em>.",
+  "Kunden får tilgang til Min side (<em>minside.dsnorge.com</em>), der kunden selv lager og oppdaterer én landingsside basert på modellen som er valgt, med valg av oppsett og fargetema. Abonnementet omfatter editoren, webhotell, SSL-sertifikat og en gratis adresse på formen <em>side.dsnorge.com/bedriftsnavn</em>.",
+  "El cliente recibe acceso a Min side (<em>minside.dsnorge.com</em>), donde él mismo monta y actualiza una landing page basada en el modelo elegido, con elección de diseño y tema de colores. La suscripción incluye el editor, alojamiento, certificado SSL y una dirección gratuita con el formato <em>side.dsnorge.com/nombredelaempresa</em>."),
+"vilk.b2t": (
+  "B2. Price",
+  "B2. Pris",
+  "B2. Precio"),
+"vilk.b2": (
+  "The price is 399 kr per month (total price). There is no setup fee. If the customer wants Digital Solutions to work on the page, for example writing texts or entering content, it costs 450 kr per task, agreed and paid before the work is done.",
+  "Prisen er 399 kr per måned (totalpris). Det er ingen etableringskostnad. Ønsker kunden at vi gjør arbeid på siden, for eksempel skriver tekster eller legger inn innhold, koster det 450 kr per oppgave. Slike oppgaver avtales og betales før vi utfører dem.",
+  "El precio es de 399 kr al mes (precio final). No hay coste de alta. Si el cliente quiere que Digital Solutions trabaje en la página, por ejemplo redactando textos o introduciendo contenido, cuesta 450 kr por tarea, acordada y pagada antes de realizarla."),
+"vilk.b3t": (
+  "B3. Payment",
+  "B3. Betaling",
+  "B3. Pago"),
+"vilk.b3": (
+  "Payment is by card via Stripe, monthly and in advance. The first 30 days after ordering are free. The first charge happens when the page is published or, at the latest, when the 30 days are over. The customer receives a receipt by email.",
+  "Betaling skjer med kort via Stripe, månedlig og forskuddsvis. De første 30 dagene etter bestilling er gratis. Første trekk skjer når siden publiseres, eller senest når de 30 dagene er over. Kunden får kvittering på e-post.",
+  "El pago se hace con tarjeta a través de Stripe, mensualmente y por adelantado. Los primeros 30 días tras el pedido son gratis. El primer cobro se produce cuando se publica la página o, como máximo, cuando terminan los 30 días. El cliente recibe el recibo por e-mail."),
+"vilk.b4t": (
+  "B4. Publishing",
+  "B4. Publisering",
+  "B4. Publicación"),
+"vilk.b4": (
+  "When the customer clicks «Publiser», the page is published immediately. Later changes are published by the customer in the same way. We may take down a page published without a valid subscription.",
+  "Når kunden trykker «Publiser», blir siden publisert med en gang. Senere endringer publiserer kunden selv på samme måte. Vi kan ta ned en side som er publisert uten gyldig abonnement.",
+  "Cuando el cliente hace clic en «Publiser», la página se publica al instante. Los cambios posteriores los publica el propio cliente de la misma forma. Podemos retirar una página publicada sin suscripción válida."),
+"vilk.b5t": (
+  "B5. Commitment period and termination",
+  "B5. Bindingstid og oppsigelse",
+  "B5. Permanencia y cancelación"),
+"vilk.b5": (
+  "The subscription has a 12-month commitment period from the first charge. After that it runs month to month, with one month's notice. Notice of termination is given in writing to <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "Abonnementet har 12 måneders bindingstid fra første trekk. Deretter løper det måned for måned, med én måneds oppsigelse. Oppsigelse sendes skriftlig til <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "La suscripción tiene una permanencia de 12 meses desde el primer cobro. Después continúa mes a mes, con un mes de preaviso. La cancelación se comunica por escrito a <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+"vilk.b6t": (
+  "B6. Domain",
+  "B6. Domene",
+  "B6. Dominio"),
+"vilk.b6": (
+  "Your own domain, for example <em>yourbusiness.no</em>, is not included in the price. If the customer wants their own domain, they register and own it, and we connect it to the page.",
+  "Eget domene, for eksempel <em>bedriften.no</em>, er ikke inkludert i prisen. Ønsker kunden eget domene, registrerer og eier kunden det selv, og vi kobler det til siden.",
+  "El dominio propio, por ejemplo <em>tuempresa.no</em>, no está incluido en el precio. Si el cliente quiere un dominio propio, lo registra y es su titular, y nosotros lo conectamos a la página."),
+"vilk.b7t": (
+  "B7. Customer content and responsibility",
+  "B7. Kundens innhold og ansvar",
+  "B7. Contenido y responsabilidad del cliente"),
+"vilk.b7a": (
+  "The customer is solely responsible for all content on the page: texts, photos, logo, prices and links. The content must be lawful and must not infringe the rights of others, such as copyright, trademarks or privacy.",
+  "Kunden er selv ansvarlig for alt innhold på siden: tekster, bilder, logo, priser og lenker. Innholdet skal være lovlig og ikke krenke andres rettigheter, for eksempel opphavsrett, varemerker eller personvern.",
+  "El cliente es el único responsable de todo el contenido de la página: textos, fotos, logo, precios y enlaces. El contenido debe ser legal y no puede vulnerar derechos de terceros, como derechos de autor, marcas o privacidad."),
+"vilk.b7b": (
+  "The page may not be used for:",
+  "Siden kan ikke brukes til:",
+  "La página no puede usarse para:"),
+"vilk.b7l1": (
+  "illegal goods or services, or advertising them;",
+  "ulovlige varer eller tjenester, eller markedsføring av slike;",
+  "productos o servicios ilegales, o su publicidad;"),
+"vilk.b7l2": (
+  "misleading advertising, fraud or fake offers;",
+  "villedende reklame, svindel eller falske tilbud;",
+  "publicidad engañosa, estafas u ofertas falsas;"),
+"vilk.b7l3": (
+  "discriminatory, threatening or abusive content;",
+  "innhold som er diskriminerende, truende eller hetsende;",
+  "contenido discriminatorio, amenazante u ofensivo;"),
+"vilk.b7l4": (
+  "pornographic or other sexual content;",
+  "pornografisk eller annet seksuelt innhold;",
+  "contenido pornográfico o sexual;"),
+"vilk.b7l5": (
+  "publishing other people's personal data without consent.",
+  "publisering av personopplysninger om andre uten samtykke.",
+  "publicar datos personales de otras personas sin su consentimiento."),
+"vilk.b7c": (
+  "Digital Solutions does not review content before it is published. If we become aware of content that breaches these terms or Norwegian law, we may take the page down immediately and without prior notice. The customer is notified by email. In case of serious or repeated breaches, we may terminate the subscription with immediate effect, without refund.",
+  "Digital Solutions kontrollerer ikke innholdet før det publiseres. Får vi kjennskap til innhold som bryter med disse vilkårene eller med norsk lov, kan vi ta ned siden straks og uten forhåndsvarsel. Kunden får beskjed på e-post. Ved alvorlige eller gjentatte brudd kan vi si opp abonnementet med umiddelbar virkning, uten tilbakebetaling.",
+  "Digital Solutions no revisa el contenido antes de su publicación. Si tenemos conocimiento de contenido que incumpla estas condiciones o la ley noruega, podemos retirar la página de inmediato y sin aviso previo. El cliente recibe aviso por e-mail. En caso de incumplimientos graves o reiterados, podemos cancelar la suscripción con efecto inmediato, sin reembolso."),
+"vilk.b7d": (
+  "The customer holds Digital Solutions harmless against claims from others caused by the customer's content, and authorises Digital Solutions to display the material on the landing page for as long as the subscription lasts. Reports of illegal content on a page: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "Kunden holder Digital Solutions skadesløs for krav fra andre som skyldes kundens innhold, og gir Digital Solutions rett til å vise materialet på landingssiden så lenge abonnementet varer. Melding om ulovlig innhold på en side: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "El cliente exime a Digital Solutions de las reclamaciones de terceros causadas por el contenido del cliente y autoriza a Digital Solutions a mostrar el material en la landing page mientras dure la suscripción. Denuncias de contenido ilegal en una página: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+"vilk.b8t": (
+  "B8. When the subscription ends",
+  "B8. Når abonnementet avsluttes",
+  "B8. Fin de la suscripción"),
+"vilk.b8": (
+  "When the subscription ends, the page is taken down and the address on dsnorge.com is closed. The customer can ask to get their texts and photos back within 3 months. In case of non-payment, the page may be closed after written notice.",
+  "Når abonnementet opphører, tas siden ned og adressen på dsnorge.com stenges. Kunden kan be om å få tilbake tekster og bilder innen 3 måneder. Ved manglende betaling kan siden stenges etter skriftlig varsel.",
+  "Cuando termina la suscripción, la página se retira y la dirección en dsnorge.com se desactiva. El cliente puede pedir que se le devuelvan sus textos y fotos en un plazo de 3 meses. En caso de impago, la página puede desactivarse tras aviso por escrito."),
+"vilk.b9t": (
+  "B9. Liability",
+  "B9. Ansvar",
+  "B9. Responsabilidad"),
+"vilk.b9": (
+  "We do our best to keep the page available at all times, but cannot guarantee that it will never be down. Our liability is limited to what the customer has paid in the last three months. We are not liable for indirect losses.",
+  "Vi gjør vårt beste for at siden er tilgjengelig hele tiden, men kan ikke garantere at den aldri er nede. Vårt ansvar er begrenset til det kunden har betalt de siste tre månedene. Vi er ikke ansvarlige for indirekte tap.",
+  "Hacemos lo posible para que la página esté siempre disponible, pero no garantizamos que nunca deje de estarlo. Nuestra responsabilidad se limita a lo que el cliente haya pagado en los últimos tres meses. No respondemos de pérdidas indirectas."),
+"vilk.pc": (
+  "Part C · General provisions",
+  "Del C · Felles bestemmelser",
+  "Parte C · Disposiciones generales"),
+"vilk.c1t": (
+  "C1. Data protection",
+  "C1. Personvern",
+  "C1. Protección de datos"),
+"vilk.c1": (
+  "The processing of personal data is described in the <a href=\"/politica-de-privacidade.html\">Privacy Policy</a>, and the use of browser storage in the <a href=\"/aviso-de-cookies.html\">Cookie Notice</a>. Orders, page content and photos are kept on our own server at Domeneshop in Norway. Card payments are processed by Stripe.",
+  "Behandlingen av personopplysninger er beskrevet i <a href=\"/politica-de-privacidade.html\">personvernerklæringen</a>, og bruken av lagring i nettleseren i <a href=\"/aviso-de-cookies.html\">erklæringen om informasjonskapsler</a>. Bestillinger, innhold på sidene og bilder lagres på vår egen server hos Domeneshop i Norge. Kortbetalingen håndteres av Stripe.",
+  "El tratamiento de datos personales se describe en la <a href=\"/politica-de-privacidade.html\">Política de Privacidad</a>, y el uso del almacenamiento del navegador, en el <a href=\"/aviso-de-cookies.html\">Aviso de Cookies</a>. Los pedidos, el contenido de las páginas y las fotos se guardan en nuestro propio servidor en Domeneshop, en Noruega. El pago con tarjeta lo procesa Stripe."),
+"vilk.c2t": (
+  "C2. Governing law and jurisdiction",
+  "C2. Lovvalg og verneting",
+  "C2. Ley aplicable y jurisdicción"),
+"vilk.c2": (
+  "These terms and the subscription are governed by Norwegian law. The competent court is that of Digital Solutions' domicile in Norway, without prejudice to the protections that consumer or data protection law grants the data subject in their country of residence.",
+  "Vilkårene og abonnementet reguleres av norsk rett. Verneting er Digital Solutions' hjemting i Norge, med forbehold om det forbruker- eller personvernlovgivning gir den registrerte i bostedslandet.",
+  "Estas condiciones y la suscripción se rigen por la ley noruega. Son competentes los tribunales del domicilio de Digital Solutions en Noruega, sin perjuicio de las garantías que la legislación de protección del consumidor o de datos conceda al interesado en su país de residencia."),
+"vilk.c3t": (
+  "C3. Changes",
+  "C3. Endringer",
+  "C3. Cambios"),
+"vilk.c3": (
+  "These terms may change. The version in force is always the one published on this page. Changes to part B are notified by email to subscribers at least 30 days before they take effect. The history is kept in the site's public repository.",
+  "Vilkårene kan endres. Gjeldende versjon er alltid den som er publisert på denne siden. Endringer i del B varsles abonnentene på e-post minst 30 dager før de trer i kraft. Historikken ligger i nettstedets offentlige kodelager.",
+  "Estas condiciones pueden cambiar. La versión vigente es siempre la publicada en esta página. Los cambios en la parte B se comunican por e-mail a los suscriptores al menos 30 días antes de su entrada en vigor. El historial queda en el repositorio público del sitio."),
+"term.mudou": (
+  "The site's terms of use and the subscription terms are now together on a single page.",
+  "Bruksvilkårene for nettstedet og abonnementsvilkårene står nå samlet på én side.",
+  "Los términos de uso del sitio y las condiciones de la suscripción están ahora juntos en una sola página."),
+"term.ir": ("See the terms and conditions", "Se vilkårene", "Ver los términos y condiciones"),
+"footer.i5": ("Terms and conditions", "Vilkår", "Términos y condiciones"),
+"footer.p.landing": ("Landing pages", "Landingssider", "Landing pages"),
 
 # ─── Aviso de cookies ───────────────────────────────────────
 "cook.c01": ("1. Cookies and local storage", "1. Informasjonskapsler og lokal lagring", "1. Cookies y almacenamiento local"),
