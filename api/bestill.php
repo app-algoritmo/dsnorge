@@ -12,7 +12,7 @@
  * Os dados do cliente ficam só no seu Domeneshop. O Stripe recebe apenas o
  * e-mail e a referência do pedido (DS-000123), para ligar o pagamento ao pedido.
  *
- * Documento controlado: DOC-WEB-API-003 · v1.1.0
+ * Documento controlado: DOC-WEB-API-003 · v1.2.0 (país + CNPJ + e-mail em 4 idiomas)
  */
 
 declare(strict_types=1);
@@ -74,7 +74,8 @@ if ($campo('website') !== '') {
 
 $modelo     = $campo('modelo', 20);
 $empresa    = $campo('empresa', 160);
-$orgnr      = preg_replace('/\D/', '', $campo('orgnr', 20)) ?? '';
+$land       = in_array($campo('land', 2), ['NO', 'BR', 'XX'], true) ? $campo('land', 2) : 'NO';
+$orgnr      = orgnr_normalizar($land, $campo('orgnr', 40));
 $contato    = $campo('contato', 120);
 $email      = $campo('email', 180);
 $telefone   = $campo('telefone', 40);
@@ -88,7 +89,7 @@ $idioma     = in_array($campo('idioma', 5), ['pt', 'en', 'no', 'es'], true) ? $c
 $erros = [];
 if (!isset(MODELOS[$modelo]))                                $erros[] = 'modelo';
 if (mb_strlen($empresa) < 2)                                 $erros[] = 'empresa';
-if (!orgnr_valido($orgnr))                                   $erros[] = 'orgnr';
+if (!orgnr_ok($land, $orgnr))                                $erros[] = 'orgnr';
 if (mb_strlen($contato) < 2)                                 $erros[] = 'contato';
 if (!filter_var($email, FILTER_VALIDATE_EMAIL))              $erros[] = 'email';
 if (strlen(preg_replace('/\D/', '', $telefone) ?? '') < 8)   $erros[] = 'telefone';
@@ -160,11 +161,11 @@ if (DB_ATIVO) {
         $pdo->beginTransaction();
         $pdo->prepare(
             'INSERT INTO bestillinger
-             (criado_em, ref, modelo, empresa, orgnr, contato, email, telefone, subdominio,
+             (criado_em, ref, modelo, empresa, land, orgnr, contato, email, telefone, subdominio,
               descricao, horario, facebook, instagram, arquivos, idioma, termos_versao, ip_hash)
-             VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+             VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         )->execute([
-            $ref, $modelo, $empresa, $orgnr, $contato, $email, $telefone, $subdominio ?: null,
+            $ref, $modelo, $empresa, $land, $orgnr, $contato, $email, $telefone, $subdominio ?: null,
             $descricao, $horario ?: null, $facebook ?: null, $instagram ?: null,
             $salvos ? json_encode($salvos) : null, $idioma, TERMOS_VERSAO, hash('sha256', $ip),
         ]);
@@ -187,7 +188,8 @@ $linhas = [
     'Modelo:     ' . MODELOS[$modelo],
     '',
     "Bedrift:    $empresa",
-    "Org.nr.:    $orgnr",
+    'Land:       ' . ['NO' => 'Norge', 'BR' => 'Brasil', 'XX' => 'Annet land'][$land],
+    ($land === 'BR' ? 'CNPJ:       ' : 'Org.nr.:    ') . orgnr_formatado($land, $orgnr),
     "Kontakt:    $contato",
     "E-post:     $email",
     "Telefon:    $telefone",
@@ -210,52 +212,50 @@ $linhas = [
 ];
 enviar(DESTINO, "[dsnorge.com · $ref] Ny bestilling — $empresa", implode("\n", $linhas), $email);
 
-/* ─── Confirmação para o cliente (norueguês) ────────────── */
-$confirmacao = implode("\n", [
-    "Hei $contato,",
-    '',
-    "Takk for bestillingen av landingsside for $empresa.",
-    "Referanse: $ref",
-    'Modell: ' . MODELOS[$modelo],
-    '',
-    'Hva skjer nå:',
-    '1. Fullfør registreringen av kortet i betalingsvinduet (hvis du ikke allerede har gjort det).',
-    '2. Logg inn på Min side med denne e-postadressen: ' . MINSIDE,
-    '   Siden din er allerede fylt ut med det du sendte oss. Juster tekst, bilder og farger.',
-    '3. Trykk «Publiser», så er siden på nett med en gang.',
-    '',
-    'Pris: 399 kr/mnd, totalpris. De første 30 dagene er gratis. Første trekk skjer',
-    'når siden publiseres, eller senest etter 30 dager.',
-    '',
-    'Viktige vilkår (du har godtatt versjon ' . TERMOS_VERSAO . '):',
-    '- 399 kr/mnd, totalpris. 12 måneders bindingstid fra første trekk,',
-    '  deretter løpende med én måneds oppsigelse.',
-    '- Du er selv ansvarlig for alt innhold på siden din: tekst, bilder,',
-    '  priser og lenker. Innholdet må være lovlig og ikke krenke andres',
-    '  rettigheter (opphavsrett, varemerker, personvern).',
-    '- Siden kan ikke brukes til ulovlige varer eller tjenester, svindel,',
-    '  villedende reklame, hets, seksuelt innhold eller andres',
-    '  personopplysninger uten samtykke.',
-    '- Vi kontrollerer ikke innholdet før publisering, men kan ta ned siden',
-    '  straks hvis den bryter med loven eller vilkårene.',
-    'Fullstendige vilkår: https://dsnorge.com/vilkar.html',
-    '',
-    'Spørsmål? Svar på denne e-posten og oppgi referansen.',
-    '',
-    'Vennlig hilsen',
-    'Digital Solutions · dsnorge.com',
-]);
-enviar($email, "Bestilling mottatt – $ref", $confirmacao, DESTINO);
+/* ─── Confirmação para o cliente (no idioma do site) ───── */
+[$assuntoCliente, $confirmacao] = confirmacao($idioma, $contato, $empresa, $ref, $modelo);
+enviar($email, $assuntoCliente, $confirmacao, DESTINO);
 
 /* ─── Resposta: segue para o Stripe ─────────────────────── */
 $redirect = STRIPE_LINK . '?' . http_build_query([
     'prefilled_email'     => $email,
     'client_reference_id' => $ref,
-    'locale'              => $idioma === 'no' ? 'nb' : $idioma,
+    'locale'              => ['no' => 'nb', 'pt' => 'pt-BR', 'en' => 'en', 'es' => 'es'][$idioma],
 ]);
 responder(200, 'ok', 'Pedido recebido.', ['ref' => $ref, 'redirect' => $redirect]);
 
 /* ─── Funções ───────────────────────────────────────────── */
+
+/** Guarda só o essencial: dígitos (NO), 14 caracteres maiúsculos (BR) ou o texto limpo (outro país). */
+function orgnr_normalizar(string $land, string $v): string
+{
+    return match ($land) {
+        'NO'    => preg_replace('/\D/', '', $v) ?? '',
+        'BR'    => strtoupper(preg_replace('/[^0-9A-Za-z]/', '', $v) ?? ''),
+        default => trim(preg_replace('/\s+/', ' ', $v) ?? ''),
+    };
+}
+
+function orgnr_ok(string $land, string $n): bool
+{
+    return match ($land) {
+        'NO'    => orgnr_valido($n),
+        'BR'    => cnpj_valido($n),
+        default => (bool)preg_match('/^[A-Za-z0-9][A-Za-z0-9 .\/-]{2,29}$/', $n),
+    };
+}
+
+function orgnr_formatado(string $land, string $n): string
+{
+    if ($land === 'NO' && strlen($n) === 9) {
+        return substr($n, 0, 3) . ' ' . substr($n, 3, 3) . ' ' . substr($n, 6);
+    }
+    if ($land === 'BR' && strlen($n) === 14) {
+        return substr($n, 0, 2) . '.' . substr($n, 2, 3) . '.' . substr($n, 5, 3) . '/' . substr($n, 8, 4) . '-' . substr($n, 12);
+    }
+    return $n;
+}
+
 function orgnr_valido(string $n): bool
 {
     // Org.nr. norueguês: 9 dígitos, dígito de controle módulo 11.
@@ -266,6 +266,119 @@ function orgnr_valido(string $n): bool
     $resto = $soma % 11;
     $dv = $resto === 0 ? 0 : 11 - $resto;
     return $dv !== 10 && $dv === (int)$n[8];
+}
+
+/**
+ * CNPJ brasileiro, numérico ou alfanumérico (Receita Federal, a partir de jul/2026):
+ * 12 caracteres [0-9A-Z] + 2 dígitos verificadores; valor de cada caractere = código ASCII − 48.
+ */
+function cnpj_valido(string $c): bool
+{
+    if (!preg_match('/^[0-9A-Z]{12}[0-9]{2}$/', $c) || preg_match('/^(.)\1{13}$/', $c)) { return false; }
+    $dv = static function (string $base): int {
+        $pesos = strlen($base) === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2] : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        $soma = 0;
+        foreach ($pesos as $i => $p) { $soma += (ord($base[$i]) - 48) * $p; }
+        $r = $soma % 11;
+        return $r < 2 ? 0 : 11 - $r;
+    };
+    $d1 = $dv(substr($c, 0, 12));
+    $d2 = $dv(substr($c, 0, 12) . $d1);
+    return $c[12] === (string)$d1 && $c[13] === (string)$d2;
+}
+
+/** Assunto e texto da confirmação ao cliente, no idioma em que ele fez o pedido. */
+function confirmacao(string $idioma, string $contato, string $empresa, string $ref, string $modelo): array
+{
+    $v = TERMOS_VERSAO;
+    $m = MINSIDE;
+    $mod = MODELOS[$modelo];
+    $t = [
+        'no' => [
+            "Bestilling mottatt – $ref",
+            "Hei $contato,", "Takk for bestillingen av landingsside for $empresa.", "Referanse: $ref", "Modell: $mod",
+            'Hva skjer nå:',
+            '1. Fullfør registreringen av kortet i betalingsvinduet (hvis du ikke allerede har gjort det).',
+            "2. Logg inn på Min side med denne e-postadressen: $m\n   Siden din er allerede fylt ut med det du sendte oss. Juster tekst, bilder, farger og språk.",
+            '3. Trykk «Publiser», så er siden på nett med en gang.',
+            "Pris: 399 kr/mnd, totalpris. De første 30 dagene er gratis. Første trekk skjer\nnår siden publiseres, eller senest etter 30 dager.",
+            "Viktige vilkår (du har godtatt versjon $v):",
+            [
+                "399 kr/mnd, totalpris. 12 måneders bindingstid fra første trekk,\n  deretter løpende med én måneds oppsigelse.",
+                "Du er selv ansvarlig for alt innhold på siden din: tekst, bilder,\n  priser og lenker. Innholdet må være lovlig og ikke krenke andres\n  rettigheter (opphavsrett, varemerker, personvern).",
+                "Siden kan ikke brukes til ulovlige varer eller tjenester, svindel,\n  villedende reklame, hets, seksuelt innhold eller andres\n  personopplysninger uten samtykke.",
+                "Vi kontrollerer ikke innholdet før publisering, men kan ta ned siden\n  straks hvis den bryter med loven eller vilkårene.",
+            ],
+            'Fullstendige vilkår: https://dsnorge.com/vilkar.html',
+            'Spørsmål? Svar på denne e-posten og oppgi referansen.',
+            'Vennlig hilsen',
+        ],
+        'pt' => [
+            "Pedido recebido – $ref",
+            "Olá, $contato,", "Obrigado pelo pedido da landing page de $empresa.", "Referência: $ref", "Modelo: $mod",
+            'O que acontece agora:',
+            '1. Conclua o cadastro do cartão na janela de pagamento (se ainda não fez).',
+            "2. Entre na sua área (Min side) com este e-mail: $m\n   Sua página já vem preenchida com o que você nos enviou. Ajuste textos, fotos, cores e idioma.",
+            '3. Clique em «Publicar» e a página entra no ar na hora.',
+            "Preço: 399 NOK/mês, preço total. Os primeiros 30 dias são grátis. A primeira cobrança\nacontece ao publicar a página, ou no máximo após 30 dias. O cartão é cobrado em coroas\nnorueguesas (NOK); o banco do cartão pode acrescentar câmbio e IOF.",
+            "Condições importantes (você aceitou a versão $v):",
+            [
+                "399 NOK/mês, preço total. Fidelidade de 12 meses a partir da primeira\n  cobrança; depois, mês a mês, com aviso de um mês para cancelar.",
+                "Você é o único responsável por todo o conteúdo da página: textos, fotos,\n  preços e links. O conteúdo deve ser legal e não pode violar direitos\n  de terceiros (direitos autorais, marcas, privacidade).",
+                "A página não pode ser usada para produtos ou serviços ilegais, fraude,\n  publicidade enganosa, discurso de ódio, conteúdo sexual ou dados\n  pessoais de terceiros sem consentimento.",
+                "Não revisamos o conteúdo antes da publicação, mas podemos tirar a\n  página do ar imediatamente se ela violar a lei ou as condições.",
+            ],
+            'Condições completas: https://dsnorge.com/vilkar.html',
+            'Dúvidas? Responda a este e-mail informando a referência.',
+            'Atenciosamente,',
+        ],
+        'en' => [
+            "Order received – $ref",
+            "Hi $contato,", "Thank you for ordering a landing page for $empresa.", "Reference: $ref", "Model: $mod",
+            'What happens now:',
+            '1. Finish registering your card in the payment window (if you have not already).',
+            "2. Log in to your account (Min side) with this email address: $m\n   Your page is already filled in with what you sent us. Adjust text, photos, colours and language.",
+            '3. Press «Publish» and the page is online right away.',
+            "Price: NOK 399/month, total price. The first 30 days are free. The first charge\nhappens when the page is published, or after 30 days at the latest. Your card is\ncharged in Norwegian kroner (NOK).",
+            "Key terms (you accepted version $v):",
+            [
+                "NOK 399/month, total price. 12-month commitment from the first charge,\n  then rolling with one month's notice.",
+                "You alone are responsible for all content on your page: text, photos,\n  prices and links. The content must be lawful and must not infringe\n  the rights of others (copyright, trademarks, privacy).",
+                "The page may not be used for illegal goods or services, fraud,\n  misleading advertising, hate speech, sexual content or other\n  people's personal data without consent.",
+                "We do not review content before publication, but may take the page\n  down at once if it breaks the law or the terms.",
+            ],
+            'Full terms: https://dsnorge.com/vilkar.html',
+            'Questions? Reply to this email and quote the reference.',
+            'Kind regards,',
+        ],
+        'es' => [
+            "Pedido recibido – $ref",
+            "Hola, $contato:", "Gracias por pedir una landing page para $empresa.", "Referencia: $ref", "Modelo: $mod",
+            'Qué pasa ahora:',
+            '1. Termina de registrar la tarjeta en la ventana de pago (si aún no lo has hecho).',
+            "2. Entra en tu área (Min side) con este correo: $m\n   Tu página ya viene rellenada con lo que nos enviaste. Ajusta textos, fotos, colores e idioma.",
+            '3. Pulsa «Publicar» y la página estará en línea al instante.',
+            "Precio: 399 NOK/mes, precio total. Los primeros 30 días son gratis. El primer cargo\nse hace al publicar la página o, como máximo, a los 30 días. La tarjeta se cobra\nen coronas noruegas (NOK).",
+            "Condiciones importantes (aceptaste la versión $v):",
+            [
+                "399 NOK/mes, precio total. Permanencia de 12 meses desde el primer cargo;\n  después, mes a mes, con un mes de preaviso.",
+                "Eres el único responsable de todo el contenido de tu página: textos,\n  fotos, precios y enlaces. El contenido debe ser legal y no puede\n  vulnerar derechos de terceros (autor, marcas, privacidad).",
+                "La página no puede usarse para productos o servicios ilegales, fraude,\n  publicidad engañosa, discurso de odio, contenido sexual ni datos\n  personales de terceros sin consentimiento.",
+                "No revisamos el contenido antes de publicarlo, pero podemos retirar\n  la página de inmediato si infringe la ley o las condiciones.",
+            ],
+            'Condiciones completas: https://dsnorge.com/vilkar.html',
+            '¿Dudas? Responde a este correo indicando la referencia.',
+            'Saludos,',
+        ],
+    ][$idioma] ?? null;
+    if ($t === null) { return confirmacao('no', $contato, $empresa, $ref, $modelo); }
+    [$assunto, $oi, $obrigado, $refL, $modL, $agora, $p1, $p2, $p3, $preco, $vilkTit, $vilk, $completo, $duvida, $tchau] = $t;
+    $corpo = implode("\n", [
+        $oi, '', $obrigado, $refL, $modL, '', $agora, $p1, $p2, $p3, '', $preco, '',
+        $vilkTit, '- ' . implode("\n- ", $vilk), $completo, '', $duvida, '', $tchau,
+        'Digital Solutions · dsnorge.com',
+    ]);
+    return [$assunto, $corpo];
 }
 
 function normalizar_arquivos(?array $f): array

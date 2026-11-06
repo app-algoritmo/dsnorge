@@ -2,19 +2,21 @@
 /**
  * DIGITAL SOLUTIONS — monta a landingsside de um cliente.
  * Usado no ar (<slug>.dsnorge.com) e na prévia do Min side.
- * DOC-WEB-MS-006 · v1.0.0
+ * DOC-WEB-MS-006 · v1.1.0 (textos no idioma da página)
  */
 declare(strict_types=1);
 
 function render_side(array $kunde, array $inn, string $layout, string $tema, bool $forhand = false): string
 {
     $modell = $kunde['modell'];
-    $m      = MODELLER[$modell];
+    // Idioma: o que foi publicado junto com o conteúdo (ou o da conta).
+    sprak((string)($inn['sprak'] ?? $kunde['sprak'] ?? 'no'));
+    $m      = modell($modell);
     $layout = isset(LAYOUTER[$layout]) ? $layout : 'a';
     $tema   = isset(TEMAER[$tema]) ? $tema : STANDARD_TEMA;
     $inn    = array_merge(tomt_innhold($modell), $inn);
 
-    $navn    = $inn['firmanavn'] !== '' ? $inn['firmanavn'] : 'Bedriften din';
+    $navn    = $inn['firmanavn'] !== '' ? $inn['firmanavn'] : t('s.bedriften');
     $tlfLenke = $inn['telefon'] !== '' ? 'tel:' . preg_replace('/[^\d+]/', '', $inn['telefon']) : '';
     $hovedLenke = $inn['knapp_lenke'] ?: ($tlfLenke ?: ($inn['epost'] ? 'mailto:' . $inn['epost'] : '#kontakt'));
     $hovedTekst = $inn['knapp_tekst'] !== '' ? $inn['knapp_tekst'] : $m['knapp'];
@@ -40,7 +42,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 
     ob_start();
 ?><!doctype html>
-<html lang="nb">
+<html lang="<?= e(HTML_LANG[sprak()]) ?>">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,7 +68,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 </head>
 <body class="layout-<?= e($layout) ?> modell-<?= e($modell) ?>">
 <?php if ($forhand): ?>
-<div class="forhand">Forhåndsvisning – ikke publisert. <a href="<?= e(minside_url('/')) ?>">Tilbake til Min side</a></div>
+<div class="forhand"><?= th('s.forhand') ?> <a href="<?= e(minside_url('/')) ?>"><?= th('s.tilbake') ?></a></div>
 <?php endif; ?>
 
 <header class="topp">
@@ -74,12 +76,12 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
     <a class="merke" href="#">
       <?php if ($inn['logo']): ?><img src="<?= e(bilde_url($inn['logo'])) ?>" alt="<?= e($navn) ?>" class="logo"><?php else: ?><span class="merke-navn"><?= e($navn) ?></span><?php endif; ?>
     </a>
-    <nav class="meny" aria-label="Hovedmeny">
+    <nav class="meny" aria-label="<?= th('s.meny') ?>">
       <?php if ($harListe): ?><a href="#liste"><?= e($m['liste_tittel']) ?></a><?php endif; ?>
-      <?php if ($inn['om'] !== ''): ?><a href="#om">Om oss</a><?php endif; ?>
-      <?php if ($harKontakt): ?><a href="#kontakt">Kontakt</a><?php endif; ?>
+      <?php if ($inn['om'] !== ''): ?><a href="#om"><?= th('s.om') ?></a><?php endif; ?>
+      <?php if ($harKontakt): ?><a href="#kontakt"><?= th('s.kontakt') ?></a><?php endif; ?>
     </nav>
-    <?php if ($tlfLenke): ?><a class="knapp knapp--liten" href="<?= e($tlfLenke) ?>">Ring <?= e($inn['telefon']) ?></a><?php endif; ?>
+    <?php if ($tlfLenke): ?><a class="knapp knapp--liten" href="<?= e($tlfLenke) ?>"><?= th('s.ring', e($inn['telefon'])) ?></a><?php endif; ?>
   </div>
 </header>
 
@@ -92,7 +94,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
     <?php if ($inn['slagord'] !== ''): ?><p class="slagord"><?= e($inn['slagord']) ?></p><?php endif; ?>
     <div class="knapper">
       <a class="knapp" href="<?= e($hovedLenke) ?>"<?= $ekstern ? ' target="_blank" rel="noopener"' : '' ?>><?= e($hovedTekst) ?></a>
-      <?php if ($harListe): ?><a class="knapp knapp--lys" href="#liste">Se <?= e(mb_strtolower($m['liste_tittel'])) ?></a><?php endif; ?>
+      <?php if ($harListe): ?><a class="knapp knapp--lys" href="#liste"><?= th('s.se', e(mb_strtolower($m['liste_tittel']))) ?></a><?php endif; ?>
     </div>
   </div>
 </section>
@@ -110,7 +112,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
       <?php if ($inn['intro'] !== ''): ?><div class="intro-tekst"><?= avsnitt($inn['intro']) ?></div><?php endif; ?>
       <div class="knapper">
         <a class="knapp" href="<?= e($hovedLenke) ?>"<?= $ekstern ? ' target="_blank" rel="noopener"' : '' ?>><?= e($hovedTekst) ?></a>
-        <?php if ($harListe): ?><a class="knapp knapp--strek" href="#liste">Se <?= e(mb_strtolower($m['liste_tittel'])) ?></a><?php endif; ?>
+        <?php if ($harListe): ?><a class="knapp knapp--strek" href="#liste"><?= th('s.se', e(mb_strtolower($m['liste_tittel']))) ?></a><?php endif; ?>
       </div>
     </div>
     <?php if ($inn['toppbilde']): ?><figure class="helt-figur"><img src="<?= e(bilde_url($inn['toppbilde'])) ?>" alt="" fetchpriority="high"></figure><?php endif; ?>
@@ -158,14 +160,14 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 <?php if ($inn['om'] !== ''): ?>
 <section class="seksjon om" id="om">
   <div class="ramme smal">
-    <h2>Om oss</h2>
+    <h2><?= th('s.om') ?></h2>
     <?= avsnitt($inn['om']) ?>
   </div>
 </section>
 <?php endif; ?>
 
 <?php if ($harGalleri): ?>
-<section class="seksjon galleri" aria-label="Bilder">
+<section class="seksjon galleri" aria-label="<?= th('s.bilder') ?>">
   <div class="ramme">
     <ul class="galleri-rutenett">
       <?php foreach ($inn['galleri'] as $g): ?>
@@ -180,11 +182,11 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 <section class="seksjon kontakt" id="kontakt">
   <div class="ramme kontakt-inn">
     <div>
-      <h2>Kontakt oss</h2>
+      <h2><?= th('s.kontakt_oss') ?></h2>
       <ul class="kontakt-liste">
-        <?php if ($inn['telefon'] !== ''): ?><li><span class="etikett">Telefon</span><a href="<?= e($tlfLenke) ?>"><?= e($inn['telefon']) ?></a></li><?php endif; ?>
-        <?php if ($inn['epost'] !== ''): ?><li><span class="etikett">E-post</span><a href="mailto:<?= e($inn['epost']) ?>"><?= e($inn['epost']) ?></a></li><?php endif; ?>
-        <?php if ($inn['adresse'] !== ''): ?><li><span class="etikett">Adresse</span><a href="<?= e($kart) ?>" target="_blank" rel="noopener"><?= e($inn['adresse']) ?></a></li><?php endif; ?>
+        <?php if ($inn['telefon'] !== ''): ?><li><span class="etikett"><?= th('s.telefon') ?></span><a href="<?= e($tlfLenke) ?>"><?= e($inn['telefon']) ?></a></li><?php endif; ?>
+        <?php if ($inn['epost'] !== ''): ?><li><span class="etikett"><?= th('s.epost') ?></span><a href="mailto:<?= e($inn['epost']) ?>"><?= e($inn['epost']) ?></a></li><?php endif; ?>
+        <?php if ($inn['adresse'] !== ''): ?><li><span class="etikett"><?= th('s.adresse') ?></span><a href="<?= e($kart) ?>" target="_blank" rel="noopener"><?= e($inn['adresse']) ?></a></li><?php endif; ?>
       </ul>
       <?php if ($inn['facebook'] || $inn['instagram']): ?>
       <p class="sosiale">
@@ -195,7 +197,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
     </div>
     <?php if ($inn['apningstider'] !== ''): ?>
     <div class="tider">
-      <h3>Åpningstider</h3>
+      <h3><?= th('s.tider') ?></h3>
       <?= avsnitt($inn['apningstider']) ?>
     </div>
     <?php endif; ?>
@@ -207,7 +209,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 <footer class="bunn">
   <div class="ramme bunn-inn">
     <span>© <?= date('Y') ?> <?= e($navn) ?></span>
-    <a href="https://dsnorge.com" target="_blank" rel="noopener">Nettside fra Digital Løsninger</a>
+    <a href="https://dsnorge.com" target="_blank" rel="noopener"><?= th('s.fra') ?></a>
   </div>
 </footer>
 </body>
@@ -218,8 +220,9 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
 
 function render_ikke_funnet(): string
 {
-    return '<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
-        . '<meta name="robots" content="noindex"><title>Siden finnes ikke</title><link rel="stylesheet" href="/assets/side.css?v=1"><style>' . tema_css(STANDARD_TEMA) . '</style></head>'
-        . '<body><main class="ikke-funnet ramme smal"><h1>Siden finnes ikke</h1><p>Denne adressen er ikke i bruk, eller siden er midlertidig stengt.</p>'
-        . '<p><a class="knapp" href="https://dsnorge.com">Til dsnorge.com</a></p></main></body></html>';
+    sprak(sprak_fra_nettleser());
+    return '<!doctype html><html lang="' . e(HTML_LANG[sprak()]) . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+        . '<meta name="robots" content="noindex"><title>' . th('s.404.h') . '</title><link rel="stylesheet" href="/assets/side.css?v=1"><style>' . tema_css(STANDARD_TEMA) . '</style></head>'
+        . '<body><main class="ikke-funnet ramme smal"><h1>' . th('s.404.h') . '</h1><p>' . th('s.404.p') . '</p>'
+        . '<p><a class="knapp" href="https://dsnorge.com">' . th('s.404.lenke') . '</a></p></main></body></html>';
 }

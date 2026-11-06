@@ -7,7 +7,7 @@
    Com ENDPOINT vazio, o formulário avisa que o pedido online
    ainda não está ativo e indica o e-mail.
 
-   Documento controlado: DOC-DS-JS-004 · v1.0.0
+   Documento controlado: DOC-DS-JS-004 · v1.1.0
    ============================================================ */
 
 const ENDPOINT = "https://api.dsnorge.com/bestill.php";
@@ -23,6 +23,25 @@ const MAX_TOTAL = 40 * 1024 * 1024;   // soma dos arquivos
     estado.textContent = texto;
     estado.dataset.erro = erro ? "true" : "false";
   };
+
+  /* País da empresa: muda o rótulo e a regra do número (org.nr, CNPJ ou outro). */
+  const land = document.getElementById("lp-land");
+  const orgnr = document.getElementById("lp-orgnr");
+  const REGRAS = {
+    NO: { pattern: "[0-9 ]{9,11}", max: 11, modo: "numeric", exemplo: "123 456 789" },
+    BR: { pattern: "[0-9A-Za-z./ -]{14,20}", max: 20, modo: "text", exemplo: "00.000.000/0001-00" },
+    XX: { pattern: "[A-Za-z0-9][A-Za-z0-9 ./-]{2,29}", max: 30, modo: "text", exemplo: "" }
+  };
+  const aplicarLand = () => {
+    const r = REGRAS[land.value] || REGRAS.NO;
+    orgnr.pattern = r.pattern;
+    orgnr.maxLength = r.max;
+    orgnr.inputMode = r.modo;
+    orgnr.placeholder = r.exemplo;
+    form.querySelectorAll("[data-land]").forEach(el => { el.hidden = el.dataset.land !== land.value; });
+  };
+  land?.addEventListener("change", () => { orgnr.removeAttribute("aria-invalid"); aplicarLand(); });
+  if (land && orgnr) aplicarLand();
 
   form.addEventListener("submit", async e => {
     e.preventDefault();

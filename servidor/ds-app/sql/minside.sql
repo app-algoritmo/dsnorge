@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS kunder (
   modell          ENUM('handverk','mat','velvaere') NOT NULL,
   layout          VARCHAR(10)  NOT NULL DEFAULT 'a',
   tema            VARCHAR(20)  NOT NULL DEFAULT 'babyblaa',
+  sprak           CHAR(2)      NOT NULL DEFAULT 'no',   -- idioma da página e do Min side: no, pt, en, es
   utkast          LONGTEXT     NOT NULL,             -- JSON: o que o cliente está editando
   publisert       LONGTEXT         NULL,             -- JSON: o que está no ar
   publisert_layout VARCHAR(10)     NULL,

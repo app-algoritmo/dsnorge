@@ -5,7 +5,7 @@
  *   side.dsnorge.com/<slug> → landingsside publicada do cliente
  *   <slug>.dsnorge.com   → idem (se um dia o endereço for criado na Domeneshop)
  * Tudo o que não é arquivo (assets, m/) chega aqui pelo .htaccess.
- * DOC-WEB-MS-008 · v1.0.0
+ * DOC-WEB-MS-008 · v1.1.0
  */
 declare(strict_types=1);
 
@@ -74,7 +74,7 @@ function vis_kundeside(string $slug, bool $sti_ok = false): void
     }
     // O navegador sempre confere se há versão nova (publicação aparece na hora);
     // se nada mudou, responde 304 sem montar a página.
-    $etag = '"' . substr(hash('sha256', $kunde['sist_publisert'] . '|' . $kunde['publisert_tema'] . '|' . $kunde['publisert_layout'] . '|1'), 0, 20) . '"';
+    $etag = '"' . substr(hash('sha256', $kunde['sist_publisert'] . '|' . $kunde['publisert_tema'] . '|' . $kunde['publisert_layout'] . '|' . md5((string)$kunde['publisert']) . '|2'), 0, 20) . '"';
     header('Cache-Control: no-cache');
     header('ETag: ' . $etag);
     if (trim((string)($_SERVER['HTTP_IF_NONE_MATCH'] ?? '')) === $etag) {

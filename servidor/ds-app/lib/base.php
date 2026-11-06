@@ -1,11 +1,12 @@
 <?php
 /**
  * DIGITAL SOLUTIONS — funções comuns do Min side e das páginas dos clientes.
- * DOC-WEB-MS-003 · v1.0.0
+ * DOC-WEB-MS-003 · v1.1.0
  */
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/config.php';
+require_once __DIR__ . '/sprak.php';
 
 // Valores novos com padrão, para um config.php antigo continuar valendo.
 if (!defined('SIDE_HOST'))    { define('SIDE_HOST', 'side.dsnorge.com'); }
@@ -129,11 +130,12 @@ function krev_csrf(): void
     if (!hash_equals((string)($_SESSION['csrf'] ?? ''), $t)) {
         // Envio grande demais: o PHP descarta tudo e o formulário chega vazio.
         if (!$_POST && (int)($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
-            flash('Bildene var for store til å sendes samlet. Prøv færre eller mindre bilder om gangen.', 'feil');
+            flash(t('for_store'), 'feil');
             videre('/');
         }
         http_response_code(400);
-        exit('Økten er utløpt. Gå tilbake og prøv igjen.');
+        header('Content-Type: text/plain; charset=utf-8');
+        exit(t('okt_utlopt'));
     }
 }
 

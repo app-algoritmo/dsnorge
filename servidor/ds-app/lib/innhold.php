@@ -2,38 +2,16 @@
 /**
  * DIGITAL SOLUTIONS — modelos, temas, layouts e o conteúdo de cada página.
  * O cliente só escolhe entre opções desta lista: é isso que protege a qualidade.
- * DOC-WEB-MS-004 · v1.0.0
+ * DOC-WEB-MS-004 · v1.1.0
+ * Os textos de modelos, layouts e temas em cada idioma ficam em lib/sprak.php.
  */
 declare(strict_types=1);
 
+// Nomes em norueguês (painel /admin). Os textos para o cliente vêm de modell() em lib/sprak.php.
 const MODELLER = [
-    'handverk' => [
-        'navn'         => 'Håndverk og service',
-        'liste_tittel' => 'Tjenester',
-        'liste_hint'   => 'Hva tilbyr dere? F.eks. «Baderomsrenovering» – kort forklaring – «fra 650 kr/t».',
-        'info_tittel'  => 'Område',
-        'info_hint'    => 'Hvilke steder dekker dere? F.eks. «Larvik, Sandefjord og Kvelde».',
-        'knapp'        => 'Be om tilbud',
-        'eksempel'     => ['Tømrerarbeid', 'Nye vinduer, terrasser og tilbygg.', 'fra 650 kr/t'],
-    ],
-    'mat' => [
-        'navn'         => 'Mat og butikk',
-        'liste_tittel' => 'Meny',
-        'liste_hint'   => 'Retter eller varer. F.eks. «Pizza Margherita» – tomat, mozzarella, basilikum – «159 kr».',
-        'info_tittel'  => 'Bestilling og levering',
-        'info_hint'    => 'Take away, levering, bordbestilling, betaling med Vipps osv.',
-        'knapp'        => 'Ring og bestill',
-        'eksempel'     => ['Pizza Margherita', 'Tomat, mozzarella og fersk basilikum.', '159 kr'],
-    ],
-    'velvaere' => [
-        'navn'         => 'Velvære og timer',
-        'liste_tittel' => 'Behandlinger',
-        'liste_hint'   => 'Behandlinger med varighet og pris. F.eks. «Dameklipp» – 45 min – «590 kr».',
-        'info_tittel'  => 'Om timebestilling',
-        'info_hint'    => 'Hvordan bestiller man time? Avbestillingsregler?',
-        'knapp'        => 'Bestill time',
-        'eksempel'     => ['Dameklipp', 'Vask, klipp og føn. 45 min.', '590 kr'],
-    ],
+    'handverk' => ['navn' => 'Håndverk og service'],
+    'mat'      => ['navn' => 'Mat og butikk'],
+    'velvaere' => ['navn' => 'Velvære og timer'],
 ];
 
 const LAYOUTER = [
@@ -77,9 +55,10 @@ function tomt_innhold(string $modell): array
         'firmanavn' => '', 'slagord' => '', 'intro' => '', 'om' => '',
         'liste' => [], 'info' => '', 'apningstider' => '',
         'telefon' => '', 'epost' => '', 'adresse' => '',
-        'knapp_tekst' => MODELLER[$modell]['knapp'] ?? '', 'knapp_lenke' => '',
+        'knapp_tekst' => modell($modell)['knapp'], 'knapp_lenke' => '',
         'facebook' => '', 'instagram' => '',
         'logo' => '', 'toppbilde' => '', 'galleri' => [],
+        'sprak' => sprak(),
     ];
 }
 

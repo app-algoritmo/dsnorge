@@ -124,3 +124,5 @@ form.inline{display:inline}
 .enkel-liste li{margin:4px 0}
 details summary{cursor:pointer;color:var(--aksent);font-size:.9rem}
 .sjekk{margin-top:40px}
+.sprakvelger{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 18px;font-size:.9rem;color:var(--dempet)}
+.sprakvelger strong{color:var(--tekst);font-weight:600}

@@ -1,5 +1,5 @@
 -- DIGITAL SOLUTIONS — pedidos de landing page (Domeneshop / MySQL)
--- DOC-WEB-API-004 · v1.0.0
+-- DOC-WEB-API-004 · v1.1.0
 -- Execute uma vez no phpMyAdmin do Domeneshop, na mesma base de contatos.sql,
 -- depois ponha DB_ATIVO = true em api/bestill.php (só na cópia do servidor).
 
@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS bestillinger (
   ref             VARCHAR(20)  NOT NULL,            -- DS-000123, enviado ao Stripe como client_reference_id
   modelo          ENUM('handverk','mat','velvaere') NOT NULL,
   empresa         VARCHAR(160) NOT NULL,
-  orgnr           CHAR(9)      NOT NULL,
+  land            CHAR(2)      NOT NULL DEFAULT 'NO', -- NO, BR ou XX (outro país)
+  orgnr           VARCHAR(30)  NOT NULL,            -- org.nr (9 dígitos), CNPJ (14) ou nº de outro país
   contato         VARCHAR(120) NOT NULL,
   email           VARCHAR(180) NOT NULL,
   telefone        VARCHAR(40)  NOT NULL,

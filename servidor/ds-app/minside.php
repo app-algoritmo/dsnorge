@@ -2,8 +2,9 @@
 /**
  * DIGITAL SOLUTIONS — Min side (minside.dsnorge.com)
  * Login por link no e-mail, editor da página, prévia, publicação e o painel /admin.
- * A interface é em norueguês (clientes); comentários em português.
- * DOC-WEB-MS-009 · v1.0.0
+ * A interface do cliente segue o idioma dele (lib/sprak.php: no, pt, en, es);
+ * o painel /admin fica em norueguês. Comentários em português.
+ * DOC-WEB-MS-009 · v1.1.0
  */
 declare(strict_types=1);
 
@@ -17,6 +18,10 @@ function minside_kjor(): void
     header('X-Frame-Options: DENY');
     header('Cache-Control: no-store');
     start_okt();
+    // Idioma antes do login: ?lang=pt (fica na sessão), senão o do navegador.
+    $valgt = (string)($_GET['lang'] ?? '');
+    if (isset(SPRAK[$valgt])) { $_SESSION['sprak'] = $valgt; }
+    sprak((string)($_SESSION['sprak'] ?? sprak_fra_nettleser()));
 
     $sti = parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/';
     $sti = rtrim($sti, '/') ?: '/';
@@ -39,7 +44,7 @@ function minside_kjor(): void
     } catch (Throwable $e) {
         error_log('[ds/minside] ' . $e::class . ': ' . $e->getMessage() . ' @' . $e->getFile() . ':' . $e->getLine());
         http_response_code(500);
-        ramme('Feil', '<div class="boks"><h1>Noe gikk galt</h1><p>Prøv igjen om litt. Hvis feilen fortsetter, send e-post til <a href="mailto:' . e(DESTINO) . '">' . e(DESTINO) . '</a>.</p></div>');
+        ramme(t('feil.tittel'), '<div class="boks"><h1>' . th('feil.h') . '</h1><p>' . th('feil.p', '<a href="mailto:' . e(DESTINO) . '">' . e(DESTINO) . '</a>') . '</p></div>');
     }
 }
 
@@ -66,10 +71,24 @@ function aktiv_kunde(): ?array
 {
     $ep = innlogget();
     if ($ep === null) { return null; }
-    if (er_admin($ep) && !empty($_SESSION['kunde_id'])) {
-        return q('SELECT * FROM kunder WHERE id = ?', [(int)$_SESSION['kunde_id']])->fetch() ?: null;
+    $k = (er_admin($ep) && !empty($_SESSION['kunde_id']))
+        ? q('SELECT * FROM kunder WHERE id = ?', [(int)$_SESSION['kunde_id']])->fetch()
+        : q('SELECT * FROM kunder WHERE epost = ?', [$ep])->fetch();
+    if (!$k) { return null; }
+    sprak((string)($k['sprak'] ?? 'no'));      // o Min side fala a língua do cliente
+    return $k;
+}
+
+/** Links para trocar o idioma antes do login. */
+function sprakvelger(): string
+{
+    $h = '<p class="sprakvelger">';
+    foreach (SPRAK as $kode => $navn) {
+        $h .= $kode === sprak()
+            ? '<strong lang="' . e(HTML_LANG[$kode]) . '">' . e($navn) . '</strong>'
+            : '<a href="?lang=' . e($kode) . '" lang="' . e(HTML_LANG[$kode]) . '" hreflang="' . e(HTML_LANG[$kode]) . '">' . e($navn) . '</a>';
     }
-    return q('SELECT * FROM kunder WHERE epost = ?', [$ep])->fetch() ?: null;
+    return $h . '</p>';
 }
 
 /* ═══ Login ══════════════════════════════════════════════════ */
@@ -81,48 +100,50 @@ function side_start(): void
     $kunde = aktiv_kunde();
     if ($kunde) { side_editor($kunde); return; }
     if (er_admin($ep)) { videre('/admin'); }
-    ramme('Min side', '<div class="boks"><h1>Ingen side funnet</h1><p>Vi fant ingen landingsside knyttet til ' . e($ep)
-        . '. Har du bestilt med en annen e-postadresse? Ellers kan du <a href="https://dsnorge.com/bestill.html">bestille her</a>.</p>'
+    ramme('Min side', '<div class="boks"><h1>' . th('ingen.h') . '</h1><p>'
+        . th('ingen.p', e($ep), '<a href="https://dsnorge.com/bestill.html">' . th('ingen.lenke') . '</a>') . '</p>'
         . utlogging() . '</div>');
 }
 
 function side_logg_inn(?string $melding = null): void
 {
     $f = flash();
-    $html = '<div class="boks smal-boks">'
-        . '<h1>Logg inn på Min side</h1>'
-        . '<p class="dempet">Her lager og endrer du landingssiden din. Skriv e-postadressen du brukte da du bestilte, så sender vi deg en innloggingslenke.</p>'
+    $html = '<div class="boks smal-boks">' . sprakvelger()
+        . '<h1>' . th('inn.h') . '</h1>'
+        . '<p class="dempet">' . th('inn.p') . '</p>'
         . ($melding ? '<p class="melding ok">' . e($melding) . '</p>' : '')
         . ($f ? '<p class="melding ' . e($f['type']) . '">' . e($f['tekst']) . '</p>' : '')
         . '<form method="post" action="/logg-inn" class="skjema">' . csrf_felt()
-        . '<label class="felt"><span>E-post</span><input type="email" name="epost" required autocomplete="email" inputmode="email" maxlength="180"></label>'
-        . '<button class="knapp" type="submit">Send meg innloggingslenke</button>'
+        . '<label class="felt"><span>' . th('inn.epost') . '</span><input type="email" name="epost" required autocomplete="email" inputmode="email" maxlength="180"></label>'
+        . '<button class="knapp" type="submit">' . th('inn.knapp') . '</button>'
         . '</form>'
-        . '<p class="dempet liten">Ikke kunde ennå? <a href="https://dsnorge.com/bestill.html">Bestill landingsside</a></p>'
+        . '<p class="dempet liten">' . th('inn.ny') . ' <a href="https://dsnorge.com/bestill.html">' . th('inn.bestill') . '</a></p>'
         . '</div>';
-    ramme('Logg inn', $html);
+    ramme(t('inn.tittel'), $html);
 }
 
 function handling_send_lenke(): void
 {
     $epost = strtolower(trim((string)($_POST['epost'] ?? '')));
-    $svar = 'Hvis e-postadressen er registrert hos oss, har vi nå sendt deg en innloggingslenke. Den virker i ' . TOKEN_MINUTTER . ' minutter. Sjekk også søppelpost.';
+    $svar = t('inn.sendt', TOKEN_MINUTTER);
     if (!filter_var($epost, FILTER_VALIDATE_EMAIL) || mb_strlen($epost) > 180) {
-        flash('Skriv en gyldig e-postadresse.', 'feil');
+        flash(t('inn.ugyldig'), 'feil');
         videre('/');
     }
     $ip = ip_hash();
     $pr_epost = (int)q('SELECT COUNT(*) FROM innlogging WHERE epost = ? AND opprettet > NOW() - INTERVAL 1 HOUR', [$epost])->fetchColumn();
     $pr_ip    = (int)q('SELECT COUNT(*) FROM innlogging WHERE ip_hash = ? AND opprettet > NOW() - INTERVAL 1 HOUR', [$ip])->fetchColumn();
     if ($pr_epost >= MAKS_LENKER_EPOST || $pr_ip >= MAKS_LENKER_IP) {
-        flash('For mange forsøk. Vent en time og prøv igjen.', 'feil');
+        flash(t('inn.for_mange'), 'feil');
         videre('/');
     }
 
-    $finnes = (bool)q('SELECT id FROM kunder WHERE epost = ?', [$epost])->fetch();
-    if (!$finnes && !er_admin($epost)) {
-        $finnes = opprett_fra_bestilling($epost) !== null;
+    $sideSprak = sprak();
+    $rad = q('SELECT id, sprak FROM kunder WHERE epost = ?', [$epost])->fetch();
+    if (!$rad && !er_admin($epost) && opprett_fra_bestilling($epost) !== null) {
+        $rad = q('SELECT id, sprak FROM kunder WHERE epost = ?', [$epost])->fetch();
     }
+    $finnes = (bool)$rad;
 
     // Registra a tentativa sempre (conta para o limite), mas só envia se existir.
     $token = bin2hex(random_bytes(32));
@@ -131,19 +152,21 @@ function handling_send_lenke(): void
 
     if ($finnes || er_admin($epost)) {
         $lenke = minside_url('/inn?t=' . $token);
-        send_epost($epost, 'Innloggingslenke til Min side', implode("\n", [
-            'Hei!',
+        if ($rad) { sprak((string)$rad['sprak']); }          // e-mail na língua do cliente
+        send_epost($epost, t('ep.inn.emne'), implode("\n", [
+            t('ep.hei'),
             '',
-            'Klikk på lenken for å logge inn på Min side hos Digital Solutions:',
+            t('ep.inn.klikk'),
             $lenke,
             '',
-            'Lenken virker i ' . TOKEN_MINUTTER . ' minutter og kan brukes én gang.',
-            'Har du ikke bedt om denne e-posten, kan du se bort fra den.',
+            t('ep.inn.gyldig', TOKEN_MINUTTER),
+            t('ep.inn.ignorer'),
             '',
-            'Vennlig hilsen',
+            t('ep.hilsen'),
             'Digital Solutions · dsnorge.com',
         ]));
     }
+    sprak($sideSprak);                                        // a tela segue na língua escolhida
     side_logg_inn($svar);
 }
 
@@ -157,10 +180,13 @@ function opprett_fra_bestilling(string $epost): ?int
         return null;
     }
     if (!$b) { return null; }
+    $forrige = sprak();
+    sprak(bestilling_sprak($b));                // textos-padrão (botão etc.) já na língua do cliente
     $inn = innhold_fra_bestilling($b);
+    sprak($forrige);
     $slug = ledig_slug(($b['subdominio'] ?? '') !== '' ? $b['subdominio'] : $b['empresa']);
-    q('INSERT INTO kunder (opprettet, epost, bestilling_ref, slug, modell, utkast) VALUES (NOW(), ?, ?, ?, ?, ?)',
-        [$epost, $b['ref'], $slug, $b['modelo'], json_skriv($inn)]);
+    q('INSERT INTO kunder (opprettet, epost, bestilling_ref, slug, modell, sprak, utkast) VALUES (NOW(), ?, ?, ?, ?, ?, ?)',
+        [$epost, $b['ref'], $slug, $b['modelo'], $inn['sprak'], json_skriv($inn)]);
     $id = (int)db()->lastInsertId();
 
     // Fotos enviadas no pedido viram galeria (o cliente escolhe logo e foto de topo)
@@ -177,16 +203,29 @@ function opprett_fra_bestilling(string $epost): ?int
     return $id;
 }
 
+/** Brasil → português; Noruega → norueguês; outro país → a língua do site no pedido (ou inglês). */
+function bestilling_sprak(array $b): string
+{
+    $land = (string)($b['land'] ?? 'NO');
+    if ($land === 'BR') { return 'pt'; }
+    if ($land === 'NO') { return 'no'; }
+    $idioma = (string)($b['idioma'] ?? '');
+    return in_array($idioma, ['pt', 'en', 'es'], true) ? $idioma : 'en';
+}
+
 function side_bekreft_inn(): void
 {
     // A entrada só acontece com um clique (POST): leitores de e-mail que
     // abrem os links sozinhos não gastam o código.
     $t = (string)($_GET['t'] ?? '');
-    if (!preg_match('/^[a-f0-9]{64}$/', $t)) { flash('Lenken er ugyldig.', 'feil'); videre('/'); }
-    ramme('Logg inn', '<div class="boks smal-boks"><h1>Logg inn</h1><p class="dempet">Klikk for å fortsette til Min side.</p>'
+    if (!preg_match('/^[a-f0-9]{64}$/', $t)) { flash(t('lenke.ugyldig'), 'feil'); videre('/'); }
+    // A língua do e-mail (= a do cliente) também na tela de confirmação.
+    $rad = q('SELECT k.sprak FROM innlogging i JOIN kunder k ON k.epost = i.epost WHERE i.token_hash = ?', [hash('sha256', $t)])->fetch();
+    if ($rad) { sprak((string)$rad['sprak']); }
+    ramme(t('inn.tittel'), '<div class="boks smal-boks"><h1>' . th('inn.tittel') . '</h1><p class="dempet">' . th('inn.bekreft') . '</p>'
         . '<form method="post" action="/inn" class="skjema">' . csrf_felt()
         . '<input type="hidden" name="t" value="' . e($t) . '">'
-        . '<button class="knapp" type="submit">Logg inn</button></form></div>');
+        . '<button class="knapp" type="submit">' . th('inn.tittel') . '</button></form></div>');
 }
 
 function handling_logg_inn(): void
@@ -196,26 +235,28 @@ function handling_logg_inn(): void
         ? q('SELECT * FROM innlogging WHERE token_hash = ? AND brukt IS NULL AND utloper > NOW()', [hash('sha256', $t)])->fetch()
         : false;
     if (!$rad) {
-        flash('Lenken er utløpt eller allerede brukt. Be om en ny nedenfor.', 'feil');
+        flash(t('lenke.utlopt'), 'feil');
         videre('/');
     }
     q('UPDATE innlogging SET brukt = NOW() WHERE token_hash = ?', [$rad['token_hash']]);
+    $ks = q('SELECT sprak FROM kunder WHERE epost = ?', [$rad['epost']])->fetch();
+    if ($ks) { sprak((string)$ks['sprak']); }
     session_regenerate_id(true);
-    $_SESSION = ['csrf' => bin2hex(random_bytes(32)), 'epost' => $rad['epost']];
+    $_SESSION = ['csrf' => bin2hex(random_bytes(32)), 'epost' => $rad['epost'], 'sprak' => sprak()];
     q('UPDATE kunder SET sist_innlogget = NOW() WHERE epost = ?', [$rad['epost']]);
     videre(er_admin($rad['epost']) ? '/admin' : '/');
 }
 
 function handling_logg_ut(): void
 {
-    $_SESSION = [];
+    $_SESSION = ['sprak' => sprak()];
     session_regenerate_id(true);
     videre('/');
 }
 
 function utlogging(): string
 {
-    return '<form method="post" action="/logg-ut" class="inline">' . csrf_felt() . '<button class="lenkeknapp" type="submit">Logg ut</button></form>';
+    return '<form method="post" action="/logg-ut" class="inline">' . csrf_felt() . '<button class="lenkeknapp" type="submit">' . th('utlogg') . '</button></form>';
 }
 
 /* ═══ Editor ═════════════════════════════════════════════════ */
@@ -223,16 +264,16 @@ function utlogging(): string
 function status_tekst(array $k): array
 {
     return match ($k['status']) {
-        'aktiv'  => ['Publisert', 'ok', 'Siden din er på nett. Endringer blir synlige når du trykker «Publiser endringer».'],
-        'venter' => ['Venter på aktivering', 'vent', 'Takk! Siden blir aktivert av oss, normalt innen én virkedag. Du får e-post når den er på nett. Du kan fortsatt gjøre endringer.'],
-        'av'     => ['Stengt', 'feil', 'Siden er ikke på nett. Ta kontakt med oss på ' . DESTINO . '.'],
-        default  => ['Ikke publisert', 'info', 'Fyll inn, se forhåndsvisning og trykk «Publiser» når du er fornøyd.'],
+        'aktiv'  => [t('st.aktiv'), 'ok', t('st.aktiv.t')],
+        'venter' => [t('st.venter'), 'vent', t('st.venter.t')],
+        'av'     => [t('st.av'), 'feil', t('st.av.t', DESTINO)],
+        default  => [t('st.utkast'), 'info', t('st.utkast.t')],
     };
 }
 
 function side_editor(array $k): void
 {
-    $m   = MODELLER[$k['modell']];
+    $m   = modell($k['modell']);
     $inn = array_merge(tomt_innhold($k['modell']), json_les($k['utkast']));
     [$stNavn, $stType, $stTekst] = status_tekst($k);
     $f = flash();
@@ -243,7 +284,7 @@ function side_editor(array $k): void
     if ($erAdmin) {
         $h .= '<p class="admin-stripe">Du redigerer som administrator: <strong>' . e($k['epost']) . '</strong> · <a href="/admin">Tilbake til admin</a></p>';
     }
-    $h .= '<div class="hode-rad"><div><h1>' . e($inn['firmanavn'] ?: 'Din landingsside') . '</h1>'
+    $h .= '<div class="hode-rad"><div><h1>' . e($inn['firmanavn'] ?: t('ed.din')) . '</h1>'
         . '<p class="adresse">' . ($k['status'] === 'aktiv'
             ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($adresse) . ' ↗</a>'
             : e($adresse)) . ' · ' . e($m['navn']) . '</p></div>'
@@ -254,28 +295,34 @@ function side_editor(array $k): void
     $h .= '<form method="post" action="/lagre" enctype="multipart/form-data" class="editor">' . csrf_felt();
 
     /* Aparência */
-    $h .= '<fieldset class="del"><legend>Utseende</legend>';
-    $h .= '<p class="feltnavn">Oppsett</p><div class="valg-rutenett valg-2">';
-    foreach (LAYOUTER as $id => $l) {
+    $h .= '<fieldset class="del"><legend>' . th('ed.utseende') . '</legend>';
+    $h .= '<label class="felt"><span>' . th('ed.sprak') . '</span><select name="sprak">';
+    foreach (SPRAK as $kode => $navn) {
+        $h .= '<option value="' . e($kode) . '" lang="' . e(HTML_LANG[$kode]) . '"' . (($k['sprak'] ?? 'no') === $kode ? ' selected' : '') . '>' . e($navn) . '</option>';
+    }
+    $h .= '</select><small>' . th('ed.sprak.h') . '</small></label>';
+    $h .= '<p class="feltnavn">' . th('ed.oppsett') . '</p><div class="valg-rutenett valg-2">';
+    foreach (array_keys(LAYOUTER) as $id) {
+        $l = layout_navn($id);
         $h .= '<label class="valg"><input type="radio" name="layout" value="' . e($id) . '"' . ($k['layout'] === $id ? ' checked' : '') . '>'
             . '<span class="valg-kort"><span class="skisse skisse-' . e($id) . '" aria-hidden="true"><i></i><i></i><i></i></span>'
             . '<strong>' . e($l['navn']) . '</strong><small>' . e($l['tekst']) . '</small></span></label>';
     }
-    $h .= '</div><p class="feltnavn">Fargetema</p><div class="valg-rutenett valg-3">';
+    $h .= '</div><p class="feltnavn">' . th('ed.tema') . '</p><div class="valg-rutenett valg-3">';
     foreach (TEMAER as $id => $t) {
         $h .= '<label class="valg"><input type="radio" name="tema" value="' . e($id) . '"' . ($k['tema'] === $id ? ' checked' : '') . '>'
             . '<span class="valg-kort tema-kort" style="background:' . e($t['bg']) . ';color:' . e($t['tekst']) . ';border-color:' . e($t['linje']) . '">'
             . '<span class="prove"><b style="background:' . e($t['aksent']) . '"></b><b style="background:' . e($t['aksent_mork']) . '"></b><b style="background:' . e($t['flate']) . ';border:1px solid ' . e($t['linje']) . '"></b></span>'
-            . '<strong class="' . ($t['overskrift'] === 'serif' ? 'serif' : '') . '">' . e($t['navn']) . '</strong></span></label>';
+            . '<strong class="' . ($t['overskrift'] === 'serif' ? 'serif' : '') . '">' . e(tema_navn($id)) . '</strong></span></label>';
     }
     $h .= '</div></fieldset>';
 
     /* Textos */
-    $h .= '<fieldset class="del"><legend>Om bedriften</legend>'
-        . felt('firmanavn', 'Bedriftens navn', $inn['firmanavn'], 80, true)
-        . felt('slagord', 'Slagord', $inn['slagord'], 120, false, 'Én kort setning, f.eks. «Din lokale rørlegger i Larvik siden 1998».')
-        . tekstfelt('intro', 'Kort introduksjon', $inn['intro'], 600, 4, 'Vises øverst. 2–3 setninger om hva dere gjør og for hvem.')
-        . tekstfelt('om', 'Om oss', $inn['om'], 1500, 6, 'Historie, erfaring, hvem som jobber der. Kan stå tomt.')
+    $h .= '<fieldset class="del"><legend>' . th('ed.om') . '</legend>'
+        . felt('firmanavn', t('f.firmanavn'), $inn['firmanavn'], 80, true)
+        . felt('slagord', t('f.slagord'), $inn['slagord'], 120, false, t('f.slagord.h'))
+        . tekstfelt('intro', t('f.intro'), $inn['intro'], 600, 4, t('f.intro.h'))
+        . tekstfelt('om', t('f.om'), $inn['om'], 1500, 6, t('f.om.h'))
         . '</fieldset>';
 
     /* Lista (serviços / cardápio / tratamentos) */
@@ -288,69 +335,69 @@ function side_editor(array $k): void
         $ny = $i >= count($rader);
         $eks = $m['eksempel'];
         $h .= '<div class="liste-rad' . ($ny ? ' ny' : '') . '">'
-            . '<label class="felt"><span>Navn</span><input name="liste_navn[' . $i . ']" value="' . e($r['navn']) . '" maxlength="80"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[0]) . '"' : '') . '></label>'
-            . '<label class="felt"><span>Beskrivelse</span><input name="liste_tekst[' . $i . ']" value="' . e($r['tekst']) . '" maxlength="240"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[1]) . '"' : '') . '></label>'
-            . '<label class="felt felt-pris"><span>Pris</span><input name="liste_pris[' . $i . ']" value="' . e($r['pris']) . '" maxlength="40"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[2]) . '"' : '') . '></label>'
-            . ($ny ? '' : '<label class="slett"><input type="checkbox" name="liste_slett[' . $i . ']" value="1"> Fjern</label>')
+            . '<label class="felt"><span>' . th('l.navn') . '</span><input name="liste_navn[' . $i . ']" value="' . e($r['navn']) . '" maxlength="80"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[0]) . '"' : '') . '></label>'
+            . '<label class="felt"><span>' . th('l.tekst') . '</span><input name="liste_tekst[' . $i . ']" value="' . e($r['tekst']) . '" maxlength="240"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[1]) . '"' : '') . '></label>'
+            . '<label class="felt felt-pris"><span>' . th('l.pris') . '</span><input name="liste_pris[' . $i . ']" value="' . e($r['pris']) . '" maxlength="40"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[2]) . '"' : '') . '></label>'
+            . ($ny ? '' : '<label class="slett"><input type="checkbox" name="liste_slett[' . $i . ']" value="1"> ' . th('fjern') . '</label>')
             . '</div>';
     }
-    $h .= '</div><p class="hjelp">Trenger du flere linjer? Trykk «Lagre», så kommer det nye tomme linjer (maks ' . MAKS_LISTE . ').</p></fieldset>';
+    $h .= '</div><p class="hjelp">' . th('l.flere', th('k.lagre'), MAKS_LISTE) . '</p></fieldset>';
 
     $h .= '<fieldset class="del"><legend>' . e($m['info_tittel']) . '</legend>'
         . tekstfelt('info', $m['info_tittel'], $inn['info'], 600, 3, $m['info_hint'])
         . '</fieldset>';
 
     /* Contato */
-    $h .= '<fieldset class="del"><legend>Kontakt og åpningstider</legend><div class="to-kol">'
-        . felt('telefon', 'Telefon', $inn['telefon'], 40, false, '', 'tel')
-        . felt('epost', 'E-post på siden', $inn['epost'], 180, false, '', 'email')
+    $h .= '<fieldset class="del"><legend>' . th('ed.kontakt') . '</legend><div class="to-kol">'
+        . felt('telefon', t('f.telefon'), $inn['telefon'], 40, false, '', 'tel')
+        . felt('epost', t('f.epost'), $inn['epost'], 180, false, '', 'email')
         . '</div>'
-        . felt('adresse', 'Adresse', $inn['adresse'], 200, false, 'Gir kartlenke på siden. Kan stå tomt.')
-        . tekstfelt('apningstider', 'Åpningstider', $inn['apningstider'], 600, 4, "Én linje per dag, f.eks.\nMan–fre 08–16\nLør 10–14")
+        . felt('adresse', t('f.adresse'), $inn['adresse'], 200, false, t('f.adresse.h'))
+        . tekstfelt('apningstider', t('f.tider'), $inn['apningstider'], 600, 4, t('f.tider.h'))
         . '</fieldset>';
 
-    $h .= '<fieldset class="del"><legend>Hovedknapp og sosiale medier</legend><div class="to-kol">'
-        . felt('knapp_tekst', 'Tekst på knappen', $inn['knapp_tekst'], 40, false, 'F.eks. «' . $m['knapp'] . '».')
-        . felt('knapp_lenke', 'Lenke for knappen', $inn['knapp_lenke'], 300, false, 'Tomt = knappen ringer telefonnummeret ditt.', 'url')
-        . felt('facebook', 'Facebook-side', $inn['facebook'], 300, false, '', 'url')
-        . felt('instagram', 'Instagram-profil', $inn['instagram'], 300, false, '', 'url')
+    $h .= '<fieldset class="del"><legend>' . th('ed.knapp') . '</legend><div class="to-kol">'
+        . felt('knapp_tekst', t('f.knapp'), $inn['knapp_tekst'], 40, false, t('f.knapp.h', $m['knapp']))
+        . felt('knapp_lenke', t('f.lenke'), $inn['knapp_lenke'], 300, false, t('f.lenke.h'), 'url')
+        . felt('facebook', t('f.facebook'), $inn['facebook'], 300, false, '', 'url')
+        . felt('instagram', t('f.instagram'), $inn['instagram'], 300, false, '', 'url')
         . '</div></fieldset>';
 
     /* Imagens */
-    $h .= '<fieldset class="del"><legend>Bilder</legend>'
-        . '<p class="hjelp">JPG, PNG eller WebP, maks 15 MB per bilde. Vi gjør bildene mindre automatisk, så siden laster raskt.</p>'
+    $h .= '<fieldset class="del"><legend>' . th('ed.bilder') . '</legend>'
+        . '<p class="hjelp">' . th('b.hjelp') . '</p>'
         . '<div class="to-kol">'
-        . bildefelt('logo', 'Logo', $inn['logo'], 'Helst PNG med gjennomsiktig bakgrunn.')
-        . bildefelt('toppbilde', 'Toppbilde', $inn['toppbilde'], 'Et bredt bilde av arbeidet, lokalet eller maten.')
+        . bildefelt('logo', t('b.logo'), $inn['logo'], t('b.logo.h'))
+        . bildefelt('toppbilde', t('b.topp'), $inn['toppbilde'], t('b.topp.h'))
         . '</div>';
-    $h .= '<p class="feltnavn">Bildegalleri (maks ' . MAKS_GALLERI . ')</p>';
+    $h .= '<p class="feltnavn">' . th('b.galleri', MAKS_GALLERI) . '</p>';
     if ($inn['galleri']) {
         $h .= '<ul class="galleri-admin">';
         foreach ($inn['galleri'] as $i => $g) {
-            $h .= '<li><img src="' . e(bilde_url($g)) . '" alt=""><label class="felt"><span class="sr">Bilde ' . ($i + 1) . '</span><select name="galleri_valg[' . $i . ']">'
-                . '<option value="behold">Behold i galleriet</option>'
-                . '<option value="topp">Bruk som toppbilde</option>'
-                . '<option value="logo">Bruk som logo</option>'
-                . '<option value="slett">Slett</option>'
+            $h .= '<li><img src="' . e(bilde_url($g)) . '" alt=""><label class="felt"><span class="sr">' . th('b.nr', $i + 1) . '</span><select name="galleri_valg[' . $i . ']">'
+                . '<option value="behold">' . th('g.behold') . '</option>'
+                . '<option value="topp">' . th('g.topp') . '</option>'
+                . '<option value="logo">' . th('g.logo') . '</option>'
+                . '<option value="slett">' . th('g.slett') . '</option>'
                 . '</select></label></li>';
         }
         $h .= '</ul>';
     }
     if (count($inn['galleri']) < MAKS_GALLERI) {
-        $h .= '<label class="felt"><span>Legg til bilder i galleriet</span><input type="file" name="galleri_ny[]" accept="image/jpeg,image/png,image/webp" multiple></label>';
+        $h .= '<label class="felt"><span>' . th('b.legg_til') . '</span><input type="file" name="galleri_ny[]" accept="image/jpeg,image/png,image/webp" multiple></label>';
     }
     $h .= '</fieldset>';
 
     /* Botões */
     $h .= '<div class="handlinger">'
-        . '<button class="knapp knapp--strek" type="submit" name="handling" value="lagre">Lagre</button>'
-        . '<button class="knapp knapp--strek" type="submit" name="handling" value="forhand">Lagre og forhåndsvis</button>'
-        . '<button class="knapp" type="submit" name="handling" value="publiser">' . ($k['status'] === 'aktiv' ? 'Publiser endringer' : 'Publiser') . '</button>'
+        . '<button class="knapp knapp--strek" type="submit" name="handling" value="lagre">' . th('k.lagre') . '</button>'
+        . '<button class="knapp knapp--strek" type="submit" name="handling" value="forhand">' . th('k.forhand') . '</button>'
+        . '<button class="knapp" type="submit" name="handling" value="publiser">' . th($k['status'] === 'aktiv' ? 'k.publiser2' : 'k.publiser') . '</button>'
         . '</div>';
     $h .= '</form>';
 
-    $h .= '<div class="bunnlenker"><a href="https://billing.stripe.com/p/login/8x200ka6v07Y28SaYm73G00" target="_blank" rel="noopener">Abonnement og kvitteringer ↗</a>'
-        . ' · <a href="https://dsnorge.com/vilkar.html" target="_blank" rel="noopener">Vilkår</a> · ' . utlogging() . '</div>';
+    $h .= '<div class="bunnlenker"><a href="https://billing.stripe.com/p/login/8x200ka6v07Y28SaYm73G00" target="_blank" rel="noopener">' . th('bunn.abo') . ' ↗</a>'
+        . ' · <a href="https://dsnorge.com/vilkar.html?lang=' . e(sprak()) . '" target="_blank" rel="noopener">' . th('bunn.vilkar') . '</a> · ' . utlogging() . '</div>';
 
     ramme('Min side', $h, true);
 }
@@ -374,9 +421,9 @@ function bildefelt(string $navn, string $etikett, string $fil, string $hjelp): s
     $h = '<div class="bildefelt"><p class="feltnavn">' . e($etikett) . '</p>';
     if ($fil !== '') {
         $h .= '<img class="miniatyr" src="' . e(bilde_url($fil)) . '" alt="">'
-            . '<label class="slett"><input type="checkbox" name="fjern_' . e($navn) . '" value="1"> Fjern</label>';
+            . '<label class="slett"><input type="checkbox" name="fjern_' . e($navn) . '" value="1"> ' . th('fjern') . '</label>';
     }
-    $h .= '<label class="felt"><span>' . ($fil !== '' ? 'Bytt bilde' : 'Last opp') . '</span>'
+    $h .= '<label class="felt"><span>' . th($fil !== '' ? 'b.bytt' : 'b.last_opp') . '</span>'
         . '<input type="file" name="' . e($navn) . '_ny" accept="image/jpeg,image/png,image/webp"></label>'
         . '<small>' . e($hjelp) . '</small></div>';
     return $h;
@@ -433,41 +480,50 @@ function handling_lagre(): void
 
     $layout = isset(LAYOUTER[$_POST['layout'] ?? '']) ? $_POST['layout'] : $k['layout'];
     $tema   = isset(TEMAER[$_POST['tema'] ?? '']) ? $_POST['tema'] : $k['tema'];
-    q('UPDATE kunder SET utkast = ?, layout = ?, tema = ?, sist_lagret = NOW() WHERE id = ?', [json_skriv($inn), $layout, $tema, $id]);
+    $gml    = (string)($k['sprak'] ?? 'no');
+    $nytt   = isset(SPRAK[$_POST['sprak'] ?? '']) ? (string)$_POST['sprak'] : $gml;
+    if ($nytt !== $gml) {
+        // Texto do botão ainda é o padrão da língua antiga? Troca pelo padrão da nova.
+        $standard = modell($k['modell'])['knapp'];
+        sprak($nytt);
+        if ($inn['knapp_tekst'] === '' || $inn['knapp_tekst'] === $standard) { $inn['knapp_tekst'] = modell($k['modell'])['knapp']; }
+    }
+    $inn['sprak'] = $nytt;
+    q('UPDATE kunder SET utkast = ?, layout = ?, tema = ?, sprak = ?, sist_lagret = NOW() WHERE id = ?', [json_skriv($inn), $layout, $tema, $nytt, $id]);
 
-    $varsel = $feil ? " $feil bilde(r) kunne ikke brukes (bare JPG, PNG eller WebP, maks 15 MB, maks " . MAKS_GALLERI . ' i galleriet).' : '';
+    $varsel = $feil ? t('fl.bildefeil', $feil, MAKS_GALLERI) : '';
 
     $handling = (string)($_POST['handling'] ?? 'lagre');
     if ($handling === 'forhand') {
-        if ($feil) { flash('Lagret.' . $varsel, 'feil'); }
+        if ($feil) { flash(t('fl.lagret') . $varsel, 'feil'); }
         videre('/forhand');
     }
     if ($handling === 'publiser') {
         $k = q('SELECT * FROM kunder WHERE id = ?', [$id])->fetch();
         publiser($k, $inn, $varsel);
     }
-    flash('Lagret.' . $varsel, $feil ? 'feil' : 'ok');
+    flash(t('fl.lagret') . $varsel, $feil ? 'feil' : 'ok');
     videre('/');
 }
 
 function publiser(array $k, array $inn, string $varsel): never
 {
     $mangler = [];
-    if (trim($inn['firmanavn']) === '') { $mangler[] = 'bedriftens navn'; }
-    if (trim($inn['telefon']) === '' && trim($inn['epost']) === '') { $mangler[] = 'telefon eller e-post'; }
+    if (trim($inn['firmanavn']) === '') { $mangler[] = t('fl.m.navn'); }
+    if (trim($inn['telefon']) === '' && trim($inn['epost']) === '') { $mangler[] = t('fl.m.kontakt'); }
     if ($mangler) {
-        flash('Lagret, men ikke publisert. Fyll inn: ' . implode(', ', $mangler) . '.', 'feil');
+        flash(t('fl.mangler', implode(', ', $mangler)), 'feil');
         videre('/');
     }
     if ($k['status'] === 'av') {
-        flash('Lagret. Siden er stengt og kan ikke publiseres nå. Kontakt ' . DESTINO . '.', 'feil');
+        flash(t('fl.stengt', DESTINO), 'feil');
         videre('/');
     }
     q('UPDATE kunder SET publisert = utkast, publisert_layout = layout, publisert_tema = tema, sist_publisert = NOW() WHERE id = ?', [$k['id']]);
     rydd_bilder((int)$k['id']);
 
     if ($k['status'] === 'aktiv') {
-        flash('Publisert! Endringene er nå på ' . side_adresse($k['slug']) . '.' . $varsel);
+        flash(t('fl.publisert', side_adresse($k['slug'])) . $varsel);
         videre('/');
     }
 
@@ -481,6 +537,7 @@ function publiser(array $k, array $inn, string $varsel): never
             'Bedrift:  ' . $inn['firmanavn'],
             'E-post:   ' . $k['epost'],
             'Bestilling: ' . ($k['bestilling_ref'] ?: '—'),
+            'Språk:    ' . (SPRAK[$k['sprak'] ?? 'no'] ?? '—'),
             'Adresse:  ' . side_url($k['slug']),
             '',
             'Gjør dette:',
@@ -490,13 +547,13 @@ function publiser(array $k, array $inn, string $varsel): never
             AUTO_AKTIVER ? '' : '3. Stripe → Abonnementet → avslutt prøveperioden nå (første trekk).',
         ]), $k['epost']);
         if (AUTO_AKTIVER) {
-            send_epost($k['epost'], 'Landingssiden din er på nett', velkommen_tekst($k, $inn));
+            send_epost($k['epost'], t('ep.vel.emne'), velkommen_tekst($k, $inn));
         }
     }
     if (AUTO_AKTIVER) {
-        flash('Gratulerer! Siden din er nå på nett: ' . side_adresse($k['slug']) . '.' . $varsel);
+        flash(t('fl.gratulerer', side_adresse($k['slug'])) . $varsel);
     } else {
-        flash('Takk! Siden er sendt til aktivering. Du får e-post når den er på nett, normalt innen én virkedag.' . $varsel);
+        flash(t('fl.sendt') . $varsel);
     }
     videre('/');
 }
@@ -504,15 +561,15 @@ function publiser(array $k, array $inn, string $varsel): never
 function velkommen_tekst(array $k, array $inn): string
 {
     return implode("\n", [
-        'Hei!',
+        t('ep.hei'),
         '',
-        'Landingssiden til ' . ($inn['firmanavn'] ?? '') . ' er nå på nett:',
+        t('ep.vel.p1', (string)($inn['firmanavn'] ?? '')),
         side_url($k['slug']),
         '',
-        'Du kan endre tekst, bilder og farger når du vil på ' . minside_url('/') . '.',
-        'Del gjerne lenken på Facebook, Instagram og Google-profilen din.',
+        t('ep.vel.p2', minside_url('/')),
+        t('ep.vel.p3'),
         '',
-        'Vennlig hilsen',
+        t('ep.hilsen'),
         'Digital Solutions · dsnorge.com',
     ]);
 }
@@ -531,9 +588,10 @@ function side_forhand(): void
 function side_admin(): void
 {
     krev_admin();
+    sprak('no');                                // o painel fica em norueguês
     unset($_SESSION['kunde_id']);
     $f = flash();
-    $kunder = q('SELECT id, epost, bestilling_ref, slug, modell, status, sist_lagret, sist_publisert, sist_innlogget, nota, utkast FROM kunder ORDER BY FIELD(status, \'venter\', \'utkast\', \'aktiv\', \'av\'), id DESC')->fetchAll();
+    $kunder = q('SELECT id, epost, bestilling_ref, slug, modell, sprak, status, sist_lagret, sist_publisert, sist_innlogget, nota, utkast FROM kunder ORDER BY FIELD(status, \'venter\', \'utkast\', \'aktiv\', \'av\'), id DESC')->fetchAll();
 
     $h = '<div class="hode-rad"><h1>Admin</h1>' . utlogging() . '</div>';
     if ($f) { $h .= '<p class="melding ' . e($f['type']) . '">' . e($f['tekst']) . '</p>'; }
@@ -550,7 +608,7 @@ function side_admin(): void
         $inn = json_les($k['utkast']);
         [$stNavn, $stType] = status_tekst($k);
         $h .= '<tr><td><strong>' . e($inn['firmanavn'] ?? '—') . '</strong><br><small>' . e($k['epost']) . '<br>'
-            . e(MODELLER[$k['modell']]['navn']) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
+            . e(MODELLER[$k['modell']]['navn']) . ' · ' . e(strtoupper((string)$k['sprak'])) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
             . ($k['nota'] ? '<br><small class="nota">' . e($k['nota']) . '</small>' : '') . '</td>'
             . '<td><small>' . e(SIDE_HOST) . '/</small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug'])) . '</td>'
             . '<td><span class="merkelapp ' . e($stType) . '">' . e($stNavn) . '</span></td>'
@@ -578,12 +636,12 @@ function side_admin(): void
 
     /* Pedidos sem conta ainda */
     try {
-        $apne = q('SELECT b.ref, b.criado_em, b.empresa, b.email, b.modelo FROM bestillinger b LEFT JOIN kunder k ON LOWER(k.epost) = LOWER(b.email) WHERE k.id IS NULL AND b.situacao <> \'cancelado\' ORDER BY b.id DESC LIMIT 50')->fetchAll();
+        $apne = q('SELECT b.ref, b.criado_em, b.empresa, b.land, b.email, b.modelo FROM bestillinger b LEFT JOIN kunder k ON LOWER(k.epost) = LOWER(b.email) WHERE k.id IS NULL AND b.situacao <> \'cancelado\' ORDER BY b.id DESC LIMIT 50')->fetchAll();
     } catch (Throwable $e) { $apne = []; }
     if ($apne) {
         $h .= '<h2>Bestillinger uten Min side ennå</h2><p class="dempet">Kontoen lages automatisk første gang kunden logger inn med samme e-post.</p><ul class="enkel-liste">';
         foreach ($apne as $b) {
-            $h .= '<li><strong>' . e($b['ref']) . '</strong> · ' . e($b['empresa']) . ' · ' . e($b['email']) . ' · ' . e(MODELLER[$b['modelo']]['navn'] ?? $b['modelo']) . ' · <small>' . e(kort_dato($b['criado_em'])) . '</small></li>';
+            $h .= '<li><strong>' . e($b['ref']) . '</strong> · ' . e($b['empresa']) . ' (' . e($b['land'] ?? 'NO') . ') · ' . e($b['email']) . ' · ' . e(MODELLER[$b['modelo']]['navn'] ?? $b['modelo']) . ' · <small>' . e(kort_dato($b['criado_em'])) . '</small></li>';
         }
         $h .= '</ul>';
     }
@@ -595,6 +653,8 @@ function side_admin(): void
         . felt('firmanavn', 'Bedriftens navn', '', 80, true)
         . '<label class="felt"><span>Modell</span><select name="modell">';
     foreach (MODELLER as $id => $m) { $h .= '<option value="' . e($id) . '">' . e($m['navn']) . '</option>'; }
+    $h .= '</select></label><label class="felt"><span>Språk</span><select name="sprak">';
+    foreach (SPRAK as $kode => $navn) { $h .= '<option value="' . e($kode) . '">' . e($navn) . '</option>'; }
     $h .= '</select></label>'
         . felt('slug', 'Ønsket adresse (valgfritt)', '', 40, false, 'Tomt = lages av navnet.')
         . '<div><button class="knapp" type="submit">Opprett</button></div></form>';
@@ -631,7 +691,9 @@ function handling_admin(): void
             }
             q("UPDATE kunder SET status = 'aktiv' WHERE id = ?", [$id]);
             $inn = json_les($k['utkast']);
-            send_epost($k['epost'], 'Landingssiden din er på nett', velkommen_tekst($k, $inn));
+            sprak((string)($k['sprak'] ?? 'no'));
+            send_epost($k['epost'], t('ep.vel.emne'), velkommen_tekst($k, $inn));
+            sprak('no');
             flash('Aktivert: ' . side_adresse($k['slug']) . '. Husk å avslutte prøveperioden i Stripe.');
             break;
 
@@ -660,14 +722,17 @@ function handling_admin(): void
             $epost = strtolower(trim((string)($_POST['epost'] ?? '')));
             $navn = mb_substr(trim((string)($_POST['firmanavn'] ?? '')), 0, 80);
             $modell = isset(MODELLER[$_POST['modell'] ?? '']) ? $_POST['modell'] : 'handverk';
+            $nySprak = isset(SPRAK[$_POST['sprak'] ?? '']) ? (string)$_POST['sprak'] : 'no';
             if (!filter_var($epost, FILTER_VALIDATE_EMAIL) || $navn === '') { flash('Fyll inn e-post og navn.', 'feil'); break; }
             if (q('SELECT id FROM kunder WHERE epost = ?', [$epost])->fetch()) { flash('Det finnes allerede en kunde med denne e-posten.', 'feil'); break; }
             $onsket = trim((string)($_POST['slug'] ?? ''));
             $slug = ledig_slug($onsket !== '' ? $onsket : $navn);
+            sprak($nySprak);
             $inn = tomt_innhold($modell);
+            sprak('no');
             $inn['firmanavn'] = $navn;
             $inn['epost'] = $epost;
-            q('INSERT INTO kunder (opprettet, epost, slug, modell, utkast) VALUES (NOW(), ?, ?, ?, ?)', [$epost, $slug, $modell, json_skriv($inn)]);
+            q('INSERT INTO kunder (opprettet, epost, slug, modell, sprak, utkast) VALUES (NOW(), ?, ?, ?, ?, ?)', [$epost, $slug, $modell, $nySprak, json_skriv($inn)]);
             flash('Opprettet: ' . $navn . ' (' . side_adresse($slug) . '). Kunden logger inn på ' . MINSIDE_HOST . ' med ' . $epost . '.');
             break;
     }
@@ -703,15 +768,15 @@ function systemsjekk(): string
 function ikke_funnet(): never
 {
     http_response_code(404);
-    ramme('Ikke funnet', '<div class="boks"><h1>Siden finnes ikke</h1><p><a href="/">Til Min side</a></p></div>');
+    ramme(t('nf.tittel'), '<div class="boks"><h1>' . th('nf.h') . '</h1><p><a href="/">' . th('nf.lenke') . '</a></p></div>');
     exit;
 }
 
 function ramme(string $tittel, string $innhold, bool $bred = false): void
 {
-    echo '<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
+    echo '<!doctype html><html lang="' . e(HTML_LANG[sprak()]) . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
         . '<meta name="robots" content="noindex, nofollow"><title>' . e($tittel) . ' · Digital Solutions</title>'
-        . '<link rel="stylesheet" href="/assets/minside.css?v=1"></head><body>'
+        . '<link rel="stylesheet" href="/assets/minside.css?v=2"></head><body>'
         . '<header class="ms-topp"><div class="ms-ramme"><a class="ms-merke" href="/">Min side</a><span class="ms-av">Digital Løsninger · dsnorge.com</span></div></header>'
         . '<main class="ms-ramme' . ($bred ? '' : ' ms-smal') . '">' . $innhold . '</main></body></html>';
 }
