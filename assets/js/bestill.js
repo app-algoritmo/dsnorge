@@ -64,6 +64,10 @@ const MAX_TOTAL = 40 * 1024 * 1024;   // soma dos arquivos
 
     const dados = new FormData(form);
     dados.append("idioma", window.dsI18n?.atual || "no");
+    // Campanha (links com ?utm_source=...): só para saber de onde vêm os pedidos. Nada fica guardado no navegador.
+    const q = new URLSearchParams(location.search);
+    const utm = ["utm_source", "utm_medium", "utm_campaign"].map(k => (q.get(k) || "").trim()).filter(Boolean).join(" / ");
+    if (utm) dados.append("utm", utm.slice(0, 150));
     botao.disabled = true;
     mostrar(msg("enviando"), false);
 

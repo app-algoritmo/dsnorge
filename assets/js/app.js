@@ -155,5 +155,18 @@ window.dsI18n = i18n;
   }));
 })();
 
+/* ─── Campanhas: leva ?utm_... da página atual para os links do pedido ── */
+(() => {
+  const q = new URLSearchParams(location.search);
+  const utm = new URLSearchParams();
+  ["utm_source", "utm_medium", "utm_campaign"].forEach(k => { const v = q.get(k); if (v) utm.set(k, v.slice(0, 60)); });
+  if (![...utm.keys()].length) return;
+  document.querySelectorAll('a[href^="/bestill.html"]').forEach(a => {
+    const u = new URL(a.getAttribute("href"), location.origin);
+    utm.forEach((v, k) => u.searchParams.set(k, v));
+    a.setAttribute("href", u.pathname + u.search + u.hash);
+  });
+})();
+
 /* ─── Ano corrente no rodapé ──────────────────────────────── */
 document.querySelectorAll("[data-ano]").forEach(el => { el.textContent = new Date().getFullYear(); });

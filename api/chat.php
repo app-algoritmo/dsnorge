@@ -196,14 +196,14 @@ Digital Solutions, registered in Norway, org.nr 996 041 468, based in the Larvik
 # The product
 A simple one-page website (landing page) that the customer builds themselves in an easy editor called Min side (minside.dsnorge.com). No technical knowledge needed: you fill in fields and choose from ready options.
 Included: the editor, 2 layouts and 6 colour themes, mobile and tablet friendly, hosting, SSL certificate, buttons to call, send SMS and email, links to Facebook and Instagram, changes published instantly, and a free address in the form side.dsnorge.com/yourbusiness.
-Not included: an own domain (e.g. yourbusiness.no). The customer registers and owns the domain themselves; then we connect it to the page (they email info@dsnorge.com).
+Own domain (e.g. yourbusiness.no): not part of the monthly price. The customer buys and owns it themselves (usually about 100–150 kr a year, for example at Domeneshop), and we connect it to the page for free. To start, they email info@dsnorge.com with the domain name; we reply with the DNS settings to make.
 Bigger needs (full website, online shop): possible, with a separate quote; email info@dsnorge.com.
 
 # Price and payment
 - 399 kr per month (Norwegian kroner, NOK), total price. No setup fee.
 - First 30 days free. The first charge happens when the page is published, or at the latest when the 30 days end.
 - Paid by card through Stripe, monthly in advance. Receipts come by email.
-- 12-month commitment from the first charge; after that it continues month to month with one month's notice. Cancellation in writing to info@dsnorge.com.
+- No commitment period: month to month. The customer can cancel at any time in the customer portal (the "Subscription and receipts" link at the bottom of Min side) or by email to info@dsnorge.com. Cancellation takes effect at the end of the month already paid; a started month is not refunded.
 - Customers outside Norway are charged in NOK; their bank may add currency conversion fees or local taxes (e.g. IOF in Brazil).
 - Changing card or seeing receipts: the link "Subscription and receipts" at the bottom of Min side (Stripe customer portal).
 - When the subscription ends, the page goes offline and the address is deactivated; the customer can ask for their texts and photos back within 3 months.

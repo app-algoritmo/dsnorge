@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS bestillinger (
   facebook        VARCHAR(300)     NULL,
   instagram       VARCHAR(300)     NULL,
   arquivos        JSON             NULL,            -- nomes dos arquivos salvos fora do public_html
+  kilde           VARCHAR(20)      NULL,            -- como conheceu: facebook, instagram, google, flyer, anbefaling, annet
+  utm             VARCHAR(150)     NULL,            -- campanha (utm_source / utm_medium / utm_campaign)
   idioma          CHAR(5)      NOT NULL DEFAULT 'no',
   termos_versao   VARCHAR(20)  NOT NULL,            -- versão de /vilkar.html aceita
   ip_hash         CHAR(64)         NULL,

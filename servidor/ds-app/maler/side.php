@@ -26,7 +26,7 @@ function render_side(array $kunde, array $inn, string $layout, string $tema, boo
     $ekstern = str_starts_with($hovedLenke, 'http');
     $kart = $inn['adresse'] !== '' ? 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode($inn['adresse']) : '';
     $beskrivelse = mb_substr(trim(preg_replace('/\s+/u', ' ', $inn['slagord'] ?: $inn['intro']) ?? ''), 0, 160);
-    $url = side_url($kunde['slug']);
+    $url = kunde_url($kunde);
     $harListe = !empty($inn['liste']);
     $harGalleri = !empty($inn['galleri']);
     $harKontakt = $inn['telefon'] || $inn['epost'] || $inn['adresse'] || $inn['apningstider'];

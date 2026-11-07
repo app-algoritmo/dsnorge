@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS kunder (
   opprettet       DATETIME     NOT NULL,
   epost           VARCHAR(180) NOT NULL,             -- login do Min side
   bestilling_ref  VARCHAR(20)      NULL,             -- DS-000123 (pedido de origem)
-  slug            VARCHAR(40)  NOT NULL,             -- <slug>.dsnorge.com
+  slug            VARCHAR(40)  NOT NULL,             -- side.dsnorge.com/<slug>
+  domene          VARCHAR(100)     NULL DEFAULT NULL, -- domínio próprio do cliente (ex.: bedriften.no), sem www
   modell          ENUM('handverk','mat','velvaere') NOT NULL,
   layout          VARCHAR(10)  NOT NULL DEFAULT 'a',
   tema            VARCHAR(20)  NOT NULL DEFAULT 'babyblaa',
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS kunder (
   PRIMARY KEY (id),
   UNIQUE KEY uq_epost (epost),
   UNIQUE KEY uq_slug (slug),
+  UNIQUE KEY uk_kunder_domene (domene),
   KEY idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

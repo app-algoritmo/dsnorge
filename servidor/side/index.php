@@ -4,8 +4,9 @@
  *   minside.dsnorge.com  → área do cliente (Min side) e /admin
  *   side.dsnorge.com/<slug> → landingsside publicada do cliente
  *   <slug>.dsnorge.com   → idem (se um dia o endereço for criado na Domeneshop)
+ *   bedriften.no         → página do cliente com esse domínio próprio (kunder.domene)
  * Tudo o que não é arquivo (assets, m/) chega aqui pelo .htaccess.
- * DOC-WEB-MS-008 · v1.1.0
+ * DOC-WEB-MS-008 · v1.2.0 (domínio próprio)
  */
 declare(strict_types=1);
 
@@ -45,6 +46,17 @@ $suffiks = '.' . BASE_DOMENE;
 if (str_ends_with($host, $suffiks)) {
     $slug = substr($host, 0, -strlen($suffiks));
     vis_kundeside($slug);
+    exit;
+}
+
+// Domínio próprio de um cliente (ex.: bedriften.no), ligado em Webadresser na Domeneshop.
+try {
+    $rad = q('SELECT slug FROM kunder WHERE domene = ?', [$host])->fetch();
+} catch (Throwable $e) {
+    $rad = null;                               // coluna ainda não criada: segue para 404
+}
+if ($rad) {
+    vis_kundeside((string)$rad['slug']);
     exit;
 }
 

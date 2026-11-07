@@ -149,9 +149,9 @@ T = {
 
 # ─── Termos e condições (vilkar.html, página única) ─────────
 "vilk.eyebrow": (
-  "Legal document · effective from 6 November 2026",
-  "Vilkår · gjelder fra 6. november 2026",
-  "Documento legal · vigente desde el 6 de noviembre de 2026"),
+  "Legal document · effective from 7 November 2026",
+  "Vilkår · gjelder fra 7. november 2026",
+  "Documento legal · vigente desde el 7 de noviembre de 2026"),
 "vilk.titulo": (
   "Terms and conditions",
   "Vilkår",
@@ -265,21 +265,21 @@ T = {
   "Når kunden trykker «Publiser», blir siden publisert med en gang. Senere endringer publiserer kunden selv på samme måte. Vi kan ta ned en side som er publisert uten gyldig abonnement.",
   "Cuando el cliente hace clic en «Publiser», la página se publica al instante. Los cambios posteriores los publica el propio cliente de la misma forma. Podemos retirar una página publicada sin suscripción válida."),
 "vilk.b5t": (
-  "B5. Commitment period and termination",
-  "B5. Bindingstid og oppsigelse",
-  "B5. Permanencia y cancelación"),
+  'B5. Term and cancellation',
+  'B5. Varighet og oppsigelse',
+  'B5. Duración y cancelación'),
 "vilk.b5": (
-  "The subscription has a 12-month commitment period from the first charge. After that it runs month to month, with one month's notice. Notice of termination is given in writing to <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "Abonnementet har 12 måneders bindingstid fra første trekk. Deretter løper det måned for måned, med én måneds oppsigelse. Oppsigelse sendes skriftlig til <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "La suscripción tiene una permanencia de 12 meses desde el primer cobro. Después continúa mes a mes, con un mes de preaviso. La cancelación se comunica por escrito a <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+  'The subscription has no commitment period and runs month to month. The customer can cancel at any time, in the customer portal (the «Subscription and receipts» link in Min side) or in writing to <a href="mailto:info@dsnorge.com">info@dsnorge.com</a>. Cancellation takes effect at the end of the period already paid; a started month is not refunded.',
+  'Abonnementet har ingen bindingstid og løper måned for måned. Kunden kan si opp når som helst, i kundeportalen (lenken «Abonnement og kvitteringer» på Min side) eller skriftlig til <a href="mailto:info@dsnorge.com">info@dsnorge.com</a>. Oppsigelsen gjelder fra slutten av perioden som allerede er betalt; påbegynt måned refunderes ikke.',
+  'La suscripción no tiene permanencia y es mes a mes. El cliente puede cancelarla cuando quiera, en el portal del cliente (el enlace «Suscripción y recibos» de Min side) o por escrito a <a href="mailto:info@dsnorge.com">info@dsnorge.com</a>. La cancelación surte efecto al final del periodo ya pagado; el mes iniciado no se reembolsa.'),
 "vilk.b6t": (
   "B6. Domain",
   "B6. Domene",
   "B6. Dominio"),
 "vilk.b6": (
-  "Your own domain, for example <em>yourbusiness.no</em>, is not included in the price. If the customer wants their own domain, they register and own it, and we connect it to the page.",
-  "Eget domene, for eksempel <em>bedriften.no</em>, er ikke inkludert i prisen. Ønsker kunden eget domene, registrerer og eier kunden det selv, og vi kobler det til siden.",
-  "El dominio propio, por ejemplo <em>tuempresa.no</em>, no está incluido en el precio. Si el cliente quiere un dominio propio, lo registra y es su titular, y nosotros lo conectamos a la página."),
+  'An own domain, for example <em>yourbusiness.no</em>, is not part of the monthly price: the customer registers it, pays for it and owns it (usually about 100–150 kr a year). Digital Solutions connects the domain to the page at no extra cost once the customer has made the DNS settings we provide.',
+  'Eget domene, for eksempel <em>bedriften.no</em>, er ikke med i månedsprisen: kunden registrerer, betaler og eier domenet selv (vanligvis ca. 100–150 kr i året). Digital Solutions kobler domenet til siden uten ekstra kostnad når kunden har gjort DNS-innstillingene vi oppgir.',
+  'El dominio propio, por ejemplo <em>tuempresa.no</em>, no entra en el precio mensual: el cliente lo registra, lo paga y es su dueño (normalmente unos 100–150 kr al año). Digital Solutions conecta el dominio a la página sin coste adicional cuando el cliente haya hecho los ajustes de DNS que le indiquemos.'),
 "vilk.b7t": (
   "B7. Customer content and responsibility",
   "B7. Kundens innhold og ansvar",

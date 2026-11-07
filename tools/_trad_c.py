@@ -35,11 +35,9 @@ T = {
   "Monta tu landing page en pocos clics"),
 "lp.oferta.mes": ("/month, total price", "/mnd, totalpris", "/mes, precio final"),
 "lp.oferta.cond": (
-  "No setup fee. 30 days free. 12-month commitment. Own domain not included.",
-  "Ingen oppstartskostnad. 30 dager gratis. 12 måneders bindingstid. Eget domene er ikke inkludert.",
-  "Sin coste inicial. 30 días gratis. Permanencia de 12 meses. Dominio propio no incluido."),
-
-# Modelos
+  'No setup fee. 30 days free. No commitment. Your own domain connected for free.',
+  'Ingen oppstartskostnad. 30 dager gratis. Ingen bindingstid. Eget domene kobles til gratis.',
+  'Sin coste inicial. 30 días gratis. Sin permanencia. Tu propio dominio conectado gratis.'),
 "lp.mod.titulo": ("Choose the model for your business", "Velg modellen som passer bedriften din", "Elige el modelo para tu empresa"),
 "lp.mod.lead": (
   "Three ready-made models, all at the same price. You choose the layout and colours and add your own text and photos.",
@@ -96,22 +94,23 @@ T = {
   "Endre tekst, priser, åpningstider og bilder når du vil, og publiser med en gang",
   "Cambia textos, precios, horarios y fotos cuando quieras y publica al instante"),
 "lp.inc.i7": (
-  "Free address: side.dsnorge.com/yourbusiness",
-  "Gratis adresse: side.dsnorge.com/dinbedrift",
-  "Dirección gratis: side.dsnorge.com/tuempresa"),
-
-# Plano
+  'Free address side.dsnorge.com/yourbusiness, or your own domain connected for free',
+  'Gratis adresse side.dsnorge.com/dinbedrift, eller ditt eget domene koblet til gratis',
+  'Dirección gratis side.dsnorge.com/tuempresa, o tu propio dominio conectado gratis'),
 "lp.plano.rot": ("Landing page", "Landingsside", "Landing page"),
 "lp.preco.r1": ("<strong>Setup fee:</strong> 0 kr", "<strong>Oppstart:</strong> 0 kr", "<strong>Coste de creación:</strong> 0 kr"),
-"lp.preco.r2": ("<strong>Commitment:</strong> 12 months", "<strong>Bindingstid:</strong> 12 måneder", "<strong>Permanencia:</strong> 12 meses"),
+"lp.preco.r2": (
+  '<strong>Commitment:</strong> none',
+  '<strong>Bindingstid:</strong> ingen',
+  '<strong>Permanencia:</strong> ninguna'),
 "lp.preco.r3": (
-  "<strong>After that:</strong> month to month, one month’s notice",
-  "<strong>Deretter:</strong> løpende, med én måneds oppsigelse",
-  "<strong>Después:</strong> mes a mes, con un mes de preaviso"),
+  '<strong>Cancellation:</strong> any time, effective at the end of the paid month',
+  '<strong>Oppsigelse:</strong> når som helst, gjelder ut betalt måned',
+  '<strong>Cancelación:</strong> cuando quieras, válida hasta el final del mes pagado'),
 "lp.preco.r4": (
-  "<strong>Own domain:</strong> not included (free address on dsnorge.com)",
-  "<strong>Eget domene:</strong> ikke inkludert (gratis adresse på dsnorge.com)",
-  "<strong>Dominio propio:</strong> no incluido (dirección gratis en dsnorge.com)"),
+  '<strong>Own domain:</strong> you buy it (about 100–150 kr/year) and we connect it for free',
+  '<strong>Eget domene:</strong> du kjøper det (ca. 100–150 kr/år), vi kobler det til gratis',
+  '<strong>Dominio propio:</strong> lo compras tú (unos 100–150 kr/año) y lo conectamos gratis'),
 "lp.preco.r5": (
   "<strong>Free period:</strong> 30 days",
   "<strong>Gratisperiode:</strong> 30 dager",
@@ -150,11 +149,14 @@ T = {
 
 # Perguntas
 "lp.faq.titulo": ("Frequently asked questions", "Vanlige spørsmål", "Preguntas frecuentes"),
-"lp.faq.q1": ("What happens after 12 months?", "Hva skjer etter 12 måneder?", "¿Qué pasa después de 12 meses?"),
+"lp.faq.q1": (
+  'Is there a commitment period?',
+  'Er det bindingstid?',
+  '¿Hay permanencia?'),
 "lp.faq.a1": (
-  "The subscription continues month to month. You can cancel with one month's notice.",
-  "Abonnementet fortsetter måned for måned. Du kan si opp med én måneds varsel.",
-  "La suscripción continúa mes a mes. Puedes cancelar con un mes de preaviso."),
+  'No. The subscription runs month to month and you can cancel any time. Your page stays online until the end of the month you have paid for.',
+  'Nei. Abonnementet løper måned for måned, og du kan si opp når som helst. Siden er på nett ut måneden du har betalt for.',
+  'No. La suscripción es mes a mes y puedes cancelarla cuando quieras. Tu página sigue en línea hasta el final del mes ya pagado.'),
 "lp.faq.q2": ("How long does it take?", "Hvor lang tid tar det?", "¿Cuánto tarda?"),
 "lp.faq.a2": (
   "You just fill in the fields and choose the colours, and the page is ready in no time. When you click publish, it goes live instantly.",
@@ -172,9 +174,9 @@ T = {
   'Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. ¿Tienes dudas? Pregunta a nuestro asistente en la esquina de la pantalla.'),
 "lp.faq.q5": ("What about the domain?", "Hva med domene?", "¿Y el dominio?"),
 "lp.faq.a5": (
-  "The page gets a free address, like side.dsnorge.com/yourbusiness. If you want your own domain, like yourbusiness.no, you register it in your name and we connect it. Your own domain is not included in the price.",
-  "Siden får en gratis adresse, som side.dsnorge.com/dinbedrift. Vil du ha eget domene, som dinbedrift.no, registrerer du det i ditt navn, og vi kobler det til. Eget domene er ikke inkludert i prisen.",
-  "La página recibe una dirección gratis, como side.dsnorge.com/tuempresa. Si quieres un dominio propio, como tuempresa.no, lo registras a tu nombre y lo conectamos. El dominio propio no está incluido en el precio."),
+  'Your page gets a free address, such as side.dsnorge.com/yourbusiness. If you want your own domain, such as yourbusiness.no, you buy it in your own name (about 100–150 kr a year, for example at Domeneshop) and we connect it to your page for free.',
+  'Siden får en gratis adresse, som side.dsnorge.com/dinbedrift. Vil du ha eget domene, som dinbedrift.no, kjøper du det i ditt navn (ca. 100–150 kr i året, for eksempel hos Domeneshop), og vi kobler det til siden din gratis.',
+  'Tu página recibe una dirección gratis, como side.dsnorge.com/tuempresa. Si quieres tu propio dominio, como tuempresa.no, lo compras a tu nombre (unos 100–150 kr al año, por ejemplo en Domeneshop) y lo conectamos a tu página gratis.'),
 "lp.faq.q6": ("How do I pay?", "Hvordan betaler jeg?", "¿Cómo pago?"),
 "lp.faq.a6": (
   "By card, automatically every month. The first 30 days are free: billing starts when the page is published or after 30 days at the latest. You get the receipt by email.",
@@ -232,6 +234,11 @@ T = {
 "lp.form.mod.m2.ex": ("E.g. café, pizzeria, bakery, farm shop, firewood sales", "F.eks. kafé, pizzeria, bakeri, gårdsbutikk, vedsalg", "P. ej. cafetería, pizzería, panadería, tienda de granja, venta de leña"),
 "lp.form.mod.m3.ex": ("E.g. hairdresser, nails, physiotherapist, personal trainer, dog groomer", "F.eks. frisør, negler, fysioterapeut, PT, hundefrisør", "P. ej. peluquería, uñas, fisioterapeuta, entrenador personal, peluquería canina"),
 "lp.form.mod.dica": ("Can't find your sector? Pick the closest one. You can change the headings yourself later in Min side.", "Finner du ikke bransjen din? Velg den som ligner mest. Overskriftene kan du endre selv etterpå på Min side.", "¿No encuentras tu sector? Elige el más parecido. Los títulos los cambias tú después en Min side."),
+"lp.form.kilde": ("How did you hear about us?", "Hvor hørte du om oss?", "¿Cómo nos conociste?"),
+"lp.form.kilde.velg": ("Choose (optional)", "Velg (valgfritt)", "Elige (opcional)"),
+"lp.form.kilde.flyer": ("Flyer", "Brosjyre i postkassen", "Folleto"),
+"lp.form.kilde.anbefaling": ("Recommended by someone", "Anbefalt av noen", "Me lo recomendaron"),
+"lp.form.kilde.annet": ("Other", "Annet", "Otro"),
 "lp.form.empresa": ("Business name *", "Bedriftsnavn *", "Nombre de la empresa *"),
 "lp.form.orgnr": ("Organisation number (9 digits) *", "Org.nr. (9 siffer) *", "Número de organización (9 dígitos) *"),
 "lp.form.land": ("Country of the business *", "Bedriftens land *", "País de la empresa *"),

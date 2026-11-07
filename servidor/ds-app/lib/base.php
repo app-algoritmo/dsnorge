@@ -1,7 +1,7 @@
 <?php
 /**
  * DIGITAL SOLUTIONS — funções comuns do Min side e das páginas dos clientes.
- * DOC-WEB-MS-003 · v1.1.0
+ * DOC-WEB-MS-003 · v1.2.0
  */
 declare(strict_types=1);
 
@@ -81,6 +81,29 @@ function side_url(string $slug): string
 function side_rot(): string
 {
     return (HTTPS ? 'https://' : 'http://') . SIDE_HOST . port_suffiks();
+}
+
+/** Endereço público de um cliente: o domínio próprio, se tiver, senão side.dsnorge.com/<slug>. */
+function kunde_url(array $k): string
+{
+    return !empty($k['domene']) ? 'https://' . $k['domene'] : side_url((string)$k['slug']);
+}
+
+function kunde_adresse(array $k): string
+{
+    return !empty($k['domene']) ? (string)$k['domene'] : side_adresse((string)$k['slug']);
+}
+
+/** Domínio digitado no admin → forma limpa (sem https://, www. e barra), ou '' se inválido. */
+function rens_domene(string $d): string
+{
+    $d = strtolower(trim($d));
+    $d = preg_replace('~^https?://~', '', $d) ?? '';
+    $d = preg_replace('~^www\.~', '', $d) ?? '';
+    $d = rtrim(explode('/', $d)[0], '.');
+    if (function_exists('idn_to_ascii') && preg_match('/[^\x20-\x7e]/', $d)) { $d = (string)idn_to_ascii($d); }
+    return preg_match('/^(?=.{4,100}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/', $d)
+        && !str_ends_with($d, BASE_DOMENE) ? $d : '';
 }
 
 /** Como o endereço aparece em textos: side.dsnorge.com/<slug> */

@@ -4,7 +4,7 @@
  * Login por link no e-mail, editor da página, prévia, publicação e o painel /admin.
  * A interface do cliente segue o idioma dele (lib/sprak.php: no, pt, en, es);
  * o painel /admin fica em norueguês. Comentários em português.
- * DOC-WEB-MS-009 · v1.3.0 (assistente de chat)
+ * DOC-WEB-MS-009 · v1.4.0 (domínio próprio, origem dos pedidos)
  */
 declare(strict_types=1);
 
@@ -277,7 +277,7 @@ function side_editor(array $k): void
     $inn = array_merge(tomt_innhold($k['modell']), json_les($k['utkast']));
     [$stNavn, $stType, $stTekst] = status_tekst($k);
     $f = flash();
-    $adresse = side_adresse($k['slug']);
+    $adresse = kunde_adresse($k);
     $erAdmin = er_admin(innlogget());
 
     $h  = '';
@@ -286,7 +286,7 @@ function side_editor(array $k): void
     }
     $h .= '<div class="hode-rad"><div><h1>' . e($inn['firmanavn'] ?: t('ed.din')) . '</h1>'
         . '<p class="adresse">' . ($k['status'] === 'aktiv'
-            ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($adresse) . ' ↗</a>'
+            ? '<a href="' . e(kunde_url($k)) . '" target="_blank" rel="noopener">' . e($adresse) . ' ↗</a>'
             : e($adresse)) . ' · ' . e($m['navn']) . '</p></div>'
         . '<span class="merkelapp ' . e($stType) . '">' . e($stNavn) . '</span></div>';
     $h .= '<p class="statuslinje">' . e($stTekst) . '</p>';
@@ -528,7 +528,7 @@ function publiser(array $k, array $inn, string $varsel): never
     rydd_bilder((int)$k['id']);
 
     if ($k['status'] === 'aktiv') {
-        flash(t('fl.publisert', side_adresse($k['slug'])) . $varsel);
+        flash(t('fl.publisert', kunde_adresse($k)) . $varsel);
         videre('/');
     }
 
@@ -543,7 +543,7 @@ function publiser(array $k, array $inn, string $varsel): never
             'E-post:   ' . $k['epost'],
             'Bestilling: ' . ($k['bestilling_ref'] ?: '—'),
             'Språk:    ' . (SPRAK[$k['sprak'] ?? 'no'] ?? '—'),
-            'Adresse:  ' . side_url($k['slug']),
+            'Adresse:  ' . kunde_url($k),
             '',
             'Gjør dette:',
             '1. Sjekk i Stripe at abonnementet finnes (kunden har lagt inn kort).',
@@ -556,7 +556,7 @@ function publiser(array $k, array $inn, string $varsel): never
         }
     }
     if (AUTO_AKTIVER) {
-        flash(t('fl.gratulerer', side_adresse($k['slug'])) . $varsel);
+        flash(t('fl.gratulerer', kunde_adresse($k)) . $varsel);
     } else {
         flash(t('fl.sendt') . $varsel);
     }
@@ -569,7 +569,7 @@ function velkommen_tekst(array $k, array $inn): string
         t('ep.hei'),
         '',
         t('ep.vel.p1', (string)($inn['firmanavn'] ?? '')),
-        side_url($k['slug']),
+        kunde_url($k),
         '',
         t('ep.vel.p2', minside_url('/')),
         t('ep.vel.p3'),
@@ -596,7 +596,7 @@ function side_admin(): void
     sprak('no');                                // o painel fica em norueguês
     unset($_SESSION['kunde_id']);
     $f = flash();
-    $kunder = q('SELECT id, epost, bestilling_ref, slug, modell, sprak, status, sist_lagret, sist_publisert, sist_innlogget, nota, utkast FROM kunder ORDER BY FIELD(status, \'venter\', \'utkast\', \'aktiv\', \'av\'), id DESC')->fetchAll();
+    $kunder = q('SELECT id, epost, bestilling_ref, slug, domene, modell, sprak, status, sist_lagret, sist_publisert, sist_innlogget, nota, utkast FROM kunder ORDER BY FIELD(status, \'venter\', \'utkast\', \'aktiv\', \'av\'), id DESC')->fetchAll();
 
     $h = '<div class="hode-rad"><h1>Admin</h1>' . utlogging() . '</div>';
     if ($f) { $h .= '<p class="melding ' . e($f['type']) . '">' . e($f['tekst']) . '</p>'; }
@@ -615,7 +615,8 @@ function side_admin(): void
         $h .= '<tr><td><strong>' . e($inn['firmanavn'] ?? '—') . '</strong><br><small>' . e($k['epost']) . '<br>'
             . e(MODELLER[$k['modell']]['navn']) . ' · ' . e(strtoupper((string)$k['sprak'])) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
             . ($k['nota'] ? '<br><small class="nota">' . e($k['nota']) . '</small>' : '') . '</td>'
-            . '<td><small>' . e(SIDE_HOST) . '/</small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug'])) . '</td>'
+            . '<td><small>' . e(SIDE_HOST) . '/</small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug']))
+            . (!empty($k['domene']) ? '<br><small>Domene: </small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(kunde_url($k)) . '" target="_blank" rel="noopener">' . e($k['domene']) . '</a>' : e($k['domene'])) : '') . '</td>'
             . '<td><span class="merkelapp ' . e($stType) . '">' . e($stNavn) . '</span></td>'
             . '<td><small>Lagret: ' . e(kort_dato($k['sist_lagret'])) . '<br>Publisert: ' . e(kort_dato($k['sist_publisert'])) . '<br>Innlogget: ' . e(kort_dato($k['sist_innlogget'])) . '</small></td>'
             . '<td class="admin-handlinger">'
@@ -631,6 +632,10 @@ function side_admin(): void
             . '<input type="hidden" name="id" value="' . (int)$k['id'] . '"><input type="hidden" name="handling" value="slug">'
             . '<label class="felt"><span>Adresse</span><input name="slug" value="' . e($k['slug']) . '" maxlength="40" pattern="[a-z0-9-]+"></label>'
             . '<button class="knapp knapp--liten knapp--strek" type="submit">Endre adresse</button></form>'
+            . '<form method="post" action="/admin/handling" class="mini">' . csrf_felt()
+            . '<input type="hidden" name="id" value="' . (int)$k['id'] . '"><input type="hidden" name="handling" value="domene">'
+            . '<label class="felt"><span>Eget domene</span><input name="domene" value="' . e($k['domene'] ?? '') . '" maxlength="100" placeholder="bedriften.no"><small>Tomt = fjern. Legg også domenet inn under Webadresser i Domeneshop (mappe /side).</small></label>'
+            . '<button class="knapp knapp--liten knapp--strek" type="submit">Lagre domene</button></form>'
             . '<form method="post" action="/admin/handling" class="mini">' . csrf_felt()
             . '<input type="hidden" name="id" value="' . (int)$k['id'] . '"><input type="hidden" name="handling" value="nota">'
             . '<label class="felt"><span>Notat (internt)</span><textarea name="nota" rows="2" maxlength="1000">' . e($k['nota'] ?? '') . '</textarea></label>'
@@ -663,6 +668,23 @@ function side_admin(): void
     $h .= '</select></label>'
         . felt('slug', 'Ønsket adresse (valgfritt)', '', 40, false, 'Tomt = lages av navnet.')
         . '<div><button class="knapp" type="submit">Opprett</button></div></form>';
+
+    /* De onde vêm os pedidos (últimos 90 dias) */
+    try {
+        $kilder = q("SELECT COALESCE(kilde, '') AS k, COUNT(*) AS n FROM bestillinger WHERE criado_em >= NOW() - INTERVAL 90 DAY GROUP BY k ORDER BY n DESC")->fetchAll();
+        $kamp   = q("SELECT utm, COUNT(*) AS n FROM bestillinger WHERE utm IS NOT NULL AND criado_em >= NOW() - INTERVAL 90 DAY GROUP BY utm ORDER BY n DESC LIMIT 15")->fetchAll();
+    } catch (Throwable $e) { $kilder = $kamp = []; }
+    if ($kilder) {
+        $navn = ['facebook' => 'Facebook', 'instagram' => 'Instagram', 'google' => 'Google', 'flyer' => 'Brosjyre', 'anbefaling' => 'Anbefalt', 'annet' => 'Annet', '' => 'Ikke oppgitt'];
+        $h .= '<h2>Hvor kommer bestillingene fra? <small class="dempet">(siste 90 dager)</small></h2><div class="tabell-ramme"><table class="tabell"><thead><tr><th>Kilde (kunden svarte)</th><th>Bestillinger</th></tr></thead><tbody>';
+        foreach ($kilder as $r) { $h .= '<tr><td>' . e($navn[$r['k']] ?? $r['k']) . '</td><td>' . (int)$r['n'] . '</td></tr>'; }
+        $h .= '</tbody></table></div>';
+        if ($kamp) {
+            $h .= '<div class="tabell-ramme"><table class="tabell"><thead><tr><th>Kampanje (lenke med utm_)</th><th>Bestillinger</th></tr></thead><tbody>';
+            foreach ($kamp as $r) { $h .= '<tr><td>' . e($r['utm']) . '</td><td>' . (int)$r['n'] . '</td></tr>'; }
+            $h .= '</tbody></table></div>';
+        }
+    }
 
     $h .= systemsjekk();
     ramme('Admin', $h, true);
@@ -715,6 +737,21 @@ function handling_admin(): void
             if (q('SELECT id FROM kunder WHERE slug = ? AND id <> ?', [$ny, $id])->fetch()) { flash('Adressen er i bruk.', 'feil'); break; }
             q('UPDATE kunder SET slug = ? WHERE id = ?', [$ny, $id]);
             flash('Ny adresse: ' . side_adresse($ny) . '. Den gamle adressen virker ikke lenger.');
+            break;
+
+        case 'domene':
+            if (!$k) { break; }
+            $raa = trim((string)($_POST['domene'] ?? ''));
+            if ($raa === '') {
+                q('UPDATE kunder SET domene = NULL WHERE id = ?', [$id]);
+                flash('Domenet er fjernet. Siden ligger fortsatt på ' . side_adresse($k['slug']) . '.');
+                break;
+            }
+            $dom = rens_domene($raa);
+            if ($dom === '') { flash('Ugyldig domene. Skriv for eksempel bedriften.no (uten https:// og www).', 'feil'); break; }
+            if (q('SELECT id FROM kunder WHERE domene = ? AND id <> ?', [$dom, $id])->fetch()) { flash('Domenet er allerede koblet til en annen kunde.', 'feil'); break; }
+            q('UPDATE kunder SET domene = ? WHERE id = ?', [$dom, $id]);
+            flash('Domene lagret: ' . $dom . '. Husk: Webadresser i Domeneshop for ' . $dom . ' og www.' . $dom . ' → mappe /side, med HTTPS.');
             break;
 
         case 'nota':

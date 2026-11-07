@@ -21,7 +21,7 @@ declare(strict_types=1);
 const ORIGENS      = ['https://dsnorge.com', 'https://www.dsnorge.com'];
 const LIMITE_HORA  = 5;                        // pedidos por IP por hora
 const STRIPE_LINK  = 'https://buy.stripe.com/8x200ka6v07Y28SaYm73G00';
-const TERMOS_VERSAO = '2026-11-06';            // data no topo de /vilkar.html
+const TERMOS_VERSAO = '2026-11-07';            // data no topo de /vilkar.html
 const MINSIDE      = 'https://minside.dsnorge.com/';
 
 // Senha e dados do banco ficam SÓ no servidor, em ~/ds-app/config.php
@@ -90,6 +90,8 @@ $descricao  = $campo('descricao', 4000);
 $horario    = $campo('horario', 2000);
 $facebook   = $campo('facebook', 300);
 $instagram  = $campo('instagram', 300);
+$kilde      = in_array($campo('kilde', 20), ['facebook', 'instagram', 'google', 'flyer', 'anbefaling', 'annet'], true) ? $campo('kilde', 20) : null;
+$utm        = trim(preg_replace('/[^\p{L}\p{N} _.\/-]/u', '', $campo('utm', 150)) ?? '') ?: null;
 $idioma     = in_array($campo('idioma', 5), ['pt', 'en', 'no', 'es'], true) ? $campo('idioma', 5) : 'no';
 
 $erros = [];
@@ -168,12 +170,12 @@ if (DB_ATIVO) {
         $pdo->prepare(
             'INSERT INTO bestillinger
              (criado_em, ref, modelo, empresa, land, orgnr, contato, email, telefone, subdominio,
-              descricao, horario, facebook, instagram, arquivos, idioma, termos_versao, ip_hash)
-             VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+              descricao, horario, facebook, instagram, arquivos, kilde, utm, idioma, termos_versao, ip_hash)
+             VALUES (NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         )->execute([
             $ref, $modelo, $empresa, $land, $orgnr, $contato, $email, $telefone, $subdominio ?: null,
             $descricao, $horario ?: null, $facebook ?: null, $instagram ?: null,
-            $salvos ? json_encode($salvos) : null, $idioma, TERMOS_VERSAO, hash('sha256', $ip),
+            $salvos ? json_encode($salvos) : null, $kilde, $utm, $idioma, TERMOS_VERSAO, hash('sha256', $ip),
         ]);
         $id = (int)$pdo->lastInsertId();
         $novaRef = sprintf('DS-%06d', $id);
@@ -202,6 +204,7 @@ $linhas = [
     'Adresse:    ' . ($subdominio !== '' ? "side.dsnorge.com/$subdominio" : '—'),
     'Facebook:   ' . ($facebook ?: '—'),
     'Instagram:  ' . ($instagram ?: '—'),
+    'Kilde:      ' . ($kilde ?: '—') . ($utm ? '  (kampanje: ' . $utm . ')' : ''),
     '',
     'Om bedriften:',
     $descricao,
@@ -310,7 +313,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
             "Pris: 399 kr/mnd, totalpris. De første 30 dagene er gratis. Første trekk skjer\nnår siden publiseres, eller senest etter 30 dager.",
             "Viktige vilkår (du har godtatt versjon $v):",
             [
-                "399 kr/mnd, totalpris. 12 måneders bindingstid fra første trekk,\n  deretter løpende med én måneds oppsigelse.",
+                "399 kr/mnd, totalpris. Ingen bindingstid: du kan si opp når som helst,\n  og oppsigelsen gjelder ut måneden du har betalt for.",
                 "Du er selv ansvarlig for alt innhold på siden din: tekst, bilder,\n  priser og lenker. Innholdet må være lovlig og ikke krenke andres\n  rettigheter (opphavsrett, varemerker, personvern).",
                 "Siden kan ikke brukes til ulovlige varer eller tjenester, svindel,\n  villedende reklame, hets, seksuelt innhold eller andres\n  personopplysninger uten samtykke.",
                 "Vi kontrollerer ikke innholdet før publisering, men kan ta ned siden\n  straks hvis den bryter med loven eller vilkårene.",
@@ -329,7 +332,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
             "Preço: 399 NOK/mês, preço total. Os primeiros 30 dias são grátis. A primeira cobrança\nacontece ao publicar a página, ou no máximo após 30 dias. O cartão é cobrado em coroas\nnorueguesas (NOK); o banco do cartão pode acrescentar câmbio e IOF.",
             "Condições importantes (você aceitou a versão $v):",
             [
-                "399 NOK/mês, preço total. Fidelidade de 12 meses a partir da primeira\n  cobrança; depois, mês a mês, com aviso de um mês para cancelar.",
+                "399 NOK/mês, preço total. Sem fidelidade: você pode cancelar quando quiser,\n  e o cancelamento vale até o fim do mês já pago.",
                 "Você é o único responsável por todo o conteúdo da página: textos, fotos,\n  preços e links. O conteúdo deve ser legal e não pode violar direitos\n  de terceiros (direitos autorais, marcas, privacidade).",
                 "A página não pode ser usada para produtos ou serviços ilegais, fraude,\n  publicidade enganosa, discurso de ódio, conteúdo sexual ou dados\n  pessoais de terceiros sem consentimento.",
                 "Não revisamos o conteúdo antes da publicação, mas podemos tirar a\n  página do ar imediatamente se ela violar a lei ou as condições.",
@@ -348,7 +351,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
             "Price: NOK 399/month, total price. The first 30 days are free. The first charge\nhappens when the page is published, or after 30 days at the latest. Your card is\ncharged in Norwegian kroner (NOK).",
             "Key terms (you accepted version $v):",
             [
-                "NOK 399/month, total price. 12-month commitment from the first charge,\n  then rolling with one month's notice.",
+                "NOK 399/month, total price. No commitment: you can cancel at any time,\n  effective at the end of the month you have paid for.",
                 "You alone are responsible for all content on your page: text, photos,\n  prices and links. The content must be lawful and must not infringe\n  the rights of others (copyright, trademarks, privacy).",
                 "The page may not be used for illegal goods or services, fraud,\n  misleading advertising, hate speech, sexual content or other\n  people's personal data without consent.",
                 "We do not review content before publication, but may take the page\n  down at once if it breaks the law or the terms.",
@@ -367,7 +370,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
             "Precio: 399 NOK/mes, precio total. Los primeros 30 días son gratis. El primer cargo\nse hace al publicar la página o, como máximo, a los 30 días. La tarjeta se cobra\nen coronas noruegas (NOK).",
             "Condiciones importantes (aceptaste la versión $v):",
             [
-                "399 NOK/mes, precio total. Permanencia de 12 meses desde el primer cargo;\n  después, mes a mes, con un mes de preaviso.",
+                "399 NOK/mes, precio total. Sin permanencia: puedes cancelar cuando quieras,\n  y la cancelación vale hasta el final del mes ya pagado.",
                 "Eres el único responsable de todo el contenido de tu página: textos,\n  fotos, precios y enlaces. El contenido debe ser legal y no puede\n  vulnerar derechos de terceros (autor, marcas, privacidad).",
                 "La página no puede usarse para productos o servicios ilegales, fraude,\n  publicidad engañosa, discurso de odio, contenido sexual ni datos\n  personales de terceros sin consentimiento.",
                 "No revisamos el contenido antes de publicarlo, pero podemos retirar\n  la página de inmediato si infringe la ley o las condiciones.",
