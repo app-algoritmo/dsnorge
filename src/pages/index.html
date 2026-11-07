@@ -3,8 +3,8 @@
   "slug": "index.html",
   "layout": "landing",
   "doc": "DOC-DS-PG-010",
-  "title": "Digital Solutions — landing pages para empresas · nettsider for bedrifter",
-  "desc": "Monte a landing page da sua empresa em poucos cliques: 399 kr/mês, preço final, 30 dias grátis. Três modelos, editor fácil, hospedagem e SSL incluídos. Hvarnes, Larvik e região.",
+  "title": "Digital Solutions — nettsider for bedrifter",
+  "desc": "Lag nettsiden til bedriften din selv på noen minutter: 399 kr/mnd, totalpris, 30 dager gratis. Tre modeller for alle bransjer, enkel editor, hosting og SSL inkludert.",
   "styles": ["/assets/css/landing.css"],
   "scripts": [],
   "jsonld": {
@@ -33,7 +33,7 @@
 <section class="lp-hero" id="topo">
   <div class="lp-wrap lp-hero-inner">
     <div class="lp-hero-texto">
-      <span class="lp-eyebrow" data-i18n="lp.hero.eyebrow">Sites para empresas de Hvarnes e região</span>
+      <span class="lp-eyebrow" data-i18n="lp.hero.eyebrow">Sites para todos os setores e profissões</span>
       <h1 class="lp-h1" data-i18n="lp.hero.titulo">Sua empresa ainda não está na internet?</h1>
       <p class="lp-lead" data-i18n="lp.hero.lead">A maioria dos clientes pesquisa na internet antes de entrar em contato. Com o nosso editor, você monta uma página simples e bonita em poucos cliques, sem precisar saber programar.</p>
       <div class="lp-btn-row">
@@ -58,23 +58,32 @@
     <p class="lp-sub" data-i18n="lp.mod.lead">Três modelos prontos, todos pelo mesmo preço. Você escolhe o layout e as cores e coloca os seus textos e fotos.</p>
 
     <div class="lp-cards">
-      <article class="lp-card">
-        <h3 class="lp-card-titulo" data-i18n="lp.mod.m1.t">Serviços e profissionais</h3>
-        <p data-i18n="lp.mod.m1.d">Para quem presta serviço: marceneiro, eletricista, advogado, contador, jardineiro, lenhador. O que você faz, onde atende e como pedir orçamento.</p>
-        <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
-      </article>
+      <div class="lp-modelo">
+        <article class="lp-card">
+          <h3 class="lp-card-titulo" data-i18n="lp.mod.m1.t">Serviços e profissionais</h3>
+          <p data-i18n="lp.mod.m1.d">Para quem presta serviço: marceneiro, eletricista, advogado, contador, jardineiro, lenhador. O que você faz, onde atende e como pedir orçamento.</p>
+          <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
+        </article>
+        <figure class="lp-modelo-fig"><img src="/assets/img/modeller/modell-tjenester.webp" width="960" height="640" loading="lazy" decoding="async" alt="Exemplo de página de marceneiro no computador e no celular" data-i18n-attr="alt:lp.mod.m1.alt"></figure>
+      </div>
 
-      <article class="lp-card lp-card--destaque">
-        <h3 class="lp-card-titulo" data-i18n="lp.mod.m2.t">Comida, loja e produtos</h3>
-        <p data-i18n="lp.mod.m2.d">Para café, pizzaria, padaria, loja da fazenda e venda de lenha: cardápio ou produtos com preço, horário e mapa.</p>
-        <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
-      </article>
+      <div class="lp-modelo">
+        <article class="lp-card lp-card--destaque">
+          <h3 class="lp-card-titulo" data-i18n="lp.mod.m2.t">Comida, loja e produtos</h3>
+          <p data-i18n="lp.mod.m2.d">Para café, pizzaria, padaria, loja da fazenda e venda de lenha: cardápio ou produtos com preço, horário e mapa.</p>
+          <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
+        </article>
+        <figure class="lp-modelo-fig"><img src="/assets/img/modeller/modell-mat.webp" width="960" height="640" loading="lazy" decoding="async" alt="Exemplo de página de padaria e café no computador e no celular" data-i18n-attr="alt:lp.mod.m2.alt"></figure>
+      </div>
 
-      <article class="lp-card">
-        <h3 class="lp-card-titulo" data-i18n="lp.mod.m3.t">Agendamento e bem-estar</h3>
-        <p data-i18n="lp.mod.m3.d">Para cabeleireiro, unhas, fisioterapeuta, personal trainer e banho e tosa: tratamentos, preços e link para marcar horário.</p>
-        <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
-      </article>
+      <div class="lp-modelo">
+        <article class="lp-card">
+          <h3 class="lp-card-titulo" data-i18n="lp.mod.m3.t">Agendamento e bem-estar</h3>
+          <p data-i18n="lp.mod.m3.d">Para cabeleireiro, unhas, fisioterapeuta, personal trainer e banho e tosa: tratamentos, preços e link para marcar horário.</p>
+          <p class="lp-card-preco" data-i18n="lp.mod.preco">399 kr/mês</p>
+        </article>
+        <figure class="lp-modelo-fig"><img src="/assets/img/modeller/modell-timebestilling.webp" width="960" height="640" loading="lazy" decoding="async" alt="Exemplo de página de salão de beleza no computador e no celular" data-i18n-attr="alt:lp.mod.m3.alt"></figure>
+      </div>
     </div>
   </div>
 </section>
@@ -82,7 +91,7 @@
 <section class="lp-wrap lp-secao lp-preco-secao" id="preco">
   <div class="lp-incluso">
     <h2 class="lp-h2" data-i18n="lp.inc.titulo">Tudo o que você precisa para estar na internet</h2>
-    <p class="lp-sub" data-i18n="lp.inc.lead">Tudo isso está incluído na mensalidade. Sem custos escondidos.</p>
+    <p class="lp-sub" data-i18n="lp.inc.lead">Faça você mesmo seu site em 5 minutos.</p>
     <ul class="lp-lista">
       <li><svg class="lp-check" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span data-i18n="lp.inc.i1">Editor fácil, com 2 layouts e 6 temas de cores</span></li>
       <li><svg class="lp-check" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7 12.5l3.2 3.2L17 9"/></svg><span data-i18n="lp.inc.i2">Adaptada para celular e tablet</span></li>

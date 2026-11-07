@@ -14,10 +14,7 @@ T = {
   "Cómo funciona"),
 "lp.nav.faq": ("Questions", "Spørsmål", "Preguntas"),
 "lp.nav.bestill": ('Get started', 'Kom i gang', 'Empieza ahora'),
-"lp.hero.eyebrow": (
-  "Websites for businesses in Hvarnes and the surrounding area",
-  "Nettsider for bedrifter i Hvarnes og omegn",
-  "Sitios web para empresas de Hvarnes y alrededores"),
+"lp.hero.eyebrow": ('Websites for every sector and profession', 'Nettsider for alle bransjer og yrker', 'Webs para todos los sectores y profesiones'),
 "lp.hero.titulo": (
   "Is your business not online yet?",
   "Er bedriften din ikke på nett ennå?",
@@ -72,6 +69,9 @@ T = {
   'For hairdressers, nail studios, physiotherapists, personal trainers and dog groomers: treatments, prices and a booking link.',
   'For frisør, negler, fysioterapeut, PT og hundefrisør: behandlinger, priser og lenke til timebestilling.',
   'Para peluquerías, uñas, fisioterapeutas, entrenadores personales y peluquerías caninas: tratamientos, precios y enlace para pedir cita.'),
+"lp.mod.m1.alt": ("Example of a carpenter's page on a computer and a phone", "Eksempel på nettside for en tømrer på PC og mobil", "Ejemplo de página de carpintero en el ordenador y el móvil"),
+"lp.mod.m2.alt": ("Example of a bakery and café page on a computer and a phone", "Eksempel på nettside for et bakeri og en kafé på PC og mobil", "Ejemplo de página de panadería y cafetería en el ordenador y el móvil"),
+"lp.mod.m3.alt": ("Example of a hair salon page on a computer and a phone", "Eksempel på nettside for en frisørsalong på PC og mobil", "Ejemplo de página de peluquería en el ordenador y el móvil"),
 "lp.mod.preco": ("399 kr/month", "399 kr/mnd", "399 kr/mes"),
 
 # Incluído
@@ -79,10 +79,7 @@ T = {
   "Everything you need to get online",
   "Alt du trenger for å komme på nett",
   "Todo lo que necesitas para estar en internet"),
-"lp.inc.lead": (
-  "All of this is included in the monthly price. No hidden costs.",
-  "Alt dette er inkludert i månedsprisen. Ingen skjulte kostnader.",
-  "Todo esto está incluido en la cuota mensual. Sin costes ocultos."),
+"lp.inc.lead": ('Build your own website in 5 minutes.', 'Lag nettsiden din selv på 5 minutter.', 'Crea tu propia web en 5 minutos.'),
 "lp.inc.i1": (
   "Easy editor with 2 layouts and 6 colour themes",
   "Enkel editor med 2 oppsett og 6 fargetemaer",

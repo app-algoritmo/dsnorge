@@ -80,6 +80,10 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-sans);font-siz
 .lp-cards{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 20px}
 .lp-card{position:relative;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:32px 28px;
   display:flex;flex-direction:column;gap:10px;color:var(--ink-2)}
+.lp-modelo{display:flex;flex-direction:column;gap:18px}
+.lp-modelo>.lp-card{flex:1}
+.lp-modelo-fig{margin:0}
+.lp-modelo-fig img{display:block;width:100%;height:auto}
 .lp-card-titulo{font-family:var(--f-sans);font-weight:600;font-size:1.375rem;color:var(--ink)}
 .lp-card-preco{margin-top:auto;padding-top:16px;font-weight:600;color:var(--marca)}
 .lp-card--destaque{background:var(--marca);border-color:var(--marca);color:#E3ECF2;box-shadow:0 10px 28px rgba(var(--ink-rgb),.18)}
