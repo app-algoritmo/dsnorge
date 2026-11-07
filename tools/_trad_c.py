@@ -194,8 +194,8 @@ T = {
 "lp.cta.duvidas": ("Questions?", "Spørsmål?", "¿Dudas?"),
 
 # Rodapé
-"lp.rodape.marca": ("Digital Løsninger · since 2010", "Digital Løsninger · siden 2010", "Digital Løsninger · desde 2010"),
-"lp.rodape.empresa": ("About Digital Solutions", "Om Digital Solutions", "Sobre Digital Solutions"),
+"lp.rodape.marca": ("DS Norge · Digital Solutions · since 2010", "DS Norge · Digital Solutions · siden 2010", "DS Norge · Digital Solutions · desde 2010"),
+"lp.rodape.empresa": ("About DS Norge", "Om DS Norge", "Sobre DS Norge"),
 "lp.rodape.conta": ("Manage subscription", "Administrer abonnement", "Gestionar suscripción"),
 "lp.nav.minside": (
   "Min side",

@@ -163,7 +163,7 @@ function handling_send_lenke(): void
             t('ep.inn.ignorer'),
             '',
             t('ep.hilsen'),
-            'Digital Solutions · dsnorge.com',
+            'DS Norge · Digital Solutions · dsnorge.com',
         ]));
     }
     sprak($sideSprak);                                        // a tela segue na língua escolhida
@@ -575,7 +575,7 @@ function velkommen_tekst(array $k, array $inn): string
         t('ep.vel.p3'),
         '',
         t('ep.hilsen'),
-        'Digital Solutions · dsnorge.com',
+        'DS Norge · Digital Solutions · dsnorge.com',
     ]);
 }
 
@@ -817,9 +817,9 @@ function ikke_funnet(): never
 function ramme(string $tittel, string $innhold, bool $bred = false): void
 {
     echo '<!doctype html><html lang="' . e(HTML_LANG[sprak()]) . '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">'
-        . '<meta name="robots" content="noindex, nofollow"><title>' . e($tittel) . ' · Digital Solutions</title>'
+        . '<meta name="robots" content="noindex, nofollow"><title>' . e($tittel) . ' · DS Norge</title>'
         . '<link rel="stylesheet" href="/assets/minside.css?v=2"></head><body>'
-        . '<header class="ms-topp"><div class="ms-ramme"><a class="ms-merke" href="/">Min side</a><span class="ms-av">Digital Løsninger · dsnorge.com</span></div></header>'
+        . '<header class="ms-topp"><div class="ms-ramme"><a class="ms-merke" href="/">Min side</a><span class="ms-av">DS Norge · dsnorge.com</span></div></header>'
         . '<main class="ms-ramme' . ($bred ? '' : ' ms-smal') . '">' . $innhold . '</main>'
         . '<script src="/assets/chat.js?v=1" defer data-sted="minside"></script></body></html>';
 }

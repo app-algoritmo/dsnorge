@@ -150,7 +150,7 @@ $corpo = implode("\n", [
 ]);
 
 $cabecalhos = implode("\r\n", [
-    'From: Digital Solutions <' . REMETENTE . '>',
+    'From: DS Norge · Digital Solutions <' . REMETENTE . '>',
     'Reply-To: ' . mb_encode_mimeheader($nome) . ' <' . $email . '>',
     'Content-Type: text/plain; charset=UTF-8',
     'Content-Transfer-Encoding: 8bit',

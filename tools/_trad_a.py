@@ -80,7 +80,7 @@ T = {
 "doc.idioma": ("Master language", "Kildespråk", "Idioma maestro"),
 "e404.b1": ("Back to home", "Tilbake til forsiden", "Volver al inicio"),
 "e404.b2": ("See the catalogue", "Se katalogen", "Ver el catálogo"),
-"e404.b3": ("Talk to Digital Solutions", "Kontakt Digital Solutions", "Hablar con Digital Solutions"),
+"e404.b3": ("Talk to DS Norge", "Kontakt DS Norge", "Hablar con DS Norge"),
 "e404.lead": (
   "The link may have changed, or the address may have been typed differently. The paths below lead somewhere.",
   "Lenken kan ha endret seg, eller adressen kan være skrevet annerledes. Veiene nedenfor fører et sted.",

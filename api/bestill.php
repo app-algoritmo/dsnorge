@@ -385,7 +385,7 @@ function confirmacao(string $idioma, string $contato, string $empresa, string $r
     $corpo = implode("\n", [
         $oi, '', $obrigado, $refL, $modL, '', $agora, $p1, $p2, $p3, '', $preco, '',
         $vilkTit, '- ' . implode("\n- ", $vilk), $completo, '', $duvida, '', $tchau,
-        'Digital Solutions · dsnorge.com',
+        'DS Norge · Digital Solutions · dsnorge.com',
     ]);
     return [$assunto, $corpo];
 }
@@ -408,7 +408,7 @@ function normalizar_arquivos(?array $f): array
 function enviar(string $para, string $assunto, string $corpo, string $responderPara): void
 {
     $cab = implode("\r\n", [
-        'From: Digital Solutions <' . REMETENTE . '>',
+        'From: DS Norge · Digital Solutions <' . REMETENTE . '>',
         'Reply-To: ' . $responderPara,
         'Content-Type: text/plain; charset=UTF-8',
         'Content-Transfer-Encoding: 8bit',

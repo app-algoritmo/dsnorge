@@ -13,9 +13,9 @@ T = {
 # ─── Política de privacidade ────────────────────────────────
 "priv.c01": ("1. Who is responsible", "1. Hvem er ansvarlig", "1. Quién es el responsable"),
 "priv.c02": (
-  "The controller (<em>behandlingsansvarlig</em>) for data collected on dsnorge.com, minside.dsnorge.com and side.dsnorge.com is <strong>Digital Solutions</strong>, a company registered in Norway with org. no. 996 041 468. Contact for any matter concerning personal data: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "Behandlingsansvarlig for opplysninger som samles inn på dsnorge.com, minside.dsnorge.com og side.dsnorge.com er <strong>Digital Solutions</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt om alt som gjelder personopplysninger: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "El responsable del tratamiento (<em>behandlingsansvarlig</em>) de los datos recogidos en dsnorge.com, minside.dsnorge.com y side.dsnorge.com es <strong>Digital Solutions</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto para cualquier asunto sobre datos personales: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+  "The controller (<em>behandlingsansvarlig</em>) for data collected on dsnorge.com, minside.dsnorge.com and side.dsnorge.com is <strong>DS Norge · Digital Solutions – de Barros</strong>, a company registered in Norway with org. no. 996 041 468. Contact for any matter concerning personal data: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "Behandlingsansvarlig for opplysninger som samles inn på dsnorge.com, minside.dsnorge.com og side.dsnorge.com er <strong>DS Norge · Digital Solutions – de Barros</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt om alt som gjelder personopplysninger: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "El responsable del tratamiento (<em>behandlingsansvarlig</em>) de los datos recogidos en dsnorge.com, minside.dsnorge.com y side.dsnorge.com es <strong>DS Norge · Digital Solutions – de Barros</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto para cualquier asunto sobre datos personales: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
 "priv.c03": ("2. Applicable law", "2. Hvilket regelverk gjelder", "2. Legislación aplicable"),
 "priv.c04": (
   "Processing follows the EU General Data Protection Regulation (GDPR, Regulation 2016/679), incorporated into Norwegian law through the <em>personopplysningsloven</em>, and, when the data subject is in Brazil, the Brazilian General Data Protection Law (Law 13.709/2018).",
@@ -157,9 +157,9 @@ T = {
   "Vilkår",
   "Términos y condiciones"),
 "vilk.lead": (
-  "These terms apply to everyone who visits dsnorge.com and its subdomains (part A) and to businesses that order a landing page from Digital Solutions, org. no. 996 041 468 (part B). The subscription is offered to businesses only. In case of discrepancy between languages, the Norwegian version prevails.",
-  "Disse vilkårene gjelder for alle som besøker dsnorge.com og underdomenene (del A), og for bedrifter som bestiller landingsside fra Digital Solutions, org.nr. 996 041 468 (del B). Abonnementet tilbys bare til næringsdrivende. Ved uoverensstemmelse mellom språkversjonene gjelder den norske.",
-  "Estas condiciones se aplican a quien visita dsnorge.com y sus subdominios (parte A) y a las empresas que contratan una landing page de Digital Solutions, org. n.º 996 041 468 (parte B). La suscripción se ofrece solo a empresas. En caso de discrepancia entre idiomas, prevalece la versión noruega."),
+  "These terms apply to everyone who visits dsnorge.com and its subdomains (part A) and to businesses that order a landing page from DS Norge (Digital Solutions – de Barros), org. no. 996 041 468 (part B). The subscription is offered to businesses only. In case of discrepancy between languages, the Norwegian version prevails.",
+  "Disse vilkårene gjelder for alle som besøker dsnorge.com og underdomenene (del A), og for bedrifter som bestiller landingsside fra DS Norge (Digital Solutions – de Barros), org.nr. 996 041 468 (del B). Abonnementet tilbys bare til næringsdrivende. Ved uoverensstemmelse mellom språkversjonene gjelder den norske.",
+  "Estas condiciones se aplican a quien visita dsnorge.com y sus subdominios (parte A) y a las empresas que contratan una landing page de DS Norge (Digital Solutions – de Barros), org. n.º 996 041 468 (parte B). La suscripción se ofrece solo a empresas. En caso de discrepancia entre idiomas, prevalece la versión noruega."),
 "vilk.pa": (
   "Part A · Use of the site",
   "Del A · Bruk av nettstedet",
@@ -169,9 +169,9 @@ T = {
   "A1. Hvem publiserer nettstedet",
   "A1. Quién publica este sitio"),
 "vilk.a1": (
-  "dsnorge.com and its subdomains are published by <strong>Digital Solutions</strong>, a company registered in Norway with org. no. 996 041 468. Contact: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "dsnorge.com og underdomenene publiseres av <strong>Digital Solutions</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
-  "dsnorge.com y sus subdominios los publica <strong>Digital Solutions</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
+  "dsnorge.com and its subdomains are published by <strong>DS Norge · Digital Solutions – de Barros</strong>, a company registered in Norway with org. no. 996 041 468. Contact: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "dsnorge.com og underdomenene publiseres av <strong>DS Norge · Digital Solutions – de Barros</strong>, registrert i Norge med org.nr. 996 041 468. Kontakt: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>.",
+  "dsnorge.com y sus subdominios los publica <strong>DS Norge · Digital Solutions – de Barros</strong>, empresa registrada en Noruega con org. n.º 996 041 468. Contacto: <a href=\"mailto:info@dsnorge.com\">info@dsnorge.com</a>."),
 "vilk.a2t": (
   "A2. Nature of the catalogue information",
   "A2. Informasjonen i katalogen",

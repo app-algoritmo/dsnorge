@@ -189,7 +189,7 @@ function send_epost(string $til, string $emne, string $tekst, ?string $svarTil =
 {
     $emneKod = '=?UTF-8?B?' . base64_encode($emne) . '?=';
     $hoder = [
-        'From: Digital Solutions <' . REMETENTE . '>',
+        'From: DS Norge · Digital Solutions <' . REMETENTE . '>',
         'Reply-To: ' . ($svarTil ?: DESTINO),
         'MIME-Version: 1.0',
         'Content-Type: text/plain; charset=UTF-8',
