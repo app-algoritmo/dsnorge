@@ -159,11 +159,14 @@ T = {
   "You just fill in the fields and choose the colours, and the page is ready in no time. When you click publish, it goes live instantly.",
   "Du fyller bare inn feltene og velger farger, så er siden klar på kort tid. Når du trykker på publiser, er den på nett med en gang.",
   "Solo rellenas los campos y eliges los colores, y la página queda lista enseguida. Cuando haces clic en publicar, se publica al instante."),
-"lp.faq.q3": ("What do you need from me?", "Hva trenger dere fra meg?", "¿Qué necesitáis de mí?"),
+"lp.faq.q3": (
+  'How do I receive the invoice?',
+  'Hvordan får jeg fakturaen?',
+  '¿Cómo recibo la factura?'),
 "lp.faq.a3": (
-  "Your logo, if you have one, a few photos and a short description of the business. You can send it all with the order or add it directly in the editor.",
-  "Logoen din hvis du har en, noen bilder og en kort beskrivelse av bedriften. Du kan sende alt med bestillingen eller legge det inn rett i editoren.",
-  "Tu logo, si tienes, algunas fotos y una breve descripción de la empresa. Puedes enviarlo todo con el pedido o directamente en el editor."),
+  'By email, automatically: after each charge you get the receipt at your registered email address. All invoices and receipts are also in Min side, under the «Subscription and receipts» link, where you can download them as PDF.',
+  'På e-post, automatisk: etter hvert trekk får du kvitteringen til e-postadressen du har registrert. Alle fakturaer og kvitteringer finner du også på Min side, under lenken «Abonnement og kvitteringer», der du kan laste dem ned som PDF.',
+  'Por correo, automáticamente: tras cada cargo recibes el recibo en tu correo registrado. Todas las facturas y recibos están también en Min side, en el enlace «Suscripción y recibos», donde puedes descargarlos en PDF.'),
 "lp.faq.q4": ("How do I update the page?", "Hvordan oppdaterer jeg siden?", "¿Cómo actualizo la página?"),
 "lp.faq.a4": (
   'Log in at minside.dsnorge.com with your email. There you change text, prices, opening hours, photos and colours and publish instantly. Any questions? Ask our assistant in the corner of the screen.',
