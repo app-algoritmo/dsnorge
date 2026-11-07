@@ -107,10 +107,7 @@ T = {
   '<strong>Cancellation:</strong> any time, effective at the end of the paid month',
   '<strong>Oppsigelse:</strong> når som helst, gjelder ut betalt måned',
   '<strong>Cancelación:</strong> cuando quieras, válida hasta el final del mes pagado'),
-"lp.preco.r4": (
-  '<strong>Own domain:</strong> you buy it (about 100–150 kr/year) and we connect it for free',
-  '<strong>Eget domene:</strong> du kjøper det (ca. 100–150 kr/år), vi kobler det til gratis',
-  '<strong>Dominio propio:</strong> lo compras tú (unos 100–150 kr/año) y lo conectamos gratis'),
+"lp.preco.r4": ('<strong>Own domain:</strong> optional, free setup', '<strong>Eget domene:</strong> valgfritt, gratis oppsett', '<strong>Dominio propio:</strong> opcional, configuración gratis'),
 "lp.preco.r5": (
   "<strong>Free period:</strong> 30 days",
   "<strong>Gratisperiode:</strong> 30 dager",
@@ -174,9 +171,9 @@ T = {
   'Entra en minside.dsnorge.com con tu e-mail. Allí cambias textos, precios, horarios, fotos y colores y publicas al instante. ¿Tienes dudas? Pregunta a nuestro asistente en la esquina de la pantalla.'),
 "lp.faq.q5": ("What about the domain?", "Hva med domene?", "¿Y el dominio?"),
 "lp.faq.a5": (
-  'Your page gets a free address, such as side.dsnorge.com/yourbusiness. If you want your own domain, such as yourbusiness.no, you buy it in your own name (about 100–150 kr a year, for example at Domeneshop) and we connect it to your page for free.',
-  'Siden får en gratis adresse, som side.dsnorge.com/dinbedrift. Vil du ha eget domene, som dinbedrift.no, kjøper du det i ditt navn (ca. 100–150 kr i året, for eksempel hos Domeneshop), og vi kobler det til siden din gratis.',
-  'Tu página recibe una dirección gratis, como side.dsnorge.com/tuempresa. Si quieres tu propio dominio, como tuempresa.no, lo compras a tu nombre (unos 100–150 kr al año, por ejemplo en Domeneshop) y lo conectamos a tu página gratis.'),
+  'Your page gets a free address, such as side.dsnorge.com/yourbusiness. If you want your own domain, such as yourbusiness.no, you buy it in your own name (about 100–150 kr a year) and we connect it to your page for free. We work with Domeneshop and recommend registering your domain there: it is Norwegian, reliable, and the setup is quicker.',
+  'Siden får en gratis adresse, som side.dsnorge.com/dinbedrift. Vil du ha eget domene, som dinbedrift.no, kjøper du det i ditt navn (ca. 100–150 kr i året), og vi kobler det til siden din gratis. Vi jobber med Domeneshop og anbefaler å registrere domenet der: det er norsk, solid, og oppsettet går raskere.',
+  'Tu página recibe una dirección gratis, como side.dsnorge.com/tuempresa. Si quieres tu propio dominio, como tuempresa.no, lo compras a tu nombre (unos 100–150 kr al año) y lo conectamos a tu página gratis. Trabajamos con Domeneshop y recomendamos registrar el dominio allí: es noruega, fiable, y la conexión es más rápida.'),
 "lp.faq.q6": ("How do I pay?", "Hvordan betaler jeg?", "¿Cómo pago?"),
 "lp.faq.a6": (
   "By card, automatically every month. The first 30 days are free: billing starts when the page is published or after 30 days at the latest. You get the receipt by email.",
