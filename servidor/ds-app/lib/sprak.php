@@ -3,7 +3,7 @@
  * DIGITAL SOLUTIONS — idiomas do Min side, dos e-mails ao cliente e da página publicada.
  * Cada cliente tem um idioma (kunder.sprak): no, pt, en ou es. O painel /admin fica em norueguês.
  * Para mudar um texto, mude-o aqui nos quatro idiomas: [no, pt, en, es].
- * DOC-WEB-MS-010 · v1.1.0
+ * DOC-WEB-MS-010 · v1.2.0 (idioma do painel separado do idioma da página)
  */
 declare(strict_types=1);
 
@@ -48,6 +48,12 @@ function th(string $nokkel, string|int ...$html): string
     $i = array_search(sprak(), array_keys(SPRAK), true);
     $s = e($rad[$i] ?? $rad[0]);
     return $html ? vsprintf($s, $html) : $s;
+}
+
+/** Textos do modelo num idioma dado (ex.: o da página), sem mudar o idioma do painel. */
+function modell_for(string $id, string $sprak): array
+{
+    return MODELL_TEKST[$sprak][$id] ?? modell($id);
 }
 
 /** Textos do modelo (serviços / cardápio / tratamentos) no idioma atual. */
@@ -161,8 +167,10 @@ const TEKST = [
     'ed.utseende'   => ['Utseende', 'Aparência', 'Appearance', 'Apariencia'],
     'ed.oppsett'    => ['Oppsett', 'Layout', 'Layout', 'Diseño'],
     'ed.tema'       => ['Fargetema', 'Tema de cores', 'Colour theme', 'Tema de color'],
-    'ed.sprak'      => ['Språk', 'Idioma', 'Language', 'Idioma'],
-    'ed.sprak.h'    => ['Språket på siden din og her på Min side. Siden får nytt språk når du publiserer.', 'Idioma da sua página e deste Min side. A página muda de idioma quando você publicar.', 'The language of your page and of Min side. The page switches language when you publish.', 'Idioma de tu página y de Min side. La página cambia de idioma cuando publiques.'],
+    'ed.sprak'      => ['Språk på siden', 'Idioma da página', 'Page language', 'Idioma de la página'],
+    'ed.sprak.h'    => ['Språket kundene dine ser. Siden får nytt språk når du publiserer.', 'O idioma que os seus clientes veem. A página muda de idioma quando você publicar.', 'The language your customers see. The page switches language when you publish.', 'El idioma que ven tus clientes. La página cambia de idioma cuando publiques.'],
+    'ed.panel'      => ['Språk på Min side', 'Idioma do painel (Min side)', 'Min side language', 'Idioma del panel (Min side)'],
+    'ed.panel.h'    => ['Gjelder denne siden, e-postene fra oss og chatten.', 'Vale para esta tela, os e-mails que enviamos e o chat.', 'Applies to this screen, our emails and the chat.', 'Vale para esta pantalla, nuestros correos y el chat.'],
     'ed.om'         => ['Om bedriften', 'Sobre a empresa', 'About the business', 'Sobre la empresa'],
     'f.firmanavn'   => ['Bedriftens navn', 'Nome da empresa', 'Business name', 'Nombre de la empresa'],
     'f.slagord'     => ['Slagord', 'Slogan', 'Slogan', 'Eslogan'],

@@ -4,7 +4,7 @@
  * Login por link no e-mail, editor da página, prévia, publicação e o painel /admin.
  * A interface do cliente segue o idioma dele (lib/sprak.php: no, pt, en, es);
  * o painel /admin fica em norueguês. Comentários em português.
- * DOC-WEB-MS-009 · v1.4.0 (domínio próprio, origem dos pedidos)
+ * DOC-WEB-MS-009 · v1.5.0 (idioma do painel ≠ idioma da página)
  */
 declare(strict_types=1);
 
@@ -181,12 +181,12 @@ function opprett_fra_bestilling(string $epost): ?int
     }
     if (!$b) { return null; }
     $forrige = sprak();
-    sprak(bestilling_sprak($b));                // textos-padrão (botão etc.) já na língua do cliente
+    sprak(bestilling_sprak($b));                // página: textos-padrão (botão etc.) na língua dos clientes dele
     $inn = innhold_fra_bestilling($b);
     sprak($forrige);
     $slug = ledig_slug(($b['subdominio'] ?? '') !== '' ? $b['subdominio'] : $b['empresa']);
     q('INSERT INTO kunder (opprettet, epost, bestilling_ref, slug, modell, sprak, utkast) VALUES (NOW(), ?, ?, ?, ?, ?, ?)',
-        [$epost, $b['ref'], $slug, $b['modelo'], $inn['sprak'], json_skriv($inn)]);
+        [$epost, $b['ref'], $slug, $b['modelo'], panel_sprak($b), json_skriv($inn)]);
     $id = (int)db()->lastInsertId();
 
     // Fotos enviadas no pedido viram galeria (o cliente escolhe logo e foto de topo)
@@ -203,7 +203,14 @@ function opprett_fra_bestilling(string $epost): ?int
     return $id;
 }
 
-/** Brasil → português; Noruega → norueguês; outro país → a língua do site no pedido (ou inglês). */
+/** Idioma do painel, dos e-mails e do chat: o idioma em que a pessoa fez o pedido. */
+function panel_sprak(array $b): string
+{
+    $idioma = (string)($b['idioma'] ?? '');
+    return isset(SPRAK[$idioma]) ? $idioma : 'no';
+}
+
+/** Idioma da PÁGINA: empresa na Noruega → norueguês; Brasil → português; outro país → a língua do pedido (ou inglês). */
 function bestilling_sprak(array $b): string
 {
     $land = (string)($b['land'] ?? 'NO');
@@ -273,8 +280,10 @@ function status_tekst(array $k): array
 
 function side_editor(array $k): void
 {
-    $m   = modell($k['modell']);
+    $m   = modell($k['modell']);                              // dicas no idioma do painel
     $inn = array_merge(tomt_innhold($k['modell']), json_les($k['utkast']));
+    $sideSprak = isset(SPRAK[$inn['sprak'] ?? '']) ? (string)$inn['sprak'] : (string)($k['sprak'] ?? 'no');
+    $ms  = modell_for($k['modell'], $sideSprak);              // títulos-padrão no idioma da página
     [$stNavn, $stType, $stTekst] = status_tekst($k);
     $f = flash();
     $adresse = kunde_adresse($k);
@@ -296,11 +305,16 @@ function side_editor(array $k): void
 
     /* Aparência */
     $h .= '<fieldset class="del"><legend>' . th('ed.utseende') . '</legend>';
-    $h .= '<label class="felt"><span>' . th('ed.sprak') . '</span><select name="sprak">';
+    $h .= '<div class="to-kol"><label class="felt"><span>' . th('ed.sprak') . '</span><select name="side_sprak">';
+    foreach (SPRAK as $kode => $navn) {
+        $h .= '<option value="' . e($kode) . '" lang="' . e(HTML_LANG[$kode]) . '"' . ($sideSprak === $kode ? ' selected' : '') . '>' . e($navn) . '</option>';
+    }
+    $h .= '</select><small>' . th('ed.sprak.h') . '</small></label>';
+    $h .= '<label class="felt"><span>' . th('ed.panel') . '</span><select name="sprak">';
     foreach (SPRAK as $kode => $navn) {
         $h .= '<option value="' . e($kode) . '" lang="' . e(HTML_LANG[$kode]) . '"' . (($k['sprak'] ?? 'no') === $kode ? ' selected' : '') . '>' . e($navn) . '</option>';
     }
-    $h .= '</select><small>' . th('ed.sprak.h') . '</small></label>';
+    $h .= '</select><small>' . th('ed.panel.h') . '</small></label></div>';
     $h .= '<p class="feltnavn">' . th('ed.oppsett') . '</p><div class="valg-rutenett valg-2">';
     foreach (array_keys(LAYOUTER) as $id) {
         $l = layout_navn($id);
@@ -326,10 +340,10 @@ function side_editor(array $k): void
         . '</fieldset>';
 
     /* Lista (serviços / cardápio / tratamentos) */
-    $listeT = trim($inn['liste_tittel']) !== '' ? $inn['liste_tittel'] : $m['liste_tittel'];
-    $infoT  = trim($inn['info_tittel']) !== '' ? $inn['info_tittel'] : $m['info_tittel'];
+    $listeT = trim($inn['liste_tittel']) !== '' ? $inn['liste_tittel'] : $ms['liste_tittel'];
+    $infoT  = trim($inn['info_tittel']) !== '' ? $inn['info_tittel'] : $ms['info_tittel'];
     $h .= '<fieldset class="del"><legend>' . e($listeT) . '</legend>'
-        . felt('liste_tittel', t('f.liste_tittel'), $inn['liste_tittel'], 40, false, t('f.tittel.h', $m['liste_tittel']))
+        . felt('liste_tittel', t('f.liste_tittel'), $inn['liste_tittel'], 40, false, t('f.tittel.h', $ms['liste_tittel']))
         . '<p class="hjelp">' . e($m['liste_hint']) . '</p>';
     $rader = $inn['liste'];
     $tomme = max(0, min(3, MAKS_LISTE - count($rader)));
@@ -337,7 +351,7 @@ function side_editor(array $k): void
     $h .= '<div class="liste-rader">';
     foreach ($alle as $i => $r) {
         $ny = $i >= count($rader);
-        $eks = $m['eksempel'];
+        $eks = $ms['eksempel'];
         $h .= '<div class="liste-rad' . ($ny ? ' ny' : '') . '">'
             . '<label class="felt"><span>' . th('l.navn') . '</span><input name="liste_navn[' . $i . ']" value="' . e($r['navn']) . '" maxlength="80"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[0]) . '"' : '') . '></label>'
             . '<label class="felt"><span>' . th('l.tekst') . '</span><input name="liste_tekst[' . $i . ']" value="' . e($r['tekst']) . '" maxlength="240"' . ($ny && $i === 0 ? ' placeholder="' . e($eks[1]) . '"' : '') . '></label>'
@@ -348,7 +362,7 @@ function side_editor(array $k): void
     $h .= '</div><p class="hjelp">' . th('l.flere', th('k.lagre'), MAKS_LISTE) . '</p></fieldset>';
 
     $h .= '<fieldset class="del"><legend>' . e($infoT) . '</legend>'
-        . felt('info_tittel', t('f.info_tittel'), $inn['info_tittel'], 40, false, t('f.tittel.tom', $m['info_tittel']))
+        . felt('info_tittel', t('f.info_tittel'), $inn['info_tittel'], 40, false, t('f.tittel.tom', $ms['info_tittel']))
         . tekstfelt('info', $infoT, $inn['info'], 600, 3, $m['info_hint'])
         . '</fieldset>';
 
@@ -362,7 +376,7 @@ function side_editor(array $k): void
         . '</fieldset>';
 
     $h .= '<fieldset class="del"><legend>' . th('ed.knapp') . '</legend><div class="to-kol">'
-        . felt('knapp_tekst', t('f.knapp'), $inn['knapp_tekst'], 40, false, t('f.knapp.h', $m['knapp']))
+        . felt('knapp_tekst', t('f.knapp'), $inn['knapp_tekst'], 40, false, t('f.knapp.h', $ms['knapp']))
         . felt('knapp_lenke', t('f.lenke'), $inn['knapp_lenke'], 300, false, t('f.lenke.h'), 'url')
         . felt('facebook', t('f.facebook'), $inn['facebook'], 300, false, '', 'url')
         . felt('instagram', t('f.instagram'), $inn['instagram'], 300, false, '', 'url')
@@ -485,15 +499,18 @@ function handling_lagre(): void
 
     $layout = isset(LAYOUTER[$_POST['layout'] ?? '']) ? $_POST['layout'] : $k['layout'];
     $tema   = isset(TEMAER[$_POST['tema'] ?? '']) ? $_POST['tema'] : $k['tema'];
-    $gml    = (string)($k['sprak'] ?? 'no');
-    $nytt   = isset(SPRAK[$_POST['sprak'] ?? '']) ? (string)$_POST['sprak'] : $gml;
-    if ($nytt !== $gml) {
+    // Dois idiomas: o da PÁGINA (o que os clientes dele veem) e o do PAINEL (esta tela, e-mails, chat).
+    $gmlUtkast = json_les($k['utkast']);
+    $gmlSide = isset(SPRAK[$gmlUtkast['sprak'] ?? '']) ? (string)$gmlUtkast['sprak'] : (string)($k['sprak'] ?? 'no');
+    $nySide  = isset(SPRAK[$_POST['side_sprak'] ?? '']) ? (string)$_POST['side_sprak'] : $gmlSide;
+    if ($nySide !== $gmlSide) {
         // Texto do botão ainda é o padrão da língua antiga? Troca pelo padrão da nova.
-        $standard = modell($k['modell'])['knapp'];
-        sprak($nytt);
-        if ($inn['knapp_tekst'] === '' || $inn['knapp_tekst'] === $standard) { $inn['knapp_tekst'] = modell($k['modell'])['knapp']; }
+        $standard = modell_for($k['modell'], $gmlSide)['knapp'];
+        if ($inn['knapp_tekst'] === '' || $inn['knapp_tekst'] === $standard) { $inn['knapp_tekst'] = modell_for($k['modell'], $nySide)['knapp']; }
     }
-    $inn['sprak'] = $nytt;
+    $inn['sprak'] = $nySide;
+    $nytt = isset(SPRAK[$_POST['sprak'] ?? '']) ? (string)$_POST['sprak'] : (string)($k['sprak'] ?? 'no');
+    sprak($nytt);                                             // avisos já no idioma novo do painel
     q('UPDATE kunder SET utkast = ?, layout = ?, tema = ?, sprak = ?, sist_lagret = NOW() WHERE id = ?', [json_skriv($inn), $layout, $tema, $nytt, $id]);
 
     $varsel = $feil ? t('fl.bildefeil', $feil, MAKS_GALLERI) : '';
@@ -542,7 +559,7 @@ function publiser(array $k, array $inn, string $varsel): never
             'Bedrift:  ' . $inn['firmanavn'],
             'E-post:   ' . $k['epost'],
             'Bestilling: ' . ($k['bestilling_ref'] ?: '—'),
-            'Språk:    ' . (SPRAK[$k['sprak'] ?? 'no'] ?? '—'),
+            'Språk:    ' . (SPRAK[$inn['sprak'] ?? ''] ?? '—') . ' (side) · ' . (SPRAK[$k['sprak'] ?? 'no'] ?? '—') . ' (Min side)',
             'Adresse:  ' . kunde_url($k),
             '',
             'Gjør dette:',
@@ -613,7 +630,7 @@ function side_admin(): void
         $inn = json_les($k['utkast']);
         [$stNavn, $stType] = status_tekst($k);
         $h .= '<tr><td><strong>' . e($inn['firmanavn'] ?? '—') . '</strong><br><small>' . e($k['epost']) . '<br>'
-            . e(MODELLER[$k['modell']]['navn']) . ' · ' . e(strtoupper((string)$k['sprak'])) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
+            . e(MODELLER[$k['modell']]['navn']) . ' · side ' . e(strtoupper((string)(json_les($k['utkast'])['sprak'] ?? $k['sprak']))) . ' / panel ' . e(strtoupper((string)$k['sprak'])) . ($k['bestilling_ref'] ? ' · ' . e($k['bestilling_ref']) : '') . '</small>'
             . ($k['nota'] ? '<br><small class="nota">' . e($k['nota']) . '</small>' : '') . '</td>'
             . '<td><small>' . e(SIDE_HOST) . '/</small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(side_url($k['slug'])) . '" target="_blank" rel="noopener">' . e($k['slug']) . '</a>' : e($k['slug']))
             . (!empty($k['domene']) ? '<br><small>Domene: </small>' . ($k['status'] === 'aktiv' ? '<a href="' . e(kunde_url($k)) . '" target="_blank" rel="noopener">' . e($k['domene']) . '</a>' : e($k['domene'])) : '') . '</td>'

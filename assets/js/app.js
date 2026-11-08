@@ -100,6 +100,10 @@ const i18n = {
 
     document.querySelectorAll(".lang-switch button").forEach(b =>
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    // Os links para o Min side levam o idioma em que a pessoa está lendo o site.
+    document.querySelectorAll('a[href^="https://minside.dsnorge.com"]').forEach(a => {
+      const u = new URL(a.href); u.searchParams.set("lang", lang); a.href = u.toString();
+    });
     document.dispatchEvent(new CustomEvent("idioma:mudou", { detail: { lang, dic: d } }));
   }
 };

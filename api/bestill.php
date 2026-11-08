@@ -300,7 +300,7 @@ function cnpj_valido(string $c): bool
 function confirmacao(string $idioma, string $contato, string $empresa, string $ref, string $modelo): array
 {
     $v = TERMOS_VERSAO;
-    $m = MINSIDE;
+    $m = MINSIDE . '/?lang=' . $idioma;
     $mod = MODELOS_IDIOMA[$idioma][$modelo] ?? MODELOS[$modelo];
     $t = [
         'no' => [
