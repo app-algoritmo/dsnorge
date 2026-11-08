@@ -12,7 +12,7 @@ Bloco <!--meta--> aceita, além de slug/title/desc/doc/scripts/jsonld:
   "styles": ["/assets/css/x.css"]   folhas extras para a página
   "layout": "landing"               usa landing-header.html / landing-footer.html
 
-Documento controlado: DOC-DS-BUILD-001 · v1.1.0
+Documento controlado: DOC-DS-BUILD-001 · v1.2.0
 """
 import json
 import re
@@ -24,7 +24,13 @@ RAIZ = Path(__file__).resolve().parent.parent
 PARTIALS = RAIZ / "src" / "partials"
 PAGES = RAIZ / "src" / "pages"
 VERSION = "1.0.0"
-REVDATE = date.today().isoformat()
+# Data de revisão gravada em tools/REVISAO: o mesmo build dá o mesmo resultado em qualquer dia,
+# então a verificação do GitHub não reprova só porque o envio foi feito no dia seguinte.
+# Para carimbar a data de hoje: python3 tools/build.py --ny-revisao
+REVFIL = RAIZ / "tools" / "REVISAO"
+if "--ny-revisao" in sys.argv or not REVFIL.exists():
+    REVFIL.write_text(date.today().isoformat() + "\n", encoding="utf-8")
+REVDATE = REVFIL.read_text(encoding="utf-8").strip()
 
 META_RE = re.compile(r"^<!--meta\s*(\{.*?\})\s*-->\s*", re.S)
 
